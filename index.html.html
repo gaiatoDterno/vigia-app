@@ -1,0 +1,1680 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Vigia — acompanhamento de contas</title>
+
+<!-- Ícone e comportamento de app ao adicionar à tela inicial -->
+<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAYAAAA9zQYyAAAFLUlEQVR4nO3dUW7TQBSF4ZuIJVSqxAp4ZWsshK3xygoqVeoeygMyNWkce+zxzLln/u8VkTieP5fBbZxLdPD0/PW9x/OivbfXl0vL52vyZASMydmBn/bgRIw1Z8Rd9QGJGHvVivta40EiiBnH1Orn8LuCkFHbkWl9aEITM85wpKtd7wRCRiul07p4QhMzWirtrShoYkYPJd1tDpqY0dPW/jYFTcxQsKXD1aCJGUrWenwYNDFD0aMuq/2kEFCwGDTTGcqW+rwbNDEjg3udsuWAlU9BM52RyW2v10d/CGQw75YtB6wQNKz8C5rtBjKb+mVCwwpBw8olgu0GfDChYYWgYYWgYeXK/hlOmNCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCw8qX3AWT36+e36o/5/cfv6o85igu3033sjGCPIvhlBD2jGO9WRP7X0EFnDnjNqIEPF7RzxEtGinuIoEeMeIl73LZBE/E6x7jtgibkck5h2wRNyMc5hJ0+6N4hnxGB42tqJW3QrRZdcXFHfu1rUgZ91oLWXMAtx9j6+fbIFnWqoGsvWu3FOnJ8SsdyT5aw0wRda4HU97zKx5ch6hRBH12QsxbizL2s6jGrRy0dtPLJb/EfM+XjVw1bNmil/eitlpfVlF+LYtSSQe89yS1OcI9rxMqvSy1quaD3nNhWJ7XnDzyUX6NS1Ok/U6i80BmfXynOPaQmdMmitTzxvWOeU33dKm8EmQmd8eS5KznPKm96maC3ah2zykJNWh9PtuEhEfTWRcp2cl1sPe8Kb36JoLfoEbPCAt3jeumwhu5Bq0aDfXqvZ/egt8gyHdxlWIeuQfd+Nz+ifGwR2sfX89jkJ3SGqTAS9fWQDxooQdCwQtCwQtCwQtCwQtCwIh+08vXWEamvR9egla9pKh9bhPbx9Tw2+QkdoT8VRpFhHboHrTxpUK73enYPeit+ZfIDv0q7TCLoTL9APqJMH8CQCLrE6B9BGv0jaGtkgs74gUx3GT+4LHUbg4jyWEe5L0eE7mtViTlCaELvNcoNWFRjViM3oSO077PmerVF+ZyXkAw6QvuumNx99C+1mCOEg47Qvocx94fWizlCPOiJ6snnDv56UgQdof09IXzHio40QUfof7OT0n5U/VydJVXQkwzfycf3FPaRMuiIca4/3zPya1+TNuhJ7x8EKO9598oY8iR90JPeETjIHPLEJugJYZdzCHliF/SEsNc5hTyxDXqOuD84Rjw3RNBzI8btHvHccEHPOcc9UsRzQwd9K3PgowZ8i6BXKEZOvMsI+qAzgifY/QgaVtJ/phCYI2hYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYub69vlx6HwRQCxMaVggaVggaVq4REeyj4eDt9eXChIYVgoaVf0Gz7UBmU79MaFghaFj5L2i2Hcho3u2nCU3UyOS2V7YcsHI3aKY0MrjX6eKEJmooW+qTLQesPAyaKQ1Fj7pcndBEDSVrPW7achA1FGzpcPMemqjR09b+iv5TSNTooaS74qscRI2WSns7FOfT89f3I38fWLJ3cB66Ds20xhmOdFUtSKY1jqoxIKv9pJBpjSNq9XNahExsrDljCDaZqsSNydn/kv8Bk8AOb2mF1fgAAAAASUVORK5CYII=" />
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAYAAAA9zQYyAAAFLUlEQVR4nO3dUW7TQBSF4ZuIJVSqxAp4ZWsshK3xygoqVeoeygMyNWkce+zxzLln/u8VkTieP5fBbZxLdPD0/PW9x/OivbfXl0vL52vyZASMydmBn/bgRIw1Z8Rd9QGJGHvVivta40EiiBnH1Orn8LuCkFHbkWl9aEITM85wpKtd7wRCRiul07p4QhMzWirtrShoYkYPJd1tDpqY0dPW/jYFTcxQsKXD1aCJGUrWenwYNDFD0aMuq/2kEFCwGDTTGcqW+rwbNDEjg3udsuWAlU9BM52RyW2v10d/CGQw75YtB6wQNKz8C5rtBjKb+mVCwwpBw8olgu0GfDChYYWgYYWgYeXK/hlOmNCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCw8qX3AWT36+e36o/5/cfv6o85igu3033sjGCPIvhlBD2jGO9WRP7X0EFnDnjNqIEPF7RzxEtGinuIoEeMeIl73LZBE/E6x7jtgibkck5h2wRNyMc5hJ0+6N4hnxGB42tqJW3QrRZdcXFHfu1rUgZ91oLWXMAtx9j6+fbIFnWqoGsvWu3FOnJ8SsdyT5aw0wRda4HU97zKx5ch6hRBH12QsxbizL2s6jGrRy0dtPLJb/EfM+XjVw1bNmil/eitlpfVlF+LYtSSQe89yS1OcI9rxMqvSy1quaD3nNhWJ7XnDzyUX6NS1Ok/U6i80BmfXynOPaQmdMmitTzxvWOeU33dKm8EmQmd8eS5KznPKm96maC3ah2zykJNWh9PtuEhEfTWRcp2cl1sPe8Kb36JoLfoEbPCAt3jeumwhu5Bq0aDfXqvZ/egt8gyHdxlWIeuQfd+Nz+ifGwR2sfX89jkJ3SGqTAS9fWQDxooQdCwQtCwQtCwQtCwQtCwIh+08vXWEamvR9egla9pKh9bhPbx9Tw2+QkdoT8VRpFhHboHrTxpUK73enYPeit+ZfIDv0q7TCLoTL9APqJMH8CQCLrE6B9BGv0jaGtkgs74gUx3GT+4LHUbg4jyWEe5L0eE7mtViTlCaELvNcoNWFRjViM3oSO077PmerVF+ZyXkAw6QvuumNx99C+1mCOEg47Qvocx94fWizlCPOiJ6snnDv56UgQdof09IXzHio40QUfof7OT0n5U/VydJVXQkwzfycf3FPaRMuiIca4/3zPya1+TNuhJ7x8EKO9598oY8iR90JPeETjIHPLEJugJYZdzCHliF/SEsNc5hTyxDXqOuD84Rjw3RNBzI8btHvHccEHPOcc9UsRzQwd9K3PgowZ8i6BXKEZOvMsI+qAzgifY/QgaVtJ/phCYI2hYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYub69vlx6HwRQCxMaVggaVggaVq4REeyj4eDt9eXChIYVgoaVf0Gz7UBmU79MaFghaFj5L2i2Hcho3u2nCU3UyOS2V7YcsHI3aKY0MrjX6eKEJmooW+qTLQesPAyaKQ1Fj7pcndBEDSVrPW7achA1FGzpcPMemqjR09b+iv5TSNTooaS74qscRI2WSns7FOfT89f3I38fWLJ3cB66Ds20xhmOdFUtSKY1jqoxIKv9pJBpjSNq9XNahExsrDljCDaZqsSNydn/kv8Bk8AOb2mF1fgAAAAASUVORK5CYII=" />
+<meta name="theme-color" content="#14171A" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Vigia" />
+<style>
+  :root {
+    --bg: #14171A;
+    --panel: #1D2126;
+    --panel-alt: #20242A;
+    --border: #2C3138;
+    --border-strong: #3A404A;
+    --paper: #ECE7DA;
+    --muted: #8B9099;
+    --faint: #5A5F68;
+    --amber: #E3A542;
+    --green: #5FB88B;
+    --rose: #C97064;
+    --blue: #5B93E0;
+    --purple: #B98AE3;
+    --teal: #4FBDBA;
+    --pink: #E38AA0;
+    --unchecked: #2A2F35;
+    --future-border: #454B54;
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--paper);
+    font-family: 'Courier New', Consolas, Menlo, monospace;
+    margin: 0;
+    padding: 32px 16px;
+    display: flex;
+    justify-content: center;
+  }
+  .app { width: 100%; max-width: 760px; }
+  .title { font-family: Arial, Helvetica, sans-serif; font-weight: 700; font-size: 26px; letter-spacing: 0.02em; }
+  .title .dot { color: var(--amber); }
+  .title-row { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+  .sync-state { font-size: 11px; font-family: Arial, sans-serif; color: var(--faint); padding: 3px 9px; border-radius: 20px; border: 1px solid var(--border); }
+  .sync-state.ok { color: var(--green); border-color: rgba(95, 184, 139, 0.4); }
+  .sync-state.saving { color: var(--amber); border-color: rgba(227, 165, 66, 0.4); }
+  .sync-state.error { color: var(--rose); border-color: rgba(201, 112, 100, 0.4); }
+  .sync-state.local { color: var(--faint); }
+  .loading-state { text-align: center; color: var(--muted); font-size: 13px; padding: 60px 0; }
+  .subtitle { font-size: 13px; color: var(--muted); margin-top: 4px; }
+  .backup-row { display: flex; gap: 8px; margin: 14px 0 10px; flex-wrap: wrap; }
+  .btn-backup {
+    background: transparent; border: 1px solid var(--border-strong); color: var(--paper);
+    border-radius: 6px; padding: 7px 14px; font-size: 12px; font-family: Arial, sans-serif;
+    cursor: pointer;
+  }
+  .btn-backup:hover { background: var(--panel-alt); }
+  .sync-state.pending { color: var(--amber); border-color: rgba(227, 165, 66, 0.4); }
+  .add-row { display: flex; gap: 10px; margin: 20px 0 16px; }
+  .add-row input {
+    flex: 1; background: var(--panel-alt); border: 1px solid var(--border);
+    border-radius: 8px; padding: 10px 12px; color: var(--paper);
+    font-family: inherit; font-size: 13px; outline: none;
+  }
+  .add-row button {
+    background: var(--amber); color: #2C1D05; border: none; border-radius: 8px;
+    padding: 10px 18px; font-family: Arial, sans-serif; font-weight: 700;
+    font-size: 13px; cursor: pointer;
+  }
+  .add-row input.nicho-input { flex: 0 0 200px; }
+  .filter-row { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+  .filter-label { font-size: 12px; color: var(--muted); }
+  .filter-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+  .filter-chip {
+    background: transparent; color: var(--muted); border: 1px solid var(--border-strong);
+    border-radius: 20px; padding: 4px 12px; font-size: 11px; font-family: Arial, sans-serif;
+    cursor: pointer;
+  }
+  .filter-chip.active { background: var(--amber); color: #2C1D05; border-color: var(--amber); }
+  .nicho-group { margin-bottom: 22px; }
+  .nicho-group-title {
+    font-family: Arial, sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 0.04em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 10px; display: flex;
+    align-items: center; gap: 8px;
+  }
+  .nicho-group-title .count { color: var(--faint); font-weight: 400; text-transform: none; letter-spacing: 0; }
+  .nicho-group-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .nicho-tag {
+    display: inline-block; font-size: 10px; font-family: Arial, sans-serif; color: var(--amber);
+    background: rgba(227, 165, 66, 0.12); border: 1px solid rgba(227, 165, 66, 0.35);
+    border-radius: 4px; padding: 2px 7px; margin-left: 8px; cursor: pointer; vertical-align: middle;
+  }
+  .nicho-edit-row { display: flex; gap: 6px; margin-bottom: 10px; }
+  .nicho-edit-row input {
+    flex: 1; background: var(--panel-alt); border: 1px solid var(--border); border-radius: 6px;
+    padding: 6px 8px; color: var(--paper); font-family: inherit; font-size: 12px; outline: none;
+  }
+  .nicho-edit-row button {
+    border-radius: 6px; padding: 6px 10px; font-size: 11px; font-family: Arial, sans-serif;
+    cursor: pointer; border: 1px solid var(--border-strong); background: transparent; color: var(--paper);
+  }
+  .nicho-edit-row button.save { background: var(--amber); color: #2C1D05; border-color: var(--amber); }
+  .contato-tag { color: var(--teal); background: rgba(79, 189, 186, 0.12); border-color: rgba(79, 189, 186, 0.35); }
+  .contato-edit-row input { min-width: 140px; }
+  .account-contact-info { display: flex; gap: 14px; flex-wrap: wrap; font-size: 11px; color: var(--muted); font-family: Arial, sans-serif; margin: -2px 0 10px; }
+  .account-contact-info .contact-whatsapp { color: var(--green); text-decoration: none; }
+  .account-contact-info .contact-whatsapp:hover { text-decoration: underline; }
+  .search-row { margin-bottom: 14px; }
+  .search-row input {
+    width: 100%; background: var(--panel-alt); border: 1px solid var(--border);
+    border-radius: 8px; padding: 9px 12px; color: var(--paper);
+    font-family: inherit; font-size: 13px; outline: none;
+  }
+  .search-row input:focus { border-color: var(--amber); }
+  .no-results { display: none; }
+  .summary { display: flex; gap: 10px; margin-bottom: 20px; font-size: 12px; color: var(--muted); }
+  .summary strong.green { color: var(--green); }
+  .summary strong.amber { color: var(--amber); }
+  .empty {
+    border: 1px dashed var(--border-strong); border-radius: 10px; padding: 28px 20px;
+    text-align: center; color: var(--muted); font-size: 13px;
+  }
+  .accounts { display: flex; flex-direction: column; gap: 12px; }
+  .account-card { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+  .account-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px; }
+  .account-name { font-family: Arial, sans-serif; font-weight: 500; font-size: 15px; }
+  .account-name a { color: var(--paper); text-decoration: none; border-bottom: 1px solid var(--border-strong); }
+  .account-name a:hover { border-bottom-color: var(--amber); }
+  .account-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  .btn-mark {
+    border-radius: 6px; padding: 5px 10px; font-size: 11px; font-family: Arial, sans-serif;
+    font-weight: 500; cursor: pointer; border: 1px solid var(--border-strong); background: transparent; color: var(--paper);
+  }
+  .btn-mark.pending { background: var(--amber); color: #2C1D05; border-color: var(--amber); }
+  .btn-history {
+    border-radius: 6px; padding: 5px 10px; font-size: 11px; font-family: Arial, sans-serif;
+    font-weight: 500; cursor: pointer; border: 1px solid var(--border-strong); background: transparent; color: var(--paper);
+  }
+  .btn-history.open { background: var(--panel-alt); }
+  .btn-remove {
+    background: transparent; color: var(--faint); border: 1px solid var(--border);
+    border-radius: 6px; padding: 5px 10px; font-size: 11px; cursor: pointer;
+  }
+  .strip { display: flex; gap: 5px; }
+  .day-cell { width: 22px; height: 22px; border-radius: 3px; cursor: pointer; padding: 0; border: 1px solid rgba(0,0,0,0.25); }
+  .day-cell.today { border: 1.5px solid var(--amber); }
+  .day-cell.future { border: 1px dashed var(--future-border); background: transparent; }
+  .strip-labels { display: flex; gap: 5px; margin-top: 3px; }
+  .strip-labels div { width: 22px; font-size: 9px; color: var(--muted); text-align: center; }
+  .strip-labels div.today { color: var(--amber); }
+  .strip-labels div.future { color: var(--faint); opacity: 0.6; }
+
+  .cal-panel { margin-top: 14px; border-top: 1px solid var(--border); padding-top: 12px; display: none; }
+  .cal-panel.open { display: block; }
+  .cal-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+  .cal-nav button {
+    background: transparent; color: var(--paper); border: 1px solid var(--border-strong);
+    border-radius: 6px; padding: 4px 10px; font-size: 12px; cursor: pointer; font-family: inherit;
+  }
+  .cal-nav .cal-label { font-family: Arial, sans-serif; font-weight: 500; font-size: 13px; color: var(--amber); }
+  .cal-weekdays, .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+  .cal-weekdays { margin-bottom: 4px; }
+  .cal-weekdays div { font-size: 9px; color: var(--faint); text-align: center; }
+  .cal-day {
+    aspect-ratio: 1; border-radius: 4px; border: 1px solid var(--border); background: var(--unchecked);
+    color: var(--muted); font-size: 10px; font-family: inherit; cursor: pointer; padding: 0;
+  }
+  .cal-day.today { border: 1.5px solid var(--amber); }
+  .cal-day.future-empty { border: 1px dashed var(--future-border); background: transparent; }
+  .cal-blank { visibility: hidden; }
+
+  .cal-legend { display: flex; flex-wrap: wrap; gap: 8px 14px; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--border); }
+  .cal-legend-item { display: flex; align-items: center; gap: 5px; font-size: 10px; color: var(--muted); font-family: Arial, sans-serif; }
+  .cal-legend-swatch { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+
+  .abordagem-badge {
+    display: inline-block; font-size: 10px; font-family: Arial, sans-serif; font-weight: 700;
+    border-radius: 4px; padding: 2px 8px; margin-left: 8px; vertical-align: middle; color: #14171A;
+  }
+  .abordagem-badge.none { background: var(--unchecked); color: var(--muted); font-weight: 400; }
+
+  .btn-abordagem {
+    border-radius: 6px; padding: 5px 10px; font-size: 11px; font-family: Arial, sans-serif;
+    font-weight: 500; cursor: pointer; border: 1px solid var(--border-strong); background: transparent; color: var(--paper);
+  }
+  .btn-abordagem.open { background: var(--panel-alt); }
+
+  .abordagem-panel { margin-top: 14px; border-top: 1px solid var(--border); padding-top: 12px; display: none; }
+  .abordagem-panel.open { display: block; }
+  .abordagem-panel-title { font-family: Arial, sans-serif; font-weight: 500; font-size: 13px; color: var(--paper); margin-bottom: 10px; }
+  .abordagem-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+  .abordagem-chip {
+    font-size: 11px; font-family: Arial, sans-serif; padding: 5px 10px; border-radius: 20px;
+    border: 1px solid var(--border-strong); background: transparent; color: var(--paper); cursor: pointer;
+  }
+  .abordagem-chip.selected { color: #14171A; font-weight: 700; border-color: transparent; }
+  .abordagem-panel textarea {
+    width: 100%; background: var(--panel-alt); border: 1px solid var(--border); border-radius: 6px;
+    padding: 8px 10px; color: var(--paper); font-family: inherit; font-size: 12px; resize: vertical;
+    outline: none; margin-bottom: 10px;
+  }
+  .abordagem-register-row { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .btn-register {
+    background: var(--amber); color: #2C1D05; border: none; border-radius: 6px; padding: 8px 16px;
+    font-family: Arial, sans-serif; font-weight: 700; font-size: 12px; cursor: pointer;
+  }
+  .abordagem-register-error { color: var(--rose); font-size: 11px; display: none; }
+  .abordagem-history-title { font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--faint); margin-bottom: 8px; font-family: Arial, sans-serif; }
+  .abordagem-history { display: flex; flex-direction: column; gap: 6px; max-height: 260px; overflow-y: auto; }
+  .abordagem-entry {
+    display: flex; align-items: flex-start; gap: 8px; background: var(--panel-alt); border: 1px solid var(--border);
+    border-radius: 6px; padding: 8px 10px; font-size: 12px;
+  }
+  .abordagem-entry-dot { width: 9px; height: 9px; border-radius: 50%; margin-top: 4px; flex-shrink: 0; }
+  .abordagem-entry-body { flex: 1; min-width: 0; }
+  .abordagem-entry-status { font-family: Arial, sans-serif; font-weight: 700; font-size: 12px; }
+  .abordagem-entry-when { color: var(--muted); font-size: 11px; margin-top: 1px; }
+  .abordagem-entry-note { color: var(--muted); font-size: 11px; margin-top: 4px; white-space: pre-wrap; }
+  .abordagem-entry-del {
+    background: transparent; border: none; color: var(--faint); cursor: pointer; font-size: 13px;
+    padding: 2px 4px; flex-shrink: 0;
+  }
+  .abordagem-entry-del:hover { color: var(--rose); }
+  .abordagem-empty { color: var(--muted); font-size: 12px; }
+
+  .editor {
+    margin-top: 14px; background: var(--panel-alt); border: 1px solid var(--amber);
+    border-radius: 10px; padding: 14px; display: none;
+  }
+  .editor.open { display: block; }
+  .editor-title { font-family: Arial, sans-serif; font-weight: 500; font-size: 14px; margin-bottom: 10px; color: var(--amber); }
+  .editor-title .hint { color: var(--muted); font-weight: 400; font-size: 12px; }
+  .status-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .status-option {
+    display: flex; align-items: center; gap: 6px; font-size: 13px; cursor: pointer;
+    background: transparent; border: 1px solid var(--border); border-radius: 6px; padding: 6px 8px;
+  }
+  .status-option.selected { background: var(--panel); }
+  .status-error { color: var(--rose); font-size: 12px; margin-bottom: 10px; display: none; }
+  .time-row { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+  .time-row label { font-size: 12px; color: var(--muted); }
+  .time-row input[type="time"] {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 6px; padding: 6px 8px;
+    color: var(--paper); font-family: inherit; font-size: 12px;
+  }
+  .editor textarea {
+    width: 100%; background: var(--panel); border: 1px solid var(--border); border-radius: 6px;
+    padding: 8px 10px; color: var(--paper); font-family: inherit; font-size: 12px; resize: vertical;
+    outline: none; margin-bottom: 10px;
+  }
+  .editor-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  .btn-save {
+    background: var(--amber); color: #2C1D05; border: none; border-radius: 6px; padding: 8px 16px;
+    font-family: Arial, sans-serif; font-weight: 700; font-size: 12px; cursor: pointer;
+  }
+  .btn-cancel {
+    background: transparent; color: var(--muted); border: 1px solid var(--border); border-radius: 6px;
+    padding: 8px 16px; font-size: 12px; cursor: pointer;
+  }
+  .btn-delete-entry {
+    background: transparent; color: var(--rose); border: 1px solid var(--rose); border-radius: 6px;
+    padding: 8px 16px; font-size: 12px; cursor: pointer; margin-left: auto;
+  }
+  .legend { margin-top: 22px; font-size: 11px; color: var(--faint); line-height: 1.8; }
+  .legend .green { color: var(--green); }
+  .legend .blue { color: var(--blue); }
+  .legend .purple { color: var(--purple); }
+  .legend .rose { color: var(--rose); }
+  .legend .faint { color: var(--faint); }
+  .error-banner {
+    background: #2E1512; color: #F3B8AE; border: 1px solid var(--rose); border-radius: 8px;
+    padding: 10px 12px; font-size: 12px; margin-bottom: 16px; display: none;
+  }
+  .error-banner.show { display: block; }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="title-row">
+    <div class="title">Vigia <span class="dot">·</span> lista de contas</div>
+    <div style="display:flex; align-items:center; gap:8px;">
+      <span class="sync-state" id="syncState">carregando…</span>
+      <button id="authBtn" class="btn-backup" style="display:none; padding:5px 10px;">entrar com Google</button>
+    </div>
+  </div>
+  <div class="subtitle">Confira manualmente cada perfil, registre o que viu — tudo salvo neste navegador. Use exportar/importar para levar os dados a outro dispositivo.</div>
+
+  <div class="backup-row">
+    <button id="exportBtn" class="btn-backup">⇩ exportar backup</button>
+    <button id="importBtn" class="btn-backup">⇧ importar backup</button>
+    <input type="file" id="importFile" accept="application/json,.json" style="display:none;" />
+  </div>
+
+  <div class="error-banner" id="errorBanner"></div>
+
+  <div id="loadingState" class="loading-state">carregando seus dados…</div>
+
+  <div id="mainApp" style="display:none;">
+
+  <div class="add-row">
+    <input id="newUsername" type="text" placeholder="@usuario ou link do instagram.com/usuario" />
+    <input id="newNicho" type="text" placeholder="nicho (ex: advocacia)" list="nichoList" class="nicho-input" />
+    <datalist id="nichoList"></datalist>
+    <button id="addBtn">adicionar</button>
+  </div>
+
+  <div class="search-row">
+    <input id="searchInput" type="text" placeholder="🔍 buscar por @usuario, nicho, endereço ou whatsapp..." />
+  </div>
+
+  <div class="filter-row" id="filterRow" style="display:none;">
+    <span class="filter-label">filtrar:</span>
+    <div class="filter-chips" id="filterChips"></div>
+  </div>
+
+  <div class="summary" id="summary" style="display:none;"></div>
+
+  <div id="emptyState" class="empty">Nenhuma conta na lista ainda. Adicione um @usuario acima para começar a acompanhar.</div>
+  <div id="noSearchResults" class="empty" style="display:none;">Nenhuma conta encontrada para essa busca.</div>
+
+  <div class="accounts" id="accountsList"></div>
+
+  </div>
+
+  <div class="legend">
+    legenda: <span class="green">■</span> feed + stories &nbsp;
+    <span class="blue">■</span> só feed &nbsp;
+    <span class="purple">■</span> só stories &nbsp;
+    <span class="rose">■</span> nada novo &nbsp;
+    <span class="faint">■</span> não conferido
+    <br />
+    quadrados/dias tracejados ainda não chegaram — clique para deixar um lembrete ou nota antecipada.
+    <br />
+    os dados ficam salvos neste navegador e, se você conectar sua conta Google, sincronizados na nuvem entre todos os seus dispositivos.
+  </div>
+</div>
+
+<!-- =======================================================================
+     FIREBASE — sincronização entre dispositivos
+     1) Crie um projeto grátis em https://console.firebase.google.com
+     2) No projeto: Build > Authentication > Sign-in method > ative "Google"
+     3) No projeto: Build > Firestore Database > criar banco (modo produção)
+     4) Em Configurações do projeto > seus apps > "</> Web" > copie o objeto
+        firebaseConfig e cole substituindo o objeto abaixo.
+     5) Nas regras do Firestore, cole (aba "Regras" do Firestore):
+          rules_version = '2';
+          service cloud.firestore {
+            match /databases/{database}/documents {
+              match /vigia_users/{uid} {
+                allow read, write: if request.auth != null && request.auth.uid == uid;
+              }
+            }
+          }
+     Se você não preencher firebaseConfig, o app continua funcionando 100%
+     normalmente, só neste navegador (como antes), sem nenhum erro.
+     ======================================================================= -->
+<script src="https://www.gstatic.com/firebasejs/12.11.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.11.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore-compat.js"></script>
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyBtwUW7KrGmLNBpiW-fXfXjJDM_igo2D7w",
+    authDomain: "vigia-instagram.firebaseapp.com",
+    databaseURL: "https://vigia-instagram-default-rtdb.firebaseio.com",
+    projectId: "vigia-instagram",
+    storageBucket: "vigia-instagram.firebasestorage.app",
+    messagingSenderId: "340266599608",
+    appId: "1:340266599608:web:3fa1f40270fa0f0646a04d",
+  };
+
+  let cloudEnabled = false;
+  let auth = null;
+  let db = null;
+  try {
+    if (firebaseConfig.apiKey && firebaseConfig.apiKey.indexOf('COLE_AQUI') === -1) {
+      firebase.initializeApp(firebaseConfig);
+      auth = firebase.auth();
+      db = firebase.firestore();
+      cloudEnabled = true;
+    }
+  } catch (e) {
+    console.error('Firebase não pôde ser iniciado:', e);
+    cloudEnabled = false;
+  }
+</script>
+
+<script>
+  const STORAGE_ACCOUNTS = 'vigia_accounts';
+  const STORAGE_CHECKIN_PREFIX = 'vigia_checkins_';
+  const STORAGE_ABORDAGEM_PREFIX = 'vigia_abordagem_';
+  const STORAGE_LASTEXPORT = 'vigia_last_export';
+  const STORAGE_LASTCHANGE = 'vigia_last_change';
+
+  const STATUS_OPTIONS = [
+    { value: 'feed', label: 'postou só no feed' },
+    { value: 'stories', label: 'postou só stories' },
+    { value: 'both', label: 'feed + stories' },
+    { value: 'nothing', label: 'nada de novo' },
+  ];
+
+  const CHECKIN_LEGEND = ['both', 'feed', 'stories', 'nothing', 'unchecked'];
+
+  const ABORDAGEM_OPTIONS = [
+    { value: 'iniciada', label: 'abordagem iniciada', color: '--blue' },
+    { value: 'sucesso', label: 'sucesso', color: '--green' },
+    { value: 'sem_interesse', label: 'sem interesse', color: '--rose' },
+    { value: 'ja_possui', label: 'já possui serviço', color: '--faint' },
+    { value: 'reuniao_marcada', label: 'reunião marcada', color: '--purple' },
+    { value: 'reuniao_realizada', label: 'reunião realizada', color: '--teal' },
+    { value: 'whatsapp_contactar', label: 'contactar no whatsapp', color: '--amber' },
+    { value: 'whatsapp_contactado', label: 'contactado no whatsapp', color: '--pink' },
+  ];
+
+  function abordagemOption(value) {
+    return ABORDAGEM_OPTIONS.find((o) => o.value === value) || null;
+  }
+
+  function abordagemColorVar(value) {
+    const opt = abordagemOption(value);
+    return opt ? 'var(' + opt.color + ')' : 'var(--unchecked)';
+  }
+
+  function abordagemLabel(value) {
+    const opt = abordagemOption(value);
+    return opt ? opt.label : value;
+  }
+
+  const DEFAULT_NICHO = 'Sem nicho';
+
+  let accounts = [];
+  let checkins = {};
+  let abordagemData = {};
+  let editorState = null;
+  let editSelectedStatus = null;
+  let historyFor = null;
+  let calMonth = null;
+  let activeFiltro = null;
+  let nichoEditFor = null;
+  let contatoEditFor = null;
+  let searchQuery = '';
+  let abordagemFor = null;
+  let abordagemSelected = null;
+  let abordagemNoteDraft = '';
+
+  function todayKey() {
+    return new Date().toISOString().slice(0, 10);
+  }
+
+  function currentTimeHHMM() {
+    const d = new Date();
+    return String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+  }
+
+  function dayRange(pastN, futureN) {
+    const out = [];
+    const now = new Date();
+    for (let i = pastN; i >= -futureN; i--) {
+      const d = new Date(now);
+      d.setDate(now.getDate() - i);
+      out.push(d.toISOString().slice(0, 10));
+    }
+    return out;
+  }
+
+  function dayLabel(dateStr) {
+    const d = new Date(dateStr + 'T00:00:00');
+    const dias = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sáb'];
+    return dias[d.getDay()];
+  }
+
+  function formatDatePretty(dateStr) {
+    const d = new Date(dateStr + 'T00:00:00');
+    return d.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+  }
+
+  function monthLabel(year, month) {
+    const d = new Date(year, month, 1);
+    const label = d.toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' });
+    return label.charAt(0).toUpperCase() + label.slice(1);
+  }
+
+  function buildMonthGrid(year, month) {
+    const firstOfMonth = new Date(year, month, 1);
+    const startOffset = firstOfMonth.getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const cells = [];
+    for (let i = 0; i < startOffset; i++) cells.push(null);
+    for (let day = 1; day <= daysInMonth; day++) {
+      const m = String(month + 1).padStart(2, '0');
+      const dd = String(day).padStart(2, '0');
+      cells.push(year + '-' + m + '-' + dd);
+    }
+    while (cells.length % 7 !== 0) cells.push(null);
+    return cells;
+  }
+
+  function statusFromEntry(entry) {
+    if (!entry) return 'unchecked';
+    if (entry.status) return entry.status;
+    if (entry.feed && entry.stories) return 'both';
+    if (entry.feed) return 'feed';
+    if (entry.stories) return 'stories';
+    return 'nothing';
+  }
+
+  function statusColorVar(status) {
+    if (status === 'both') return 'var(--green)';
+    if (status === 'feed') return 'var(--blue)';
+    if (status === 'stories') return 'var(--purple)';
+    if (status === 'nothing') return 'var(--rose)';
+    return 'var(--unchecked)';
+  }
+
+  function statusLabel(status) {
+    if (status === 'both') return 'feed + stories';
+    if (status === 'feed') return 'postou só no feed';
+    if (status === 'stories') return 'postou só stories';
+    if (status === 'nothing') return 'nada de novo';
+    return 'não conferido';
+  }
+
+  function showError(msg) {
+    const el = document.getElementById('errorBanner');
+    if (!msg) { el.classList.remove('show'); el.textContent = ''; return; }
+    el.textContent = msg;
+    el.classList.add('show');
+  }
+
+  function loadAccounts() {
+    try {
+      const raw = localStorage.getItem(STORAGE_ACCOUNTS);
+      accounts = raw ? JSON.parse(raw) : [];
+      accounts.forEach((a) => {
+        if (!a.nicho || !a.nicho.trim()) a.nicho = DEFAULT_NICHO;
+        if (typeof a.endereco !== 'string') a.endereco = '';
+        if (typeof a.whatsapp !== 'string') a.whatsapp = '';
+        if (!a.updatedAt) a.updatedAt = a.addedAt || new Date().toISOString();
+      });
+    } catch (e) {
+      accounts = [];
+      showError('Não foi possível carregar a lista de contas.');
+    }
+  }
+
+  function getAllNichos() {
+    const set = new Set(accounts.map((a) => a.nicho || DEFAULT_NICHO));
+    return Array.from(set).sort((a, b) => {
+      if (a === DEFAULT_NICHO) return 1;
+      if (b === DEFAULT_NICHO) return -1;
+      return a.localeCompare(b, 'pt-BR');
+    });
+  }
+
+  function updateNichoDatalist() {
+    const list = document.getElementById('nichoList');
+    list.innerHTML = '';
+    getAllNichos().forEach((n) => {
+      if (n === DEFAULT_NICHO) return;
+      const opt = document.createElement('option');
+      opt.value = n;
+      list.appendChild(opt);
+    });
+  }
+
+  function setNicho(username, nicho) {
+    const acc = accounts.find((a) => a.username === username);
+    if (!acc) return;
+    const clean = nicho.trim();
+    acc.nicho = clean || DEFAULT_NICHO;
+    acc.updatedAt = new Date().toISOString();
+    saveAccounts();
+  }
+
+  function setContato(username, endereco, whatsapp) {
+    const acc = accounts.find((a) => a.username === username);
+    if (!acc) return;
+    acc.endereco = (endereco || '').trim();
+    acc.whatsapp = (whatsapp || '').trim();
+    acc.updatedAt = new Date().toISOString();
+    saveAccounts();
+  }
+
+  function matchesSearch(acc, query) {
+    if (!query) return true;
+    const q = query.toLowerCase();
+    return (
+      (acc.username || '').toLowerCase().includes(q) ||
+      (acc.nicho || '').toLowerCase().includes(q) ||
+      (acc.endereco || '').toLowerCase().includes(q) ||
+      (acc.whatsapp || '').toLowerCase().includes(q)
+    );
+  }
+
+  function saveAccounts() {
+    try {
+      localStorage.setItem(STORAGE_ACCOUNTS, JSON.stringify(accounts));
+      markSynced(false);
+    } catch (e) {
+      showError('Falha ao salvar a lista de contas (armazenamento cheio ou bloqueado).');
+    }
+  }
+
+  function loadCheckins(username) {
+    try {
+      const raw = localStorage.getItem(STORAGE_CHECKIN_PREFIX + username);
+      return raw ? JSON.parse(raw) : {};
+    } catch (e) {
+      return {};
+    }
+  }
+
+  function saveCheckinsFor(username) {
+    try {
+      localStorage.setItem(STORAGE_CHECKIN_PREFIX + username, JSON.stringify(checkins[username] || {}));
+      markSynced(false);
+    } catch (e) {
+      showError('Falha ao salvar o registro (armazenamento cheio ou bloqueado).');
+    }
+  }
+
+  function loadAbordagem(username) {
+    try {
+      const raw = localStorage.getItem(STORAGE_ABORDAGEM_PREFIX + username);
+      return raw ? JSON.parse(raw) : [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function saveAbordagemFor(username) {
+    try {
+      localStorage.setItem(STORAGE_ABORDAGEM_PREFIX + username, JSON.stringify(abordagemData[username] || []));
+      markSynced(false);
+    } catch (e) {
+      showError('Falha ao salvar o histórico de abordagem (armazenamento cheio ou bloqueado).');
+    }
+  }
+
+  function currentAbordagem(username) {
+    const list = abordagemData[username] || [];
+    if (list.length === 0) return null;
+    return list[list.length - 1];
+  }
+
+  function addAbordagemEntry(username, status, note) {
+    if (!abordagemData[username]) abordagemData[username] = [];
+    abordagemData[username].push({ status, note: (note || '').trim(), at: new Date().toISOString() });
+    saveAbordagemFor(username);
+  }
+
+  function deleteAbordagemEntry(username, at) {
+    if (!abordagemData[username]) return;
+    abordagemData[username] = abordagemData[username].filter((e) => e.at !== at);
+    saveAbordagemFor(username);
+  }
+
+  function toggleAbordagemPanel(username) {
+    abordagemFor = abordagemFor === username ? null : username;
+    abordagemSelected = null;
+    abordagemNoteDraft = '';
+    render();
+  }
+
+  function formatDateTimePretty(iso) {
+    const d = new Date(iso);
+    return d.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' }) +
+      ' às ' + String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+  }
+
+  // ---------- Sincronização com a nuvem (Firebase) ----------
+  let currentUser = null;
+  let docRef = null;
+  let unsubscribeDoc = null;
+  let applyingRemote = false;
+  let pushTimer = null;
+  let lastPushError = null;
+
+  function setSyncBadge(state, text) {
+    const el = document.getElementById('syncState');
+    if (!el) return;
+    el.className = 'sync-state ' + state;
+    el.textContent = text;
+  }
+
+  function markSynced() {
+    try { localStorage.setItem(STORAGE_LASTCHANGE, new Date().toISOString()); } catch (e) {}
+    scheduleCloudPush();
+    updateSyncBadge();
+  }
+
+  function updateSyncBadge() {
+    if (!cloudEnabled) {
+      let lastExport = null, lastChange = null;
+      try { lastExport = localStorage.getItem(STORAGE_LASTEXPORT); } catch (e) {}
+      try { lastChange = localStorage.getItem(STORAGE_LASTCHANGE); } catch (e) {}
+      if (lastChange && (!lastExport || lastChange > lastExport)) {
+        setSyncBadge('pending', 'há alterações não exportadas');
+      } else if (lastExport) {
+        setSyncBadge('ok', 'backup exportado ' + formatDateTimePretty(lastExport));
+      } else {
+        setSyncBadge('local', 'somente neste dispositivo');
+      }
+      return;
+    }
+    if (!currentUser) {
+      setSyncBadge('local', 'não conectado — dados só neste dispositivo');
+      return;
+    }
+    if (lastPushError) {
+      setSyncBadge('error', 'erro ao sincronizar: ' + lastPushError);
+      return;
+    }
+    if (pushTimer) {
+      setSyncBadge('saving', 'sincronizando…');
+      return;
+    }
+    setSyncBadge('ok', 'sincronizado · ' + currentUser.email);
+  }
+
+  function scheduleCloudPush() {
+    if (!cloudEnabled || !currentUser || applyingRemote) return;
+    if (pushTimer) clearTimeout(pushTimer);
+    pushTimer = setTimeout(() => {
+      pushTimer = null;
+      pushToCloud();
+    }, 800);
+    updateSyncBadge();
+  }
+
+  function pushToCloud() {
+    if (!cloudEnabled || !currentUser || !docRef) return;
+    docRef.set({
+      accounts,
+      checkins,
+      abordagem: abordagemData,
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+    }).then(() => {
+      lastPushError = null;
+      updateSyncBadge();
+    }).catch((e) => {
+      lastPushError = (e && e.message) || 'falha ao salvar';
+      updateSyncBadge();
+    });
+  }
+
+  function applyRemoteSnapshot(data) {
+    applyingRemote = true;
+    const merged = mergeImportedData(
+      accounts, checkins, abordagemData,
+      (data.accounts || []), (data.checkins || {}), (data.abordagem || {})
+    );
+    accounts = merged.accounts;
+    checkins = merged.checkins;
+    abordagemData = merged.abordagem;
+    saveAccounts();
+    accounts.forEach((acc) => { saveCheckinsFor(acc.username); saveAbordagemFor(acc.username); });
+    applyingRemote = false;
+    render();
+    updateSyncBadge();
+  }
+
+  function startCloudSync(user) {
+    currentUser = user;
+    docRef = db.collection('vigia_users').doc(user.uid);
+    if (unsubscribeDoc) unsubscribeDoc();
+    unsubscribeDoc = docRef.onSnapshot((snap) => {
+      if (!snap.exists) { pushToCloud(); return; }
+      applyRemoteSnapshot(snap.data());
+    }, (err) => {
+      lastPushError = (err && err.message) || 'falha ao sincronizar';
+      updateSyncBadge();
+    });
+    updateAuthUI();
+    updateSyncBadge();
+  }
+
+  function stopCloudSync() {
+    currentUser = null;
+    docRef = null;
+    if (unsubscribeDoc) { unsubscribeDoc(); unsubscribeDoc = null; }
+    updateAuthUI();
+    updateSyncBadge();
+  }
+
+  function updateAuthUI() {
+    const btn = document.getElementById('authBtn');
+    if (!btn) return;
+    if (!cloudEnabled) { btn.style.display = 'none'; return; }
+    btn.style.display = 'inline-block';
+    btn.textContent = currentUser ? 'sair (' + currentUser.email + ')' : 'entrar com Google';
+  }
+
+  function toggleAuth() {
+    if (!cloudEnabled) return;
+    if (currentUser) {
+      auth.signOut();
+      return;
+    }
+    const provider = new firebase.auth.GoogleAuthProvider();
+    auth.signInWithPopup(provider).catch(() => {
+      auth.signInWithRedirect(provider);
+    });
+  }
+
+  function loadAll() {
+    loadAccounts();
+    checkins = {};
+    abordagemData = {};
+    accounts.forEach((acc) => {
+      checkins[acc.username] = loadCheckins(acc.username);
+      abordagemData[acc.username] = loadAbordagem(acc.username);
+    });
+  }
+
+  function dayStatus(username, date) {
+    return statusFromEntry((checkins[username] || {})[date]);
+  }
+
+  function extractUsername(raw) {
+    let value = raw.trim();
+    if (!value) return '';
+
+    // Se for um link do Instagram (com ou sem https, com ou sem www),
+    // extrai o nome de usuário do caminho da URL.
+    const urlMatch = value.match(/instagram\.com\/([^/?#]+)/i);
+    if (urlMatch) {
+      value = urlMatch[1];
+    }
+
+    value = value.trim().replace(/^@/, '');
+
+    // Remove barra final e qualquer coisa depois de ? ou # que tenha sobrado.
+    value = value.split('?')[0].split('#')[0].replace(/\/+$/, '');
+
+    // Ignora seções que não são perfis de usuário.
+    const reserved = ['p', 'reel', 'reels', 'stories', 'explore', 'accounts', 'tv', 'direct'];
+    if (reserved.includes(value.toLowerCase())) return '';
+
+    return value;
+  }
+
+  function addAccount() {
+    const input = document.getElementById('newUsername');
+    const nichoInput = document.getElementById('newNicho');
+    const clean = extractUsername(input.value);
+    if (!clean) return;
+    if (accounts.some((a) => a.username.toLowerCase() === clean.toLowerCase())) {
+      input.value = '';
+      return;
+    }
+    const nicho = nichoInput.value.trim() || DEFAULT_NICHO;
+    const nowIso = new Date().toISOString();
+    accounts.push({ username: clean, addedAt: nowIso, updatedAt: nowIso, nicho, endereco: '', whatsapp: '' });
+    checkins[clean] = {};
+    saveAccounts();
+    input.value = '';
+    nichoInput.value = '';
+    render();
+  }
+
+  function removeAccount(username) {
+    accounts = accounts.filter((a) => a.username !== username);
+    delete checkins[username];
+    delete abordagemData[username];
+    saveAccounts();
+    try { localStorage.removeItem(STORAGE_CHECKIN_PREFIX + username); } catch (e) {}
+    try { localStorage.removeItem(STORAGE_ABORDAGEM_PREFIX + username); } catch (e) {}
+    if (editorState && editorState.username === username) editorState = null;
+    if (historyFor === username) historyFor = null;
+    if (abordagemFor === username) abordagemFor = null;
+    if (nichoEditFor === username) nichoEditFor = null;
+    if (contatoEditFor === username) contatoEditFor = null;
+    render();
+  }
+
+  function buildStatusGrid(container) {
+    container.innerHTML = '';
+    STATUS_OPTIONS.forEach((opt) => {
+      const label = document.createElement('label');
+      label.className = 'status-option' + (editSelectedStatus === opt.value ? ' selected' : '');
+      label.style.borderColor = editSelectedStatus === opt.value ? statusColorVar(opt.value) : '';
+      const input = document.createElement('input');
+      input.type = 'radio';
+      input.name = 'status';
+      input.checked = editSelectedStatus === opt.value;
+      input.addEventListener('change', () => {
+        editSelectedStatus = opt.value;
+        const errEl = document.getElementById('statusError');
+        if (errEl) errEl.style.display = 'none';
+        buildStatusGrid(container);
+      });
+      label.appendChild(input);
+      label.appendChild(document.createTextNode(opt.label));
+      container.appendChild(label);
+    });
+  }
+
+  // Monta o painel de registro (editor) inline, para ser inserido logo abaixo
+  // da faixa de dias do próprio card da conta — em vez de um painel fixo no
+  // rodapé da página.
+  function buildEditorPanel(username, date) {
+    const existing = (checkins[username] || {})[date];
+    const today = todayKey();
+
+    const wrap = document.createElement('div');
+    wrap.className = 'editor open';
+    wrap.id = 'editorPanel';
+
+    const titleEl = document.createElement('div');
+    titleEl.className = 'editor-title';
+    titleEl.innerHTML = '@' + username + ' — ' + formatDatePretty(date) + ' (' + dayLabel(date) + ')' +
+      (date > today ? ' <span class="hint">· data futura, será conferida quando chegar o dia</span>' : '');
+    wrap.appendChild(titleEl);
+
+    const grid = document.createElement('div');
+    grid.className = 'status-grid';
+    grid.id = 'statusGrid';
+    wrap.appendChild(grid);
+    buildStatusGrid(grid);
+
+    const statusError = document.createElement('div');
+    statusError.className = 'status-error';
+    statusError.id = 'statusError';
+    statusError.textContent = 'selecione uma das opções acima.';
+    wrap.appendChild(statusError);
+
+    const timeRow = document.createElement('div');
+    timeRow.className = 'time-row';
+    const timeLabel = document.createElement('label');
+    timeLabel.setAttribute('for', 'editTime');
+    timeLabel.textContent = 'horário:';
+    const timeInput = document.createElement('input');
+    timeInput.type = 'time';
+    timeInput.id = 'editTime';
+    timeInput.value = existing ? (existing.time || '') : (date === today ? currentTimeHHMM() : '');
+    timeRow.appendChild(timeLabel);
+    timeRow.appendChild(timeInput);
+    wrap.appendChild(timeRow);
+
+    const noteArea = document.createElement('textarea');
+    noteArea.id = 'editNote';
+    noteArea.rows = 2;
+    noteArea.placeholder = 'nota opcional, link do post, etc.';
+    noteArea.value = existing ? (existing.note || '') : '';
+    wrap.appendChild(noteArea);
+
+    const actions = document.createElement('div');
+    actions.className = 'editor-actions';
+    const saveBtn = document.createElement('button');
+    saveBtn.className = 'btn-save';
+    saveBtn.id = 'saveBtn';
+    saveBtn.textContent = 'salvar registro';
+    saveBtn.addEventListener('click', saveCheckin);
+    actions.appendChild(saveBtn);
+    const cancelBtn = document.createElement('button');
+    cancelBtn.className = 'btn-cancel';
+    cancelBtn.id = 'cancelBtn';
+    cancelBtn.textContent = 'cancelar';
+    cancelBtn.addEventListener('click', closeEditor);
+    actions.appendChild(cancelBtn);
+    if (existing) {
+      const deleteBtn = document.createElement('button');
+      deleteBtn.className = 'btn-delete-entry';
+      deleteBtn.id = 'deleteBtn';
+      deleteBtn.textContent = 'apagar registro desse dia';
+      deleteBtn.addEventListener('click', () => deleteCheckin(username, date));
+      actions.appendChild(deleteBtn);
+    }
+    wrap.appendChild(actions);
+
+    return wrap;
+  }
+
+  function openEditor(username, date) {
+    const existing = (checkins[username] || {})[date];
+    editSelectedStatus = existing ? statusFromEntry(existing) : null;
+    editorState = { username, date };
+    render();
+    requestAnimationFrame(() => {
+      const panel = document.getElementById('editorPanel');
+      if (panel) panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  }
+
+  function closeEditor() {
+    editorState = null;
+    render();
+  }
+
+  function saveCheckin() {
+    if (!editorState) return;
+    if (!editSelectedStatus) {
+      const errEl = document.getElementById('statusError');
+      if (errEl) errEl.style.display = 'block';
+      return;
+    }
+    const { username, date } = editorState;
+    const entry = {
+      status: editSelectedStatus,
+      time: document.getElementById('editTime').value,
+      note: document.getElementById('editNote').value.trim(),
+      checkedAt: new Date().toISOString(),
+    };
+    if (!checkins[username]) checkins[username] = {};
+    checkins[username][date] = entry;
+    saveCheckinsFor(username);
+    editorState = null;
+    render();
+  }
+
+  function deleteCheckin(username, date) {
+    if (checkins[username]) {
+      delete checkins[username][date];
+      saveCheckinsFor(username);
+    }
+    if (editorState && editorState.username === username && editorState.date === date) editorState = null;
+    render();
+  }
+
+  function openHistory(username) {
+    if (historyFor === username) {
+      historyFor = null;
+      render();
+      return;
+    }
+    const now = new Date();
+    calMonth = { year: now.getFullYear(), month: now.getMonth() };
+    historyFor = username;
+    render();
+  }
+
+  function shiftMonth(delta) {
+    const d = new Date(calMonth.year, calMonth.month + delta, 1);
+    calMonth = { year: d.getFullYear(), month: d.getMonth() };
+    render();
+  }
+
+  function createAccountCard(acc, today, days) {
+      const card = document.createElement('div');
+      card.className = 'account-card';
+
+      const statusToday = dayStatus(acc.username, today);
+      const markBtnClass = 'btn-mark' + (statusToday === 'unchecked' ? ' pending' : '');
+      const curAbordagem = currentAbordagem(acc.username);
+
+      const header = document.createElement('div');
+      header.className = 'account-header';
+      header.innerHTML =
+        '<div class="account-name"><a href="https://www.instagram.com/' + acc.username + '/" target="_blank" rel="noopener noreferrer">@' + acc.username + '</a>' +
+        '<span class="nicho-tag" data-action="edit-nicho" data-username="' + acc.username + '">' + (acc.nicho || DEFAULT_NICHO) + ' ✎</span>' +
+        '<span class="nicho-tag contato-tag" data-action="edit-contato" data-username="' + acc.username + '">contato ✎</span>' +
+        '<span class="abordagem-badge' + (curAbordagem ? '' : ' none') + '" style="' + (curAbordagem ? 'background:' + abordagemColorVar(curAbordagem.status) + ';' : '') + '">' +
+        (curAbordagem ? abordagemLabel(curAbordagem.status) : 'sem abordagem') + '</span></div>' +
+        '<div class="account-actions">' +
+        '<button class="' + markBtnClass + '" data-action="mark" data-username="' + acc.username + '">marcar hoje</button>' +
+        '<button class="btn-history' + (historyFor === acc.username ? ' open' : '') + '" data-action="toggle-history" data-username="' + acc.username + '">histórico por mês</button>' +
+        '<button class="btn-abordagem' + (abordagemFor === acc.username ? ' open' : '') + '" data-action="toggle-abordagem" data-username="' + acc.username + '">abordagem</button>' +
+        '<button class="btn-remove" data-action="remove" data-username="' + acc.username + '">remover</button>' +
+        '</div>';
+      card.appendChild(header);
+
+      if (acc.endereco || acc.whatsapp) {
+        const infoRow = document.createElement('div');
+        infoRow.className = 'account-contact-info';
+        if (acc.endereco) {
+          const end = document.createElement('span');
+          end.className = 'contact-endereco';
+          end.textContent = '📍 ' + acc.endereco;
+          infoRow.appendChild(end);
+        }
+        if (acc.whatsapp) {
+          const digits = acc.whatsapp.replace(/\D/g, '');
+          const link = document.createElement('a');
+          link.className = 'contact-whatsapp';
+          link.href = digits ? ('https://wa.me/' + digits) : '#';
+          link.target = '_blank';
+          link.rel = 'noopener noreferrer';
+          link.textContent = '💬 ' + acc.whatsapp;
+          infoRow.appendChild(link);
+        }
+        card.appendChild(infoRow);
+      }
+
+      if (contatoEditFor === acc.username) {
+        const cEditRow = document.createElement('div');
+        cEditRow.className = 'nicho-edit-row contato-edit-row';
+        const enderecoInput = document.createElement('input');
+        enderecoInput.type = 'text';
+        enderecoInput.value = acc.endereco || '';
+        enderecoInput.placeholder = 'endereço';
+        const whatsappInput = document.createElement('input');
+        whatsappInput.type = 'text';
+        whatsappInput.value = acc.whatsapp || '';
+        whatsappInput.placeholder = 'whatsapp (com DDD)';
+        const saveContatoBtn = document.createElement('button');
+        saveContatoBtn.className = 'save';
+        saveContatoBtn.textContent = 'salvar';
+        saveContatoBtn.addEventListener('click', () => {
+          setContato(acc.username, enderecoInput.value, whatsappInput.value);
+          contatoEditFor = null;
+          render();
+        });
+        const cancelContatoBtn = document.createElement('button');
+        cancelContatoBtn.textContent = 'cancelar';
+        cancelContatoBtn.addEventListener('click', () => {
+          contatoEditFor = null;
+          render();
+        });
+        [enderecoInput, whatsappInput].forEach((inp) => {
+          inp.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') saveContatoBtn.click();
+            if (e.key === 'Escape') cancelContatoBtn.click();
+          });
+        });
+        cEditRow.appendChild(enderecoInput);
+        cEditRow.appendChild(whatsappInput);
+        cEditRow.appendChild(saveContatoBtn);
+        cEditRow.appendChild(cancelContatoBtn);
+        card.appendChild(cEditRow);
+      }
+
+      if (nichoEditFor === acc.username) {
+        const editRow = document.createElement('div');
+        editRow.className = 'nicho-edit-row';
+        const nicheInput = document.createElement('input');
+        nicheInput.type = 'text';
+        nicheInput.value = acc.nicho === DEFAULT_NICHO ? '' : acc.nicho;
+        nicheInput.placeholder = 'nome do nicho';
+        nicheInput.setAttribute('list', 'nichoList');
+        const saveNicheBtn = document.createElement('button');
+        saveNicheBtn.className = 'save';
+        saveNicheBtn.textContent = 'salvar';
+        saveNicheBtn.addEventListener('click', () => {
+          setNicho(acc.username, nicheInput.value);
+          nichoEditFor = null;
+          render();
+        });
+        const cancelNicheBtn = document.createElement('button');
+        cancelNicheBtn.textContent = 'cancelar';
+        cancelNicheBtn.addEventListener('click', () => {
+          nichoEditFor = null;
+          render();
+        });
+        nicheInput.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') saveNicheBtn.click();
+          if (e.key === 'Escape') cancelNicheBtn.click();
+        });
+        editRow.appendChild(nicheInput);
+        editRow.appendChild(saveNicheBtn);
+        editRow.appendChild(cancelNicheBtn);
+        card.appendChild(editRow);
+      }
+
+      const strip = document.createElement('div');
+      strip.className = 'strip';
+      days.forEach((date, i) => {
+        const status = dayStatus(acc.username, date);
+        const isToday = date === today;
+        const isFuture = date > today;
+        const cell = document.createElement('button');
+        cell.className = 'day-cell' + (isToday ? ' today' : '') + (isFuture && status === 'unchecked' ? ' future' : '');
+        if (!(isFuture && status === 'unchecked')) cell.style.background = statusColorVar(status);
+        const rotation = isFuture ? 0 : ((i * 7) % 5) - 2;
+        cell.style.transform = 'rotate(' + rotation + 'deg)';
+        cell.title = formatDatePretty(date) + ' — ' + (isFuture && status === 'unchecked' ? 'ainda não chegou' : statusLabel(status));
+        cell.dataset.action = 'edit';
+        cell.dataset.username = acc.username;
+        cell.dataset.date = date;
+        strip.appendChild(cell);
+      });
+      card.appendChild(strip);
+
+      const labels = document.createElement('div');
+      labels.className = 'strip-labels';
+      days.forEach((date) => {
+        const div = document.createElement('div');
+        const isFuture = date > today;
+        div.className = date === today ? 'today' : (isFuture ? 'future' : '');
+        div.textContent = date.slice(8, 10);
+        labels.appendChild(div);
+      });
+      card.appendChild(labels);
+
+      if (editorState && editorState.username === acc.username) {
+        card.appendChild(buildEditorPanel(acc.username, editorState.date));
+      }
+
+      if (historyFor === acc.username && calMonth) {
+        const panel = document.createElement('div');
+        panel.className = 'cal-panel open';
+
+        const nav = document.createElement('div');
+        nav.className = 'cal-nav';
+        const prevBtn = document.createElement('button');
+        prevBtn.textContent = '‹ mês anterior';
+        prevBtn.addEventListener('click', () => shiftMonth(-1));
+        const label = document.createElement('div');
+        label.className = 'cal-label';
+        label.textContent = monthLabel(calMonth.year, calMonth.month);
+        const nextBtn = document.createElement('button');
+        nextBtn.textContent = 'mês seguinte ›';
+        nextBtn.addEventListener('click', () => shiftMonth(1));
+        nav.appendChild(prevBtn);
+        nav.appendChild(label);
+        nav.appendChild(nextBtn);
+        panel.appendChild(nav);
+
+        const weekdaysEl = document.createElement('div');
+        weekdaysEl.className = 'cal-weekdays';
+        ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sáb'].forEach((wd) => {
+          const d = document.createElement('div');
+          d.textContent = wd;
+          weekdaysEl.appendChild(d);
+        });
+        panel.appendChild(weekdaysEl);
+
+        const gridEl = document.createElement('div');
+        gridEl.className = 'cal-grid';
+        buildMonthGrid(calMonth.year, calMonth.month).forEach((date) => {
+          if (!date) {
+            const blank = document.createElement('div');
+            blank.className = 'cal-blank';
+            gridEl.appendChild(blank);
+            return;
+          }
+          const status = dayStatus(acc.username, date);
+          const isToday = date === today;
+          const isFuture = date > today;
+          const entry = (checkins[acc.username] || {})[date];
+          const dayNum = parseInt(date.slice(8, 10), 10);
+
+          const btn = document.createElement('button');
+          btn.className = 'cal-day' + (isToday ? ' today' : '') + (isFuture && status === 'unchecked' ? ' future-empty' : '');
+          if (!(isFuture && status === 'unchecked')) btn.style.background = statusColorVar(status);
+          btn.textContent = dayNum;
+          btn.title = formatDatePretty(date) + ' — ' + (isFuture && status === 'unchecked' ? 'ainda não chegou' : statusLabel(status)) + (entry && entry.time ? ' · ' + entry.time : '');
+          btn.addEventListener('click', () => openEditor(acc.username, date));
+          gridEl.appendChild(btn);
+        });
+        panel.appendChild(gridEl);
+
+        const legendEl = document.createElement('div');
+        legendEl.className = 'cal-legend';
+        CHECKIN_LEGEND.forEach((st) => {
+          const item = document.createElement('div');
+          item.className = 'cal-legend-item';
+          const swatch = document.createElement('span');
+          swatch.className = 'cal-legend-swatch';
+          swatch.style.background = statusColorVar(st);
+          item.appendChild(swatch);
+          item.appendChild(document.createTextNode(statusLabel(st)));
+          legendEl.appendChild(item);
+        });
+        panel.appendChild(legendEl);
+
+        card.appendChild(panel);
+      }
+
+      if (abordagemFor === acc.username) {
+        const aPanel = document.createElement('div');
+        aPanel.className = 'abordagem-panel open';
+
+        const aTitle = document.createElement('div');
+        aTitle.className = 'abordagem-panel-title';
+        aTitle.textContent = 'Registrar novo status de abordagem';
+        aPanel.appendChild(aTitle);
+
+        const chips = document.createElement('div');
+        chips.className = 'abordagem-chips';
+        ABORDAGEM_OPTIONS.forEach((opt) => {
+          const chip = document.createElement('button');
+          chip.className = 'abordagem-chip' + (abordagemSelected === opt.value ? ' selected' : '');
+          chip.textContent = opt.label;
+          if (abordagemSelected === opt.value) {
+            chip.style.background = 'var(' + opt.color + ')';
+          } else {
+            chip.style.borderColor = 'var(' + opt.color + ')';
+            chip.style.color = 'var(' + opt.color + ')';
+          }
+          chip.addEventListener('click', () => {
+            abordagemSelected = opt.value;
+            render();
+          });
+          chips.appendChild(chip);
+        });
+        aPanel.appendChild(chips);
+
+        const noteArea = document.createElement('textarea');
+        noteArea.rows = 2;
+        noteArea.placeholder = 'nota opcional sobre esse status (o que foi combinado, etc.)';
+        noteArea.value = abordagemNoteDraft;
+        noteArea.addEventListener('input', (e) => { abordagemNoteDraft = e.target.value; });
+        aPanel.appendChild(noteArea);
+
+        const registerRow = document.createElement('div');
+        registerRow.className = 'abordagem-register-row';
+        const registerBtn = document.createElement('button');
+        registerBtn.className = 'btn-register';
+        registerBtn.textContent = 'registrar';
+        const registerError = document.createElement('span');
+        registerError.className = 'abordagem-register-error';
+        registerError.textContent = 'selecione um status acima.';
+        registerBtn.addEventListener('click', () => {
+          if (!abordagemSelected) {
+            registerError.style.display = 'inline';
+            return;
+          }
+          addAbordagemEntry(acc.username, abordagemSelected, abordagemNoteDraft);
+          abordagemSelected = null;
+          abordagemNoteDraft = '';
+          render();
+        });
+        registerRow.appendChild(registerBtn);
+        registerRow.appendChild(registerError);
+        aPanel.appendChild(registerRow);
+
+        const histTitle = document.createElement('div');
+        histTitle.className = 'abordagem-history-title';
+        histTitle.textContent = 'histórico de status';
+        aPanel.appendChild(histTitle);
+
+        const histList = (abordagemData[acc.username] || []).slice().reverse();
+        if (histList.length === 0) {
+          const empty = document.createElement('div');
+          empty.className = 'abordagem-empty';
+          empty.textContent = 'nenhum status registrado ainda.';
+          aPanel.appendChild(empty);
+        } else {
+          const histWrap = document.createElement('div');
+          histWrap.className = 'abordagem-history';
+          histList.forEach((entry) => {
+            const row = document.createElement('div');
+            row.className = 'abordagem-entry';
+
+            const dot = document.createElement('div');
+            dot.className = 'abordagem-entry-dot';
+            dot.style.background = abordagemColorVar(entry.status);
+            row.appendChild(dot);
+
+            const body = document.createElement('div');
+            body.className = 'abordagem-entry-body';
+            const statusEl = document.createElement('div');
+            statusEl.className = 'abordagem-entry-status';
+            statusEl.style.color = abordagemColorVar(entry.status);
+            statusEl.textContent = abordagemLabel(entry.status);
+            body.appendChild(statusEl);
+            const whenEl = document.createElement('div');
+            whenEl.className = 'abordagem-entry-when';
+            whenEl.textContent = formatDateTimePretty(entry.at);
+            body.appendChild(whenEl);
+            if (entry.note) {
+              const noteEl = document.createElement('div');
+              noteEl.className = 'abordagem-entry-note';
+              noteEl.textContent = entry.note;
+              body.appendChild(noteEl);
+            }
+            row.appendChild(body);
+
+            const delBtn = document.createElement('button');
+            delBtn.className = 'abordagem-entry-del';
+            delBtn.textContent = '✕';
+            delBtn.title = 'apagar este registro';
+            delBtn.addEventListener('click', () => {
+              deleteAbordagemEntry(acc.username, entry.at);
+              render();
+            });
+            row.appendChild(delBtn);
+
+            histWrap.appendChild(row);
+          });
+          aPanel.appendChild(histWrap);
+        }
+
+        card.appendChild(aPanel);
+      }
+
+      return card;
+  }
+
+  function render() {
+    showError('');
+    const today = todayKey();
+    const days = dayRange(13, 6);
+
+    document.getElementById('emptyState').style.display = accounts.length === 0 ? 'block' : 'none';
+    updateNichoDatalist();
+
+    const summaryEl = document.getElementById('summary');
+    if (accounts.length > 0) {
+      const posted = accounts.filter((a) => {
+        const s = dayStatus(a.username, today);
+        return s !== 'unchecked' && s !== 'nothing';
+      }).length;
+      const pending = accounts.filter((a) => dayStatus(a.username, today) === 'unchecked').length;
+      summaryEl.style.display = 'flex';
+      summaryEl.innerHTML = 'hoje: <strong class="green">' + posted + ' postaram</strong>&nbsp;·&nbsp;<strong class="amber">' + pending + ' ainda não conferidas</strong>';
+    } else {
+      summaryEl.style.display = 'none';
+    }
+
+    const nichos = getAllNichos();
+    const filterRow = document.getElementById('filterRow');
+    const chipsEl = document.getElementById('filterChips');
+    if (accounts.length > 0 && nichos.length > 1) {
+      filterRow.style.display = 'flex';
+      chipsEl.innerHTML = '';
+      const allChip = document.createElement('button');
+      allChip.className = 'filter-chip' + (activeFiltro === null ? ' active' : '');
+      allChip.textContent = 'todos';
+      allChip.addEventListener('click', () => { activeFiltro = null; render(); });
+      chipsEl.appendChild(allChip);
+      nichos.forEach((n) => {
+        const chip = document.createElement('button');
+        chip.className = 'filter-chip' + (activeFiltro === n ? ' active' : '');
+        chip.textContent = n;
+        chip.addEventListener('click', () => { activeFiltro = (activeFiltro === n ? null : n); render(); });
+        chipsEl.appendChild(chip);
+      });
+    } else {
+      filterRow.style.display = 'none';
+    }
+
+    const listEl = document.getElementById('accountsList');
+    listEl.innerHTML = '';
+
+    // mais recente adicionado primeiro
+    const sortedAccounts = accounts.slice().sort((a, b) => new Date(b.addedAt || 0) - new Date(a.addedAt || 0));
+
+    const searchFiltered = searchQuery ? sortedAccounts.filter((a) => matchesSearch(a, searchQuery)) : sortedAccounts;
+    const visibleAccounts = activeFiltro ? searchFiltered.filter((a) => (a.nicho || DEFAULT_NICHO) === activeFiltro) : searchFiltered;
+
+    const noResultsEl = document.getElementById('noSearchResults');
+    noResultsEl.style.display = (accounts.length > 0 && visibleAccounts.length === 0) ? 'block' : 'none';
+
+    const groups = {};
+    visibleAccounts.forEach((acc) => {
+      const n = acc.nicho || DEFAULT_NICHO;
+      if (!groups[n]) groups[n] = [];
+      groups[n].push(acc);
+    });
+
+    const groupOrder = getAllNichos().filter((n) => groups[n]);
+
+    groupOrder.forEach((nicho) => {
+      const groupEl = document.createElement('div');
+      groupEl.className = 'nicho-group';
+
+      const titleEl = document.createElement('div');
+      titleEl.className = 'nicho-group-title';
+      titleEl.innerHTML = nicho + ' <span class="count">(' + groups[nicho].length + ')</span>';
+      groupEl.appendChild(titleEl);
+
+      const cardsWrap = document.createElement('div');
+      cardsWrap.className = 'accounts';
+      groups[nicho].forEach((acc) => {
+        cardsWrap.appendChild(createAccountCard(acc, today, days));
+      });
+      groupEl.appendChild(cardsWrap);
+
+      listEl.appendChild(groupEl);
+    });
+  }
+
+  document.getElementById('accountsList').addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-action]');
+    if (!btn) return;
+    const action = btn.dataset.action;
+    const username = btn.dataset.username;
+    if (action === 'mark') openEditor(username, todayKey());
+    if (action === 'remove') removeAccount(username);
+    if (action === 'edit') openEditor(username, btn.dataset.date);
+    if (action === 'toggle-history') openHistory(username);
+    if (action === 'edit-nicho') { nichoEditFor = (nichoEditFor === username ? null : username); contatoEditFor = null; render(); }
+    if (action === 'edit-contato') { contatoEditFor = (contatoEditFor === username ? null : username); nichoEditFor = null; render(); }
+    if (action === 'toggle-abordagem') toggleAbordagemPanel(username);
+  });
+
+  document.getElementById('searchInput').addEventListener('input', (e) => {
+    searchQuery = e.target.value.trim();
+    render();
+  });
+
+  document.getElementById('addBtn').addEventListener('click', addAccount);
+  document.getElementById('newUsername').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') addAccount();
+  });
+  document.getElementById('newNicho').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') addAccount();
+  });
+  function exportBackup() {
+    const payload = {
+      app: 'vigia-instagram-local',
+      version: 1,
+      exportedAt: new Date().toISOString(),
+      accounts,
+      checkins,
+      abordagem: abordagemData,
+    };
+    const json = JSON.stringify(payload, null, 2);
+    const blob = new Blob([json], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const now = new Date();
+    const pad = (n) => String(n).padStart(2, '0');
+    const filename = 'vigia-backup-' + now.getFullYear() + pad(now.getMonth() + 1) + pad(now.getDate()) +
+      '-' + pad(now.getHours()) + pad(now.getMinutes()) + '.json';
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+
+    try { localStorage.setItem(STORAGE_LASTEXPORT, now.toISOString()); } catch (e) {}
+    updateSyncBadge();
+  }
+
+  // Mescla os dados importados com os dados locais, mantendo sempre o registro
+  // mais recente de cada conta/checkin/abordagem, em vez de substituir tudo.
+  function mergeImportedData(localAccounts, localCheckins, localAbordagem, importedAccounts, importedCheckins, importedAbordagem) {
+    const byKey = {};
+    localAccounts.forEach((a) => { byKey[a.username.toLowerCase()] = { ...a }; });
+    importedAccounts.forEach((a) => {
+      const key = a.username.toLowerCase();
+      const existing = byKey[key];
+      if (!existing) {
+        byKey[key] = { ...a };
+      } else {
+        const localTime = new Date(existing.updatedAt || existing.addedAt || 0).getTime();
+        const importedTime = new Date(a.updatedAt || a.addedAt || 0).getTime();
+        // mantém a versão mais recente; em empate, fica a local
+        if (importedTime > localTime) byKey[key] = { ...a };
+      }
+    });
+    const mergedAccounts = Object.values(byKey);
+
+    function mergeCheckinMaps(localMap, importedMap) {
+      const result = {};
+      const users = new Set([...Object.keys(localMap || {}), ...Object.keys(importedMap || {})]);
+      users.forEach((u) => {
+        const localDays = (localMap && localMap[u]) || {};
+        const importedDays = (importedMap && importedMap[u]) || {};
+        const days = { ...localDays };
+        Object.keys(importedDays).forEach((date) => {
+          const l = localDays[date];
+          const im = importedDays[date];
+          if (!l) { days[date] = im; return; }
+          const lt = new Date(l.checkedAt || 0).getTime();
+          const it = new Date(im.checkedAt || 0).getTime();
+          if (it > lt) days[date] = im;
+        });
+        result[u] = days;
+      });
+      return result;
+    }
+
+    function mergeAbordagemMaps(localMap, importedMap) {
+      const result = {};
+      const users = new Set([...Object.keys(localMap || {}), ...Object.keys(importedMap || {})]);
+      users.forEach((u) => {
+        const localList = (localMap && localMap[u]) || [];
+        const importedList = (importedMap && importedMap[u]) || [];
+        const seen = new Set();
+        const combined = [];
+        localList.concat(importedList).forEach((entry) => {
+          const key = entry.at + '|' + entry.status + '|' + (entry.note || '');
+          if (seen.has(key)) return;
+          seen.add(key);
+          combined.push(entry);
+        });
+        combined.sort((a, b) => new Date(a.at) - new Date(b.at));
+        result[u] = combined;
+      });
+      return result;
+    }
+
+    return {
+      accounts: mergedAccounts,
+      checkins: mergeCheckinMaps(localCheckins, importedCheckins),
+      abordagem: mergeAbordagemMaps(localAbordagem, importedAbordagem),
+    };
+  }
+
+  function importBackup(file) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      let data;
+      try {
+        data = JSON.parse(reader.result);
+      } catch (e) {
+        showError('Arquivo inválido: não parece ser um backup do Vigia (JSON malformado).');
+        return;
+      }
+      if (!data || !Array.isArray(data.accounts)) {
+        showError('Arquivo inválido: não parece ser um backup do Vigia.');
+        return;
+      }
+      const total = data.accounts.length;
+      const ok = window.confirm(
+        'Importar este arquivo (' + total + ' conta(s), exportado em ' +
+        (data.exportedAt ? formatDateTimePretty(data.exportedAt) : 'data desconhecida') + ') vai MESCLAR com os dados já salvos neste dispositivo.\n\n' +
+        'Para cada conta e cada registro, o sistema compara as datas e mantém sempre a versão mais recente. Contas que existem só no arquivo ou só neste dispositivo são preservadas. Deseja continuar?'
+      );
+      if (!ok) return;
+
+      const importedAccounts = data.accounts.map((a) => ({
+        username: a.username,
+        addedAt: a.addedAt || new Date().toISOString(),
+        updatedAt: a.updatedAt || a.addedAt || new Date().toISOString(),
+        nicho: (a.nicho && a.nicho.trim()) ? a.nicho : DEFAULT_NICHO,
+        endereco: typeof a.endereco === 'string' ? a.endereco : '',
+        whatsapp: typeof a.whatsapp === 'string' ? a.whatsapp : '',
+      }));
+      const importedCheckins = data.checkins || {};
+      const importedAbordagem = data.abordagem || {};
+
+      const merged = mergeImportedData(accounts, checkins, abordagemData, importedAccounts, importedCheckins, importedAbordagem);
+      accounts = merged.accounts;
+      checkins = merged.checkins;
+      abordagemData = merged.abordagem;
+
+      saveAccounts();
+      accounts.forEach((acc) => {
+        saveCheckinsFor(acc.username);
+        saveAbordagemFor(acc.username);
+      });
+
+      try { localStorage.setItem(STORAGE_LASTEXPORT, new Date().toISOString()); } catch (e) {}
+      showError('');
+      historyFor = null;
+      abordagemFor = null;
+      nichoEditFor = null;
+      contatoEditFor = null;
+      editorState = null;
+      activeFiltro = null;
+      searchQuery = '';
+      document.getElementById('searchInput').value = '';
+      render();
+      updateSyncBadge();
+    };
+    reader.onerror = () => {
+      showError('Não foi possível ler o arquivo selecionado.');
+    };
+    reader.readAsText(file);
+  }
+
+  document.getElementById('exportBtn').addEventListener('click', exportBackup);
+  document.getElementById('importBtn').addEventListener('click', () => {
+    document.getElementById('importFile').click();
+  });
+  document.getElementById('importFile').addEventListener('change', (e) => {
+    const file = e.target.files && e.target.files[0];
+    if (file) importBackup(file);
+    e.target.value = '';
+  });
+
+  loadAll();
+  document.getElementById('loadingState').style.display = 'none';
+  document.getElementById('mainApp').style.display = 'block';
+  render();
+  updateSyncBadge();
+  updateAuthUI();
+
+  if (cloudEnabled) {
+    document.getElementById('authBtn').addEventListener('click', toggleAuth);
+    auth.onAuthStateChanged((user) => {
+      if (user) startCloudSync(user); else stopCloudSync();
+    });
+  }
+
+  setInterval(() => { render(); }, 60000);
+</script>
+</body>
+</html>
