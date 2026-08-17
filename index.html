@@ -1,0 +1,2777 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Vigia — acompanhamento de contas</title>
+
+<!-- Ícone e comportamento de app ao adicionar à tela inicial -->
+<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAYAAAA9zQYyAAAFLUlEQVR4nO3dUW7TQBSF4ZuIJVSqxAp4ZWsshK3xygoqVeoeygMyNWkce+zxzLln/u8VkTieP5fBbZxLdPD0/PW9x/OivbfXl0vL52vyZASMydmBn/bgRIw1Z8Rd9QGJGHvVivta40EiiBnH1Orn8LuCkFHbkWl9aEITM85wpKtd7wRCRiul07p4QhMzWirtrShoYkYPJd1tDpqY0dPW/jYFTcxQsKXD1aCJGUrWenwYNDFD0aMuq/2kEFCwGDTTGcqW+rwbNDEjg3udsuWAlU9BM52RyW2v10d/CGQw75YtB6wQNKz8C5rtBjKb+mVCwwpBw8olgu0GfDChYYWgYYWgYeXK/hlOmNCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCw8qX3AWT36+e36o/5/cfv6o85igu3033sjGCPIvhlBD2jGO9WRP7X0EFnDnjNqIEPF7RzxEtGinuIoEeMeIl73LZBE/E6x7jtgibkck5h2wRNyMc5hJ0+6N4hnxGB42tqJW3QrRZdcXFHfu1rUgZ91oLWXMAtx9j6+fbIFnWqoGsvWu3FOnJ8SsdyT5aw0wRda4HU97zKx5ch6hRBH12QsxbizL2s6jGrRy0dtPLJb/EfM+XjVw1bNmil/eitlpfVlF+LYtSSQe89yS1OcI9rxMqvSy1quaD3nNhWJ7XnDzyUX6NS1Ok/U6i80BmfXynOPaQmdMmitTzxvWOeU33dKm8EmQmd8eS5KznPKm96maC3ah2zykJNWh9PtuEhEfTWRcp2cl1sPe8Kb36JoLfoEbPCAt3jeumwhu5Bq0aDfXqvZ/egt8gyHdxlWIeuQfd+Nz+ifGwR2sfX89jkJ3SGqTAS9fWQDxooQdCwQtCwQtCwQtCwQtCwIh+08vXWEamvR9egla9pKh9bhPbx9Tw2+QkdoT8VRpFhHboHrTxpUK73enYPeit+ZfIDv0q7TCLoTL9APqJMH8CQCLrE6B9BGv0jaGtkgs74gUx3GT+4LHUbg4jyWEe5L0eE7mtViTlCaELvNcoNWFRjViM3oSO077PmerVF+ZyXkAw6QvuumNx99C+1mCOEg47Qvocx94fWizlCPOiJ6snnDv56UgQdof09IXzHio40QUfof7OT0n5U/VydJVXQkwzfycf3FPaRMuiIca4/3zPya1+TNuhJ7x8EKO9598oY8iR90JPeETjIHPLEJugJYZdzCHliF/SEsNc5hTyxDXqOuD84Rjw3RNBzI8btHvHccEHPOcc9UsRzQwd9K3PgowZ8i6BXKEZOvMsI+qAzgifY/QgaVtJ/phCYI2hYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYub69vlx6HwRQCxMaVggaVggaVq4REeyj4eDt9eXChIYVgoaVf0Gz7UBmU79MaFghaFj5L2i2Hcho3u2nCU3UyOS2V7YcsHI3aKY0MrjX6eKEJmooW+qTLQesPAyaKQ1Fj7pcndBEDSVrPW7achA1FGzpcPMemqjR09b+iv5TSNTooaS74qscRI2WSns7FOfT89f3I38fWLJ3cB66Ds20xhmOdFUtSKY1jqoxIKv9pJBpjSNq9XNahExsrDljCDaZqsSNydn/kv8Bk8AOb2mF1fgAAAAASUVORK5CYII=" />
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAYAAAA9zQYyAAAFLUlEQVR4nO3dUW7TQBSF4ZuIJVSqxAp4ZWsshK3xygoqVeoeygMyNWkce+zxzLln/u8VkTieP5fBbZxLdPD0/PW9x/OivbfXl0vL52vyZASMydmBn/bgRIw1Z8Rd9QGJGHvVivta40EiiBnH1Orn8LuCkFHbkWl9aEITM85wpKtd7wRCRiul07p4QhMzWirtrShoYkYPJd1tDpqY0dPW/jYFTcxQsKXD1aCJGUrWenwYNDFD0aMuq/2kEFCwGDTTGcqW+rwbNDEjg3udsuWAlU9BM52RyW2v10d/CGQw75YtB6wQNKz8C5rtBjKb+mVCwwpBw8olgu0GfDChYYWgYYWgYeXK/hlOmNCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCwQtCw8qX3AWT36+e36o/5/cfv6o85igu3033sjGCPIvhlBD2jGO9WRP7X0EFnDnjNqIEPF7RzxEtGinuIoEeMeIl73LZBE/E6x7jtgibkck5h2wRNyMc5hJ0+6N4hnxGB42tqJW3QrRZdcXFHfu1rUgZ91oLWXMAtx9j6+fbIFnWqoGsvWu3FOnJ8SsdyT5aw0wRda4HU97zKx5ch6hRBH12QsxbizL2s6jGrRy0dtPLJb/EfM+XjVw1bNmil/eitlpfVlF+LYtSSQe89yS1OcI9rxMqvSy1quaD3nNhWJ7XnDzyUX6NS1Ok/U6i80BmfXynOPaQmdMmitTzxvWOeU33dKm8EmQmd8eS5KznPKm96maC3ah2zykJNWh9PtuEhEfTWRcp2cl1sPe8Kb36JoLfoEbPCAt3jeumwhu5Bq0aDfXqvZ/egt8gyHdxlWIeuQfd+Nz+ifGwR2sfX89jkJ3SGqTAS9fWQDxooQdCwQtCwQtCwQtCwQtCwIh+08vXWEamvR9egla9pKh9bhPbx9Tw2+QkdoT8VRpFhHboHrTxpUK73enYPeit+ZfIDv0q7TCLoTL9APqJMH8CQCLrE6B9BGv0jaGtkgs74gUx3GT+4LHUbg4jyWEe5L0eE7mtViTlCaELvNcoNWFRjViM3oSO077PmerVF+ZyXkAw6QvuumNx99C+1mCOEg47Qvocx94fWizlCPOiJ6snnDv56UgQdof09IXzHio40QUfof7OT0n5U/VydJVXQkwzfycf3FPaRMuiIca4/3zPya1+TNuhJ7x8EKO9598oY8iR90JPeETjIHPLEJugJYZdzCHliF/SEsNc5hTyxDXqOuD84Rjw3RNBzI8btHvHccEHPOcc9UsRzQwd9K3PgowZ8i6BXKEZOvMsI+qAzgifY/QgaVtJ/phCYI2hYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYIWhYub69vlx6HwRQCxMaVggaVggaVq4REeyj4eDt9eXChIYVgoaVf0Gz7UBmU79MaFghaFj5L2i2Hcho3u2nCU3UyOS2V7YcsHI3aKY0MrjX6eKEJmooW+qTLQesPAyaKQ1Fj7pcndBEDSVrPW7achA1FGzpcPMemqjR09b+iv5TSNTooaS74qscRI2WSns7FOfT89f3I38fWLJ3cB66Ds20xhmOdFUtSKY1jqoxIKv9pJBpjSNq9XNahExsrDljCDaZqsSNydn/kv8Bk8AOb2mF1fgAAAAASUVORK5CYII=" />
+<meta name="theme-color" content="#14171A" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Vigia" />
+<style>
+  :root {
+    --bg: #14171A;
+    --panel: #1D2126;
+    --panel-alt: #20242A;
+    --border: #2C3138;
+    --border-strong: #3A404A;
+    --paper: #ECE7DA;
+    --muted: #8B9099;
+    --faint: #5A5F68;
+    --amber: #E3A542;
+    --green: #5FB88B;
+    --rose: #C97064;
+    --blue: #5B93E0;
+    --purple: #B98AE3;
+    --teal: #4FBDBA;
+    --pink: #E38AA0;
+    --unchecked: #2A2F35;
+    --future-border: #454B54;
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--paper);
+    font-family: 'Courier New', Consolas, Menlo, monospace;
+    margin: 0;
+    padding: 32px 16px;
+    display: flex;
+    justify-content: center;
+  }
+  .app { width: 100%; max-width: 760px; }
+  .title { font-family: Arial, Helvetica, sans-serif; font-weight: 700; font-size: 26px; letter-spacing: 0.02em; }
+  .title .dot { color: var(--amber); }
+  .title-row { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+  .sync-state { font-size: 11px; font-family: Arial, sans-serif; color: var(--faint); padding: 3px 9px; border-radius: 20px; border: 1px solid var(--border); }
+  .sync-state.ok { color: var(--green); border-color: rgba(95, 184, 139, 0.4); }
+  .sync-state.saving { color: var(--amber); border-color: rgba(227, 165, 66, 0.4); }
+  .sync-state.error { color: var(--rose); border-color: rgba(201, 112, 100, 0.4); }
+  .sync-state.local { color: var(--faint); }
+  .loading-state { text-align: center; color: var(--muted); font-size: 13px; padding: 60px 0; }
+  .subtitle { font-size: 13px; color: var(--muted); margin-top: 4px; }
+  .backup-row { display: flex; gap: 8px; margin: 14px 0 10px; flex-wrap: wrap; }
+  .btn-backup {
+    background: transparent; border: 1px solid var(--border-strong); color: var(--paper);
+    border-radius: 6px; padding: 7px 14px; font-size: 12px; font-family: Arial, sans-serif;
+    cursor: pointer;
+  }
+  .btn-backup:hover { background: var(--panel-alt); }
+  .sync-state.pending { color: var(--amber); border-color: rgba(227, 165, 66, 0.4); }
+  .add-row { display: flex; gap: 10px; margin: 20px 0 16px; }
+  .add-row input {
+    flex: 1; background: var(--panel-alt); border: 1px solid var(--border);
+    border-radius: 8px; padding: 10px 12px; color: var(--paper);
+    font-family: inherit; font-size: 13px; outline: none;
+  }
+  .add-row button {
+    background: var(--amber); color: #2C1D05; border: none; border-radius: 8px;
+    padding: 10px 18px; font-family: Arial, sans-serif; font-weight: 700;
+    font-size: 13px; cursor: pointer;
+  }
+  .add-row input.nicho-input { flex: 0 0 200px; }
+  .filter-row { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+  .filter-label { font-size: 12px; color: var(--muted); }
+  .filter-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+  .filter-chip {
+    background: transparent; color: var(--muted); border: 1px solid var(--border-strong);
+    border-radius: 20px; padding: 4px 12px; font-size: 11px; font-family: Arial, sans-serif;
+    cursor: pointer;
+  }
+  .filter-chip.active { background: var(--amber); color: #2C1D05; border-color: var(--amber); }
+  .nicho-group { margin-bottom: 22px; }
+  .nicho-group-title {
+    font-family: Arial, sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 0.04em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 10px; display: flex;
+    align-items: center; gap: 8px;
+  }
+  .nicho-group-title .count { color: var(--faint); font-weight: 400; text-transform: none; letter-spacing: 0; }
+  .nicho-group-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .nicho-tag {
+    display: inline-block; font-size: 10px; font-family: Arial, sans-serif; color: var(--amber);
+    background: rgba(227, 165, 66, 0.12); border: 1px solid rgba(227, 165, 66, 0.35);
+    border-radius: 4px; padding: 2px 7px; margin-left: 8px; cursor: pointer; vertical-align: middle;
+  }
+  .nicho-edit-row { display: flex; gap: 6px; margin-bottom: 10px; }
+  .nicho-edit-row input {
+    flex: 1; background: var(--panel-alt); border: 1px solid var(--border); border-radius: 6px;
+    padding: 6px 8px; color: var(--paper); font-family: inherit; font-size: 12px; outline: none;
+  }
+  .nicho-edit-row button {
+    border-radius: 6px; padding: 6px 10px; font-size: 11px; font-family: Arial, sans-serif;
+    cursor: pointer; border: 1px solid var(--border-strong); background: transparent; color: var(--paper);
+  }
+  .nicho-edit-row button.save { background: var(--amber); color: #2C1D05; border-color: var(--amber); }
+  .contato-tag { color: var(--teal); background: rgba(79, 189, 186, 0.12); border-color: rgba(79, 189, 186, 0.35); }
+  .contato-edit-row input { min-width: 140px; }
+  .account-contact-info { display: flex; gap: 14px; flex-wrap: wrap; font-size: 11px; color: var(--muted); font-family: Arial, sans-serif; margin: -2px 0 10px; align-items: center; }
+  .account-contact-info .contact-whatsapp { color: var(--green); text-decoration: none; }
+  .account-contact-info .contact-whatsapp:hover { text-decoration: underline; }
+  .account-contact-info .contact-endereco { color: var(--amber); text-decoration: none; }
+  .account-contact-info .contact-endereco:hover { text-decoration: underline; }
+  .account-observacoes {
+    font-size: 11px; color: var(--paper); font-family: Arial, sans-serif; background: var(--panel-alt);
+    border: 1px solid var(--border); border-radius: 6px; padding: 6px 10px; margin: -2px 0 10px;
+    white-space: pre-wrap; word-break: break-word;
+  }
+  .related-tag {
+    display: inline-block; font-size: 10px; font-family: Arial, sans-serif; color: var(--blue);
+    background: rgba(91, 147, 224, 0.12); border: 1px solid rgba(91, 147, 224, 0.35);
+    border-radius: 4px; padding: 2px 7px; cursor: pointer;
+  }
+  .related-tag:hover { background: rgba(91, 147, 224, 0.22); }
+  .search-row { margin-bottom: 14px; }
+  .search-row input {
+    width: 100%; background: var(--panel-alt); border: 1px solid var(--border);
+    border-radius: 8px; padding: 9px 12px; color: var(--paper);
+    font-family: inherit; font-size: 13px; outline: none;
+  }
+  .search-row input:focus { border-color: var(--amber); }
+  .no-results { display: none; }
+  .summary { display: flex; gap: 10px; margin-bottom: 20px; font-size: 12px; color: var(--muted); }
+  .summary strong.green { color: var(--green); }
+  .summary strong.amber { color: var(--amber); }
+  .empty {
+    border: 1px dashed var(--border-strong); border-radius: 10px; padding: 28px 20px;
+    text-align: center; color: var(--muted); font-size: 13px;
+  }
+  .accounts { display: flex; flex-direction: column; gap: 12px; }
+  .account-card { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+  .account-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px; }
+  .account-name { font-family: Arial, sans-serif; font-weight: 500; font-size: 15px; }
+  .account-name a { color: var(--paper); text-decoration: none; border-bottom: 1px solid var(--border-strong); }
+  .account-name a:hover { border-bottom-color: var(--amber); }
+  .account-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  .quick-mark-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin: -2px 0 12px; }
+  .quick-mark-label { font-size: 11px; color: var(--muted); font-family: Arial, sans-serif; margin-right: 2px; }
+  .quick-mark-btn {
+    border-radius: 6px; padding: 6px 12px; font-size: 12px; font-family: Arial, sans-serif;
+    font-weight: 500; cursor: pointer; border: 1px solid var(--border-strong); background: transparent; color: var(--paper);
+  }
+  .quick-mark-btn:hover { border-color: var(--amber); }
+  .quick-mark-btn.active { color: #1B1204; font-weight: 700; }
+  .quick-mark-edit {
+    border-radius: 6px; padding: 6px 9px; font-size: 12px; cursor: pointer;
+    border: 1px dashed var(--border); background: transparent; color: var(--muted);
+  }
+  .quick-mark-edit:hover { color: var(--paper); border-color: var(--border-strong); }
+  .btn-history {
+    border-radius: 6px; padding: 5px 10px; font-size: 11px; font-family: Arial, sans-serif;
+    font-weight: 500; cursor: pointer; border: 1px solid var(--border-strong); background: transparent; color: var(--paper);
+  }
+  .btn-history.open { background: var(--panel-alt); }
+  .btn-remove {
+    background: transparent; color: var(--faint); border: 1px solid var(--border);
+    border-radius: 6px; padding: 5px 10px; font-size: 11px; cursor: pointer;
+  }
+  .strip { display: flex; gap: 5px; }
+  .day-cell { width: 22px; height: 22px; border-radius: 3px; cursor: pointer; padding: 0; border: 1px solid rgba(0,0,0,0.25); }
+  .day-cell.today { border: 1.5px solid var(--amber); }
+  .day-cell.future { border: 1px dashed var(--future-border); background: transparent; }
+  .strip-labels { display: flex; gap: 5px; margin-top: 3px; }
+  .strip-labels div { width: 22px; font-size: 9px; color: var(--muted); text-align: center; }
+  .strip-labels div.today { color: var(--amber); }
+  .strip-labels div.future { color: var(--faint); opacity: 0.6; }
+
+  .cal-panel { margin-top: 14px; border-top: 1px solid var(--border); padding-top: 12px; display: none; }
+  .cal-panel.open { display: block; }
+  .cal-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+  .cal-nav button {
+    background: transparent; color: var(--paper); border: 1px solid var(--border-strong);
+    border-radius: 6px; padding: 4px 10px; font-size: 12px; cursor: pointer; font-family: inherit;
+  }
+  .cal-nav .cal-label { font-family: Arial, sans-serif; font-weight: 500; font-size: 13px; color: var(--amber); }
+  .cal-weekdays, .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+  .cal-weekdays { margin-bottom: 4px; }
+  .cal-weekdays div { font-size: 9px; color: var(--faint); text-align: center; }
+  .cal-day {
+    aspect-ratio: 1; border-radius: 4px; border: 1px solid var(--border); background: var(--unchecked);
+    color: var(--muted); font-size: 10px; font-family: inherit; cursor: pointer; padding: 0;
+  }
+  .cal-day.today { border: 1.5px solid var(--amber); }
+  .cal-day.future-empty { border: 1px dashed var(--future-border); background: transparent; }
+  .cal-blank { visibility: hidden; }
+
+  .cal-legend { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; padding-top: 4px; }
+  .cal-legend-item {
+    display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--paper);
+    font-family: Arial, sans-serif; background: var(--panel-alt); border: 1px solid var(--border);
+    border-radius: 20px; padding: 4px 10px 4px 6px;
+  }
+  .cal-legend-swatch { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
+
+  .abordagem-badge {
+    display: inline-block; font-size: 10px; font-family: Arial, sans-serif; font-weight: 700;
+    border-radius: 4px; padding: 2px 8px; margin-left: 8px; vertical-align: middle; color: #14171A;
+    cursor: pointer;
+  }
+  .abordagem-badge.none { background: var(--unchecked); color: var(--muted); font-weight: 400; }
+
+  .presence-badge {
+    display: inline-block; font-size: 10px; font-family: Arial, sans-serif; font-weight: 700;
+    border-radius: 4px; padding: 2px 8px; margin-left: 8px; vertical-align: middle;
+    background: rgba(255,255,255,0.06); border: 1px solid; cursor: pointer;
+  }
+  .presence-badge.none { color: var(--muted); border-color: var(--border); font-weight: 400; background: transparent; }
+
+  .btn-abordagem {
+    border-radius: 6px; padding: 5px 10px; font-size: 11px; font-family: Arial, sans-serif;
+    font-weight: 500; cursor: pointer; border: 1px solid var(--border-strong); background: transparent; color: var(--paper);
+  }
+  .btn-abordagem.open { background: var(--panel-alt); }
+
+  .abordagem-panel { margin-top: 14px; border-top: 1px solid var(--border); padding-top: 12px; display: none; }
+  .abordagem-panel.open { display: block; }
+  .abordagem-panel-title { font-family: Arial, sans-serif; font-weight: 500; font-size: 13px; color: var(--paper); margin-bottom: 10px; }
+  .abordagem-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+  .abordagem-chip {
+    font-size: 11px; font-family: Arial, sans-serif; padding: 5px 10px; border-radius: 20px;
+    border: 1px solid var(--border-strong); background: transparent; color: var(--paper); cursor: pointer;
+  }
+  .abordagem-chip.selected { color: #14171A; font-weight: 700; border-color: transparent; }
+  .abordagem-panel textarea {
+    width: 100%; background: var(--panel-alt); border: 1px solid var(--border); border-radius: 6px;
+    padding: 8px 10px; color: var(--paper); font-family: inherit; font-size: 12px; resize: vertical;
+    outline: none; margin-bottom: 10px;
+  }
+  .abordagem-register-row { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .btn-register {
+    background: var(--amber); color: #2C1D05; border: none; border-radius: 6px; padding: 8px 16px;
+    font-family: Arial, sans-serif; font-weight: 700; font-size: 12px; cursor: pointer;
+  }
+  .abordagem-register-error { color: var(--rose); font-size: 11px; display: none; }
+  .abordagem-history-title { font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--faint); margin-bottom: 8px; font-family: Arial, sans-serif; }
+  .abordagem-history { display: flex; flex-direction: column; gap: 6px; max-height: 260px; overflow-y: auto; }
+  .abordagem-entry {
+    display: flex; align-items: flex-start; gap: 8px; background: var(--panel-alt); border: 1px solid var(--border);
+    border-radius: 6px; padding: 8px 10px; font-size: 12px;
+  }
+  .abordagem-entry-dot { width: 9px; height: 9px; border-radius: 50%; margin-top: 4px; flex-shrink: 0; }
+  .abordagem-entry-body { flex: 1; min-width: 0; }
+  .abordagem-entry-status { font-family: Arial, sans-serif; font-weight: 700; font-size: 12px; }
+  .abordagem-entry-when { color: var(--muted); font-size: 11px; margin-top: 1px; }
+  .abordagem-entry-note { color: var(--muted); font-size: 11px; margin-top: 4px; white-space: pre-wrap; }
+  .abordagem-entry-del {
+    background: transparent; border: none; color: var(--faint); cursor: pointer; font-size: 13px;
+    padding: 2px 4px; flex-shrink: 0;
+  }
+  .abordagem-entry-del:hover { color: var(--rose); }
+  .abordagem-empty { color: var(--muted); font-size: 12px; }
+
+  .editor {
+    margin-top: 14px; background: var(--panel-alt); border: 1px solid var(--amber);
+    border-radius: 10px; padding: 14px; display: none;
+  }
+  .editor.open { display: block; }
+  .editor-title { font-family: Arial, sans-serif; font-weight: 500; font-size: 14px; margin-bottom: 10px; color: var(--amber); }
+  .editor-title .hint { color: var(--muted); font-weight: 400; font-size: 12px; }
+  .status-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .status-option {
+    display: flex; align-items: center; gap: 6px; font-size: 13px; cursor: pointer;
+    background: transparent; border: 1px solid var(--border); border-radius: 6px; padding: 6px 8px;
+  }
+  .status-option.selected { background: var(--panel); }
+  .status-error { color: var(--rose); font-size: 12px; margin-bottom: 10px; display: none; }
+  .time-row { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+  .time-row label { font-size: 12px; color: var(--muted); }
+  .time-row input[type="time"] {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 6px; padding: 6px 8px;
+    color: var(--paper); font-family: inherit; font-size: 12px;
+  }
+  .editor textarea {
+    width: 100%; background: var(--panel); border: 1px solid var(--border); border-radius: 6px;
+    padding: 8px 10px; color: var(--paper); font-family: inherit; font-size: 12px; resize: vertical;
+    outline: none; margin-bottom: 10px;
+  }
+  .editor-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  .btn-save {
+    background: var(--amber); color: #2C1D05; border: none; border-radius: 6px; padding: 8px 16px;
+    font-family: Arial, sans-serif; font-weight: 700; font-size: 12px; cursor: pointer;
+  }
+  .btn-cancel {
+    background: transparent; color: var(--muted); border: 1px solid var(--border); border-radius: 6px;
+    padding: 8px 16px; font-size: 12px; cursor: pointer;
+  }
+  .btn-delete-entry {
+    background: transparent; color: var(--rose); border: 1px solid var(--rose); border-radius: 6px;
+    padding: 8px 16px; font-size: 12px; cursor: pointer; margin-left: auto;
+  }
+  .legend { margin-top: 22px; font-size: 11px; color: var(--faint); line-height: 1.8; }
+  .legend .green { color: var(--green); }
+  .legend .blue { color: var(--blue); }
+  .legend .purple { color: var(--purple); }
+  .legend .rose { color: var(--rose); }
+  .legend .faint { color: var(--faint); }
+  .error-banner {
+    background: #2E1512; color: #F3B8AE; border: 1px solid var(--rose); border-radius: 8px;
+    padding: 10px 12px; font-size: 12px; margin-bottom: 16px; display: none;
+  }
+  .error-banner.show { display: block; }
+
+  /* ---------- Nível 2: Central Hoje + Modo Conferência ---------- */
+  .today-panel {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 10px;
+    padding: 14px 16px; margin: 0 0 18px;
+  }
+  .today-panel-title {
+    font-family: Arial, sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 0.04em;
+    text-transform: uppercase; color: var(--amber); margin-bottom: 8px;
+  }
+  .today-stats { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12px; color: var(--muted); font-family: Arial, sans-serif; }
+  .today-stats strong { color: var(--paper); }
+  .today-stats strong.amber { color: var(--amber); }
+  .today-stats strong.green { color: var(--green); }
+  .btn-conference {
+    display: inline-block; background: var(--amber); color: #2C1D05; border: none; border-radius: 8px;
+    padding: 10px 18px; font-family: Arial, sans-serif; font-weight: 700; font-size: 13px;
+    cursor: pointer; margin-top: 12px;
+  }
+  .btn-conference:hover { filter: brightness(1.08); }
+
+  .conference-overlay {
+    position: fixed; inset: 0; background: rgba(20, 23, 26, 0.92); display: none;
+    align-items: flex-start; justify-content: center; z-index: 1000; padding: 40px 16px; overflow-y: auto;
+  }
+  .conference-overlay.open { display: flex; }
+  .conference-panel {
+    background: var(--panel); border: 1px solid var(--border-strong); border-radius: 12px;
+    padding: 22px; width: 100%; max-width: 480px; font-family: 'Courier New', Consolas, Menlo, monospace;
+  }
+  .conference-title {
+    font-family: Arial, sans-serif; font-weight: 700; font-size: 16px; color: var(--amber);
+    letter-spacing: 0.03em; margin-bottom: 6px; text-align: center;
+  }
+  .conference-progress-text { font-size: 12px; color: var(--muted); margin-bottom: 8px; text-align: center; font-family: Arial, sans-serif; }
+  .conference-progress-bar { height: 6px; background: var(--unchecked); border-radius: 4px; overflow: hidden; margin-bottom: 18px; }
+  .conference-progress-fill { height: 100%; background: var(--amber); transition: width 0.2s ease; }
+  .conference-account { font-family: Arial, sans-serif; font-weight: 700; font-size: 20px; margin-bottom: 14px; text-align: center; color: var(--paper); }
+  .btn-conference-insta {
+    display: block; width: 100%; background: var(--blue); color: #0B1220; border: none; border-radius: 8px;
+    padding: 11px; font-family: Arial, sans-serif; font-weight: 700; font-size: 13px; cursor: pointer; margin-bottom: 14px;
+  }
+  .btn-conference-insta:hover { filter: brightness(1.08); }
+  .conference-status-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px; }
+  .conference-status-btn {
+    border-radius: 8px; padding: 12px 8px; font-family: Arial, sans-serif; font-weight: 700; font-size: 13px;
+    cursor: pointer; border: 1px solid var(--border-strong); background: transparent; color: var(--paper);
+  }
+  .conference-status-btn:hover { background: var(--panel-alt); }
+  .conference-actions-row { display: flex; gap: 8px; margin-bottom: 6px; }
+  .btn-conference-skip {
+    flex: 1; background: transparent; color: var(--muted); border: 1px solid var(--border); border-radius: 8px;
+    padding: 9px; font-family: Arial, sans-serif; font-size: 12px; cursor: pointer;
+  }
+  .btn-conference-skip:hover { color: var(--paper); border-color: var(--border-strong); }
+  .btn-conference-exit {
+    flex: 1; background: transparent; color: var(--rose); border: 1px solid var(--rose); border-radius: 8px;
+    padding: 9px; font-family: Arial, sans-serif; font-size: 12px; cursor: pointer;
+  }
+  .btn-conference-exit:hover { background: rgba(201, 112, 100, 0.1); }
+  .conference-msg { font-size: 11px; color: var(--amber); text-align: center; margin-top: 10px; min-height: 14px; font-family: Arial, sans-serif; }
+  .conference-shortcuts { font-size: 10px; color: var(--faint); text-align: center; margin-top: 12px; font-family: Arial, sans-serif; line-height: 1.6; }
+  .conference-done-icon { font-size: 34px; text-align: center; margin-bottom: 8px; color: var(--green); }
+  .conference-done-summary {
+    font-size: 12px; color: var(--paper); display: flex; flex-direction: column; gap: 5px; margin: 16px 0;
+    font-family: Arial, sans-serif; background: var(--panel-alt); border: 1px solid var(--border);
+    border-radius: 8px; padding: 12px 14px;
+  }
+
+  /* ---------- Índice de Presença Online / Saturação ---------- */
+  .presence-channels { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+  .presence-channel-row { display: flex; align-items: center; gap: 8px; font-size: 12px; font-family: Arial, sans-serif; color: var(--paper); }
+  .presence-channel-label { flex: 0 0 52px; color: var(--muted); }
+  .presence-channel-pct { flex: 0 0 38px; text-align: right; font-weight: 700; }
+  .presence-bar { flex: 1; height: 8px; background: var(--unchecked); border-radius: 4px; overflow: hidden; }
+  .presence-bar-fill { height: 100%; border-radius: 4px; transition: width 0.2s ease; }
+  .presence-meta { font-size: 10px; color: var(--faint); font-family: Arial, sans-serif; margin-top: 8px; line-height: 1.6; }
+  .presence-interpretation {
+    font-size: 12px; color: var(--muted); font-family: Arial, sans-serif; line-height: 1.5;
+    margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--border); font-style: italic;
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="title-row">
+    <div class="title">Vigia <span class="dot">·</span> lista de contas</div>
+    <div style="display:flex; align-items:center; gap:8px;">
+      <span class="sync-state" id="syncState">carregando…</span>
+      <button id="authBtn" class="btn-backup" style="display:none; padding:5px 10px;">entrar com Google</button>
+    </div>
+  </div>
+  <div class="subtitle">Confira manualmente cada perfil, registre o que viu — tudo salvo neste navegador. Use exportar/importar para levar os dados a outro dispositivo.</div>
+
+  <div class="backup-row">
+    <button id="exportBtn" class="btn-backup">⇩ exportar backup</button>
+    <button id="importBtn" class="btn-backup">⇧ importar backup</button>
+    <input type="file" id="importFile" accept="application/json,.json" style="display:none;" />
+  </div>
+
+  <div class="error-banner" id="errorBanner"></div>
+
+  <div id="loadingState" class="loading-state">carregando seus dados…</div>
+
+  <div id="mainApp" style="display:none;">
+
+  <div class="today-panel" id="todayPanel" style="display:none;">
+    <div class="today-panel-title">Hoje</div>
+    <div class="today-stats" id="todayStats"></div>
+    <button class="btn-conference" id="conferenceBtn" style="display:none;"></button>
+  </div>
+
+  <div class="add-row">
+    <input id="newUsername" type="text" placeholder="@usuario ou link do instagram.com/usuario" />
+    <input id="newNicho" type="text" placeholder="nicho (ex: advocacia)" list="nichoList" class="nicho-input" />
+    <datalist id="nichoList"></datalist>
+    <button id="addBtn">adicionar</button>
+  </div>
+
+  <div class="search-row">
+    <input id="searchInput" type="text" placeholder="🔍 buscar por @usuario, nicho, endereço ou whatsapp..." />
+  </div>
+
+  <div class="filter-row" id="filterRow" style="display:none;">
+    <span class="filter-label">filtrar por nicho:</span>
+    <div class="filter-chips" id="filterChips"></div>
+  </div>
+
+  <div class="filter-row" id="filterRowCidade" style="display:none;">
+    <span class="filter-label">filtrar por cidade:</span>
+    <div class="filter-chips" id="filterChipsCidade"></div>
+  </div>
+
+  <div class="filter-row" id="filterRowStatus" style="display:none;">
+    <span class="filter-label">status hoje:</span>
+    <div class="filter-chips" id="filterChipsStatus"></div>
+  </div>
+
+  <div class="summary" id="summary" style="display:none;"></div>
+
+  <div id="emptyState" class="empty">Nenhuma conta na lista ainda. Adicione um @usuario acima para começar a acompanhar.</div>
+  <div id="noSearchResults" class="empty" style="display:none;">Nenhuma conta encontrada para essa busca.</div>
+
+  <div class="accounts" id="accountsList"></div>
+
+  </div>
+
+  <div class="legend">
+    legenda: <span class="green">■</span> feed + stories &nbsp;
+    <span class="blue">■</span> só feed &nbsp;
+    <span class="purple">■</span> só stories &nbsp;
+    <span class="rose">■</span> nada novo &nbsp;
+    <span class="faint">■</span> não conferido
+    <br />
+    quadrados/dias tracejados ainda não chegaram — clique para deixar um lembrete ou nota antecipada.
+    <br />
+    os dados ficam salvos neste navegador e, se você conectar sua conta Google, sincronizados na nuvem entre todos os seus dispositivos.
+  </div>
+</div>
+
+<div class="conference-overlay" id="conferenceOverlay">
+  <div class="conference-panel" id="conferencePanelContent"></div>
+</div>
+
+<!-- =======================================================================
+     FIREBASE — sincronização entre dispositivos
+     1) Crie um projeto grátis em https://console.firebase.google.com
+     2) No projeto: Build > Authentication > Sign-in method > ative "Google"
+     3) No projeto: Build > Firestore Database > criar banco (modo produção)
+     4) Em Configurações do projeto > seus apps > "</> Web" > copie o objeto
+        firebaseConfig e cole substituindo o objeto abaixo.
+     5) Nas regras do Firestore, cole (aba "Regras" do Firestore):
+          rules_version = '2';
+          service cloud.firestore {
+            match /databases/{database}/documents {
+              match /vigia_users/{uid} {
+                allow read, write: if request.auth != null && request.auth.uid == uid;
+              }
+            }
+          }
+     Se você não preencher firebaseConfig, o app continua funcionando 100%
+     normalmente, só neste navegador (como antes), sem nenhum erro.
+     ======================================================================= -->
+<script src="https://www.gstatic.com/firebasejs/12.11.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.11.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore-compat.js"></script>
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyBtwUW7KrGmLNBpiW-fXfXjJDM_igo2D7w",
+    authDomain: "vigia-instagram.firebaseapp.com",
+    databaseURL: "https://vigia-instagram-default-rtdb.firebaseio.com",
+    projectId: "vigia-instagram",
+    storageBucket: "vigia-instagram.firebasestorage.app",
+    messagingSenderId: "340266599608",
+    appId: "1:340266599608:web:3fa1f40270fa0f0646a04d",
+  };
+
+  let cloudEnabled = false;
+  let auth = null;
+  let db = null;
+  try {
+    if (firebaseConfig.apiKey && firebaseConfig.apiKey.indexOf('COLE_AQUI') === -1) {
+      firebase.initializeApp(firebaseConfig);
+      auth = firebase.auth();
+      db = firebase.firestore();
+      cloudEnabled = true;
+    }
+  } catch (e) {
+    console.error('Firebase não pôde ser iniciado:', e);
+    cloudEnabled = false;
+  }
+</script>
+
+<script>
+  const STORAGE_ACCOUNTS = 'vigia_accounts';
+  const STORAGE_CHECKIN_PREFIX = 'vigia_checkins_';
+  const STORAGE_ABORDAGEM_PREFIX = 'vigia_abordagem_';
+  const STORAGE_LASTEXPORT = 'vigia_last_export';
+  const STORAGE_LASTCHANGE = 'vigia_last_change';
+
+  const STATUS_OPTIONS = [
+    { value: 'feed', label: 'postou só no feed', short: '📷 feed' },
+    { value: 'stories', label: 'postou só stories', short: '⚡ stories' },
+    { value: 'both', label: 'feed + stories', short: '✅ ambos' },
+    { value: 'nothing', label: 'nada de novo', short: '— nada' },
+  ];
+
+  const CHECKIN_LEGEND = ['both', 'feed', 'stories', 'nothing', 'unchecked'];
+
+  const ABORDAGEM_OPTIONS = [
+    { value: 'iniciada', label: 'abordagem iniciada', color: '--blue' },
+    { value: 'sucesso', label: 'sucesso', color: '--green' },
+    { value: 'sem_interesse', label: 'sem interesse', color: '--rose' },
+    { value: 'ja_possui', label: 'já possui serviço', color: '--faint' },
+    { value: 'reuniao_marcada', label: 'reunião marcada', color: '--purple' },
+    { value: 'reuniao_realizada', label: 'reunião realizada', color: '--teal' },
+    { value: 'whatsapp_contactar', label: 'contactar no whatsapp', color: '--amber' },
+    { value: 'whatsapp_contactado', label: 'contactado no whatsapp', color: '--pink' },
+  ];
+
+  function abordagemOption(value) {
+    return ABORDAGEM_OPTIONS.find((o) => o.value === value) || null;
+  }
+
+  function abordagemColorVar(value) {
+    const opt = abordagemOption(value);
+    return opt ? 'var(' + opt.color + ')' : 'var(--unchecked)';
+  }
+
+  function abordagemLabel(value) {
+    const opt = abordagemOption(value);
+    return opt ? opt.label : value;
+  }
+
+  const DEFAULT_NICHO = 'Sem nicho';
+
+  let accounts = [];
+  let checkins = {};
+  let abordagemData = {};
+  let editorState = null;
+  let editSelectedStatus = null;
+  let historyFor = null;
+  let calMonth = null;
+  let activeFiltro = null;
+  let activeCidadeFiltro = null;
+  let nichoEditFor = null;
+  let perfilEditFor = null;
+  let searchQuery = '';
+  let abordagemFor = null;
+  let presenceFor = null;
+  let quickPickFor = null;
+  let abordagemSelected = null;
+  let abordagemNoteDraft = '';
+  let activeStatusFiltro = null; // null | 'pending' | 'checked' — filtro "Hoje" (não persistido)
+
+  // ---- Nível 2: Modo Conferência (estado apenas de interface, em memória,
+  // nunca gravado no Firebase/localStorage como estrutura nova — a fila é
+  // sempre recalculada a partir de `checkins`, a fonte real dos dados) ----
+  let conferenceMode = false;
+  let conferenceQueue = [];
+  let conferenceIndex = 0;
+
+  function todayKey() {
+    return new Date().toISOString().slice(0, 10);
+  }
+
+  function currentTimeHHMM() {
+    const d = new Date();
+    return String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+  }
+
+  function dayRange(pastN, futureN) {
+    const out = [];
+    const now = new Date();
+    for (let i = pastN; i >= -futureN; i--) {
+      const d = new Date(now);
+      d.setDate(now.getDate() - i);
+      out.push(d.toISOString().slice(0, 10));
+    }
+    return out;
+  }
+
+  // Todos os dias do mês atual (do dia 1 até o último dia), recalculado a
+  // cada render — então quando o mês vira, a faixa acompanha sozinha.
+  function currentMonthDays() {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const out = [];
+    for (let day = 1; day <= daysInMonth; day++) {
+      const m = String(month + 1).padStart(2, '0');
+      const dd = String(day).padStart(2, '0');
+      out.push(year + '-' + m + '-' + dd);
+    }
+    return out;
+  }
+
+  function dayLabel(dateStr) {
+    const d = new Date(dateStr + 'T00:00:00');
+    const dias = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sáb'];
+    return dias[d.getDay()];
+  }
+
+  function formatDatePretty(dateStr) {
+    const d = new Date(dateStr + 'T00:00:00');
+    return d.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+  }
+
+  function monthLabel(year, month) {
+    const d = new Date(year, month, 1);
+    const label = d.toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' });
+    return label.charAt(0).toUpperCase() + label.slice(1);
+  }
+
+  function buildMonthGrid(year, month) {
+    const firstOfMonth = new Date(year, month, 1);
+    const startOffset = firstOfMonth.getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const cells = [];
+    for (let i = 0; i < startOffset; i++) cells.push(null);
+    for (let day = 1; day <= daysInMonth; day++) {
+      const m = String(month + 1).padStart(2, '0');
+      const dd = String(day).padStart(2, '0');
+      cells.push(year + '-' + m + '-' + dd);
+    }
+    while (cells.length % 7 !== 0) cells.push(null);
+    return cells;
+  }
+
+  function statusFromEntry(entry) {
+    if (!entry) return 'unchecked';
+    if (entry.status) return entry.status;
+    if (entry.feed && entry.stories) return 'both';
+    if (entry.feed) return 'feed';
+    if (entry.stories) return 'stories';
+    return 'nothing';
+  }
+
+  function statusColorVar(status) {
+    if (status === 'both') return 'var(--green)';
+    if (status === 'feed') return 'var(--blue)';
+    if (status === 'stories') return 'var(--purple)';
+    if (status === 'nothing') return 'var(--rose)';
+    return 'var(--unchecked)';
+  }
+
+  function statusLabel(status) {
+    if (status === 'both') return 'feed + stories';
+    if (status === 'feed') return 'postou só no feed';
+    if (status === 'stories') return 'postou só stories';
+    if (status === 'nothing') return 'nada de novo';
+    return 'não conferido';
+  }
+
+  function showError(msg) {
+    const el = document.getElementById('errorBanner');
+    if (!msg) { el.classList.remove('show'); el.textContent = ''; return; }
+    el.textContent = msg;
+    el.classList.add('show');
+  }
+
+  function loadAccounts() {
+    try {
+      const raw = localStorage.getItem(STORAGE_ACCOUNTS);
+      accounts = raw ? JSON.parse(raw) : [];
+      accounts.forEach((a) => {
+        if (!a.nicho || !a.nicho.trim()) a.nicho = DEFAULT_NICHO;
+        if (typeof a.cidade !== 'string') a.cidade = '';
+        if (typeof a.bairro !== 'string') a.bairro = '';
+        if (typeof a.rua !== 'string') a.rua = '';
+        if (typeof a.numero !== 'string') a.numero = '';
+        if (typeof a.observacoes !== 'string') a.observacoes = '';
+        if (typeof a.whatsapp !== 'string') a.whatsapp = '';
+        if (!a.updatedAt) a.updatedAt = a.addedAt || new Date().toISOString();
+      });
+    } catch (e) {
+      accounts = [];
+      showError('Não foi possível carregar a lista de contas.');
+    }
+  }
+
+  function getAllNichos() {
+    const set = new Set(accounts.map((a) => a.nicho || DEFAULT_NICHO));
+    return Array.from(set).sort((a, b) => {
+      if (a === DEFAULT_NICHO) return 1;
+      if (b === DEFAULT_NICHO) return -1;
+      return a.localeCompare(b, 'pt-BR');
+    });
+  }
+
+  function updateNichoDatalist() {
+    const list = document.getElementById('nichoList');
+    list.innerHTML = '';
+    getAllNichos().forEach((n) => {
+      if (n === DEFAULT_NICHO) return;
+      const opt = document.createElement('option');
+      opt.value = n;
+      list.appendChild(opt);
+    });
+  }
+
+  function setNicho(username, nicho) {
+    const acc = accounts.find((a) => a.username === username);
+    if (!acc) return;
+    const clean = nicho.trim();
+    acc.nicho = clean || DEFAULT_NICHO;
+    acc.updatedAt = new Date().toISOString();
+    saveAccounts();
+  }
+
+  function setPerfilInfo(username, info) {
+    const acc = accounts.find((a) => a.username === username);
+    if (!acc) return;
+    acc.cidade = (info.cidade || '').trim();
+    acc.bairro = (info.bairro || '').trim();
+    acc.rua = (info.rua || '').trim();
+    acc.numero = (info.numero || '').trim();
+    acc.observacoes = (info.observacoes || '').trim();
+    acc.whatsapp = (info.whatsapp || '').trim();
+    acc.telefone = (info.telefone || '').trim();
+    acc.relacionados = (info.relacionados || '')
+      .split(',')
+      .map((s) => s.trim())
+      .filter(Boolean);
+    acc.updatedAt = new Date().toISOString();
+    saveAccounts();
+  }
+
+  function fullAddress(acc) {
+    const parts = [];
+    if (acc.rua) parts.push(acc.rua + (acc.numero ? ', ' + acc.numero : ''));
+    else if (acc.numero) parts.push('nº ' + acc.numero);
+    if (acc.bairro) parts.push(acc.bairro);
+    if (acc.cidade) parts.push(acc.cidade);
+    return parts.join(' - ');
+  }
+
+  function mapsLink(acc) {
+    const addr = fullAddress(acc);
+    if (!addr) return null;
+    return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(addr);
+  }
+
+  function getAllCidades() {
+    const set = new Set(
+      accounts.map((a) => (a.cidade || '').trim()).filter(Boolean)
+    );
+    return Array.from(set).sort((a, b) => a.localeCompare(b, 'pt-BR'));
+  }
+
+  function matchesSearch(acc, query) {
+    if (!query) return true;
+    const q = query.toLowerCase();
+    return (
+      (acc.username || '').toLowerCase().includes(q) ||
+      (acc.nicho || '').toLowerCase().includes(q) ||
+      (acc.bairro || '').toLowerCase().includes(q) ||
+      (acc.rua || '').toLowerCase().includes(q) ||
+      (acc.cidade || '').toLowerCase().includes(q) ||
+      (acc.observacoes || '').toLowerCase().includes(q) ||
+      (acc.whatsapp || '').toLowerCase().includes(q) ||
+      (acc.telefone || '').toLowerCase().includes(q) ||
+      (acc.relacionados || []).some((r) => r.toLowerCase().includes(q))
+    );
+  }
+
+  function saveAccounts() {
+    try {
+      localStorage.setItem(STORAGE_ACCOUNTS, JSON.stringify(accounts));
+      markSynced(false);
+    } catch (e) {
+      showError('Falha ao salvar a lista de contas (armazenamento cheio ou bloqueado).');
+    }
+  }
+
+  function loadCheckins(username) {
+    try {
+      const raw = localStorage.getItem(STORAGE_CHECKIN_PREFIX + username);
+      return raw ? JSON.parse(raw) : {};
+    } catch (e) {
+      return {};
+    }
+  }
+
+  function saveCheckinsFor(username) {
+    try {
+      localStorage.setItem(STORAGE_CHECKIN_PREFIX + username, JSON.stringify(checkins[username] || {}));
+      markSynced(false);
+    } catch (e) {
+      showError('Falha ao salvar o registro (armazenamento cheio ou bloqueado).');
+    }
+  }
+
+  function loadAbordagem(username) {
+    try {
+      const raw = localStorage.getItem(STORAGE_ABORDAGEM_PREFIX + username);
+      return raw ? JSON.parse(raw) : [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function saveAbordagemFor(username) {
+    try {
+      localStorage.setItem(STORAGE_ABORDAGEM_PREFIX + username, JSON.stringify(abordagemData[username] || []));
+      markSynced(false);
+    } catch (e) {
+      showError('Falha ao salvar o histórico de abordagem (armazenamento cheio ou bloqueado).');
+    }
+  }
+
+  function currentAbordagem(username) {
+    const list = abordagemData[username] || [];
+    if (list.length === 0) return null;
+    return list[list.length - 1];
+  }
+
+  function addAbordagemEntry(username, status, note) {
+    if (!abordagemData[username]) abordagemData[username] = [];
+    abordagemData[username].push({ status, note: (note || '').trim(), at: new Date().toISOString() });
+    saveAbordagemFor(username);
+  }
+
+  function deleteAbordagemEntry(username, at) {
+    if (!abordagemData[username]) return;
+    abordagemData[username] = abordagemData[username].filter((e) => e.at !== at);
+    saveAbordagemFor(username);
+  }
+
+  function toggleAbordagemPanel(username) {
+    abordagemFor = abordagemFor === username ? null : username;
+    abordagemSelected = null;
+    abordagemNoteDraft = '';
+    render();
+  }
+
+  function formatDateTimePretty(iso) {
+    const d = new Date(iso);
+    return d.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' }) +
+      ' às ' + String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+  }
+
+  // ---------- Sincronização com a nuvem (Firebase) ----------
+  let currentUser = null;
+  let docRef = null;
+  let unsubscribeDoc = null;
+  let applyingRemote = false;
+  let pushTimer = null;
+  let lastPushError = null;
+
+  function setSyncBadge(state, text) {
+    const el = document.getElementById('syncState');
+    if (!el) return;
+    el.className = 'sync-state ' + state;
+    el.textContent = text;
+  }
+
+  function markSynced() {
+    try { localStorage.setItem(STORAGE_LASTCHANGE, new Date().toISOString()); } catch (e) {}
+    scheduleCloudPush();
+    updateSyncBadge();
+  }
+
+  function updateSyncBadge() {
+    if (!cloudEnabled) {
+      let lastExport = null, lastChange = null;
+      try { lastExport = localStorage.getItem(STORAGE_LASTEXPORT); } catch (e) {}
+      try { lastChange = localStorage.getItem(STORAGE_LASTCHANGE); } catch (e) {}
+      if (lastChange && (!lastExport || lastChange > lastExport)) {
+        setSyncBadge('pending', 'há alterações não exportadas');
+      } else if (lastExport) {
+        setSyncBadge('ok', 'backup exportado ' + formatDateTimePretty(lastExport));
+      } else {
+        setSyncBadge('local', 'somente neste dispositivo');
+      }
+      return;
+    }
+    if (!currentUser) {
+      setSyncBadge('local', 'não conectado — dados só neste dispositivo');
+      return;
+    }
+    if (lastPushError) {
+      setSyncBadge('error', 'erro ao sincronizar: ' + lastPushError);
+      return;
+    }
+    if (pushTimer) {
+      setSyncBadge('saving', 'sincronizando…');
+      return;
+    }
+    setSyncBadge('ok', 'sincronizado · ' + currentUser.email);
+  }
+
+  function scheduleCloudPush() {
+    if (!cloudEnabled || !currentUser || applyingRemote) return;
+    if (pushTimer) clearTimeout(pushTimer);
+    pushTimer = setTimeout(() => {
+      pushTimer = null;
+      pushToCloud();
+    }, 800);
+    updateSyncBadge();
+  }
+
+  function pushToCloud() {
+    if (!cloudEnabled || !currentUser || !docRef) return;
+    docRef.set({
+      accounts,
+      checkins,
+      abordagem: abordagemData,
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+    }).then(() => {
+      lastPushError = null;
+      updateSyncBadge();
+    }).catch((e) => {
+      lastPushError = (e && e.message) || 'falha ao salvar';
+      updateSyncBadge();
+    });
+  }
+
+  function applyRemoteSnapshot(data) {
+    applyingRemote = true;
+    const merged = mergeImportedData(
+      accounts, checkins, abordagemData,
+      (data.accounts || []), (data.checkins || {}), (data.abordagem || {})
+    );
+    accounts = merged.accounts;
+    checkins = merged.checkins;
+    abordagemData = merged.abordagem;
+    saveAccounts();
+    accounts.forEach((acc) => { saveCheckinsFor(acc.username); saveAbordagemFor(acc.username); });
+    applyingRemote = false;
+    render();
+    updateSyncBadge();
+  }
+
+  function startCloudSync(user) {
+    currentUser = user;
+    docRef = db.collection('vigia_users').doc(user.uid);
+    if (unsubscribeDoc) unsubscribeDoc();
+    unsubscribeDoc = docRef.onSnapshot((snap) => {
+      if (!snap.exists) { pushToCloud(); return; }
+      applyRemoteSnapshot(snap.data());
+    }, (err) => {
+      lastPushError = (err && err.message) || 'falha ao sincronizar';
+      updateSyncBadge();
+    });
+    updateAuthUI();
+    updateSyncBadge();
+  }
+
+  function stopCloudSync() {
+    currentUser = null;
+    docRef = null;
+    if (unsubscribeDoc) { unsubscribeDoc(); unsubscribeDoc = null; }
+    updateAuthUI();
+    updateSyncBadge();
+  }
+
+  function updateAuthUI() {
+    const btn = document.getElementById('authBtn');
+    if (!btn) return;
+    if (!cloudEnabled) { btn.style.display = 'none'; return; }
+    btn.style.display = 'inline-block';
+    btn.textContent = currentUser ? 'sair (' + currentUser.email + ')' : 'entrar com Google';
+  }
+
+  function toggleAuth() {
+    if (!cloudEnabled) return;
+    if (currentUser) {
+      auth.signOut();
+      return;
+    }
+    const provider = new firebase.auth.GoogleAuthProvider();
+    auth.signInWithPopup(provider).catch(() => {
+      auth.signInWithRedirect(provider);
+    });
+  }
+
+  function loadAll() {
+    loadAccounts();
+    checkins = {};
+    abordagemData = {};
+    accounts.forEach((acc) => {
+      checkins[acc.username] = loadCheckins(acc.username);
+      abordagemData[acc.username] = loadAbordagem(acc.username);
+    });
+  }
+
+  function dayStatus(username, date) {
+    return statusFromEntry((checkins[username] || {})[date]);
+  }
+
+  function presenceStats(username) {
+    const entries = checkins[username] || {};
+    const today = todayKey();
+    let total = 0, both = 0, feed = 0, stories = 0, nothing = 0;
+    Object.keys(entries).forEach((date) => {
+      if (date > today) return; // ignora lembretes de dias futuros
+      const s = statusFromEntry(entries[date]);
+      if (s === 'unchecked') return;
+      total++;
+      if (s === 'both') both++;
+      else if (s === 'feed') feed++;
+      else if (s === 'stories') stories++;
+      else if (s === 'nothing') nothing++;
+    });
+    const activePct = total > 0 ? Math.round(((both + feed + stories) / total) * 100) : null;
+    return { total, both, feed, stories, nothing, activePct };
+  }
+
+  // =====================================================================
+  // ÍNDICE DE PRESENÇA ONLINE + ÍNDICE DE SATURAÇÃO
+  //
+  // O check-in do Vigia registra apenas um status diário por conta:
+  // nothing / feed / stories / both. Não existe (ainda) informação sobre
+  // Reel, Carrossel, Foto estática, quantidade de Stories por dia, nem
+  // engajamento/desempenho. Por isso este módulo trabalha SOMENTE com dois
+  // canais observáveis — Feed e Stories — e apenas com o que é possível
+  // derivar da data de cada check-in (recência, frequência, consistência,
+  // concentração de dias ativos).
+  //
+  // Quando o check-in passar a registrar tipo de publicação e quantidade,
+  // os pesos/canais abaixo podem evoluir para Stories 40% / Reels 30% /
+  // Carrosséis 20% / Fotos 10% sem precisar reescrever o motor de cálculo
+  // — por isso os pesos, janelas e faixas ficam centralizados aqui.
+  // =====================================================================
+  const PRESENCE_CONFIG = {
+    // janela de dias considerada para frequência, consistência e saturação
+    ANALYSIS_WINDOW_DAYS: 30,
+    // dias para a força de um conteúdo cair pela metade (recência)
+    DECAY_HALFLIFE_DAYS: 7,
+    // dias para a penalidade de um "silêncio" (maior intervalo sem
+    // atividade) cair pela metade, ao calcular consistência
+    CONSISTENCY_HALFLIFE_DAYS: 10,
+    // pesos dos canais no Índice de Presença Online (modelo atual, só com
+    // Feed e Stories — ver nota acima sobre evolução futura)
+    CHANNEL_WEIGHTS: { feed: 0.5, stories: 0.5 },
+    // pesos internos de cada canal (recência + frequência + consistência)
+    SUBSCORE_WEIGHTS: { recency: 0.5, frequency: 0.3, consistency: 0.2 },
+    PRESENCE_LABELS: [
+      { min: 90, label: 'Muito presente' },
+      { min: 75, label: 'Presente' },
+      { min: 50, label: 'Moderadamente presente' },
+      { min: 25, label: 'Pouco presente' },
+      { min: 0, label: 'Praticamente ausente' },
+    ],
+    // pesos dos três sinais observáveis de saturação
+    SATURATION_WEIGHTS: { activeRatio: 0.4, streak: 0.4, bothRatio: 0.2 },
+    // abaixo desse número de dias conferidos na janela, a amostra é
+    // pequena demais para um score de saturação confiável — melhor
+    // admitir "dados insuficientes" do que inventar um número
+    SATURATION_MIN_CHECKED_DAYS: 5,
+    // % de dias conferidos que tiveram alguma atividade (feed/stories/both)
+    SATURATION_RATIO_BANDS: [
+      { max: 0.3, score: 15 }, { max: 0.5, score: 35 }, { max: 0.7, score: 55 },
+      { max: 0.9, score: 75 }, { max: 1.01, score: 95 },
+    ],
+    // maior sequência de dias consecutivos (calendário) com atividade
+    SATURATION_STREAK_BANDS: [
+      { max: 3, score: 15 }, { max: 7, score: 35 }, { max: 14, score: 55 },
+      { max: 25, score: 75 }, { max: Infinity, score: 95 },
+    ],
+    // % de dias conferidos em que houve feed + stories no mesmo dia
+    SATURATION_BOTH_BANDS: [
+      { max: 0.15, score: 10 }, { max: 0.35, score: 30 }, { max: 0.55, score: 50 },
+      { max: 0.75, score: 70 }, { max: 1.01, score: 90 },
+    ],
+    SATURATION_LABELS: [
+      { min: 90, label: 'Saturação muito alta' },
+      { min: 75, label: 'Hiperprodução' },
+      { min: 50, label: 'Produção elevada' },
+      { min: 25, label: 'Frequência alta, saudável' },
+      { min: 0, label: 'Produção normal' },
+    ],
+  };
+
+  function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+
+  function daysBetween(dateStrEarlier, dateStrLater) {
+    const a = new Date(dateStrEarlier + 'T00:00:00');
+    const b = new Date(dateStrLater + 'T00:00:00');
+    return Math.round((b - a) / 86400000);
+  }
+
+  function shiftDateStr(dateStr, deltaDays) {
+    const d = new Date(dateStr + 'T00:00:00');
+    d.setDate(d.getDate() + deltaDays);
+    return d.toISOString().slice(0, 10);
+  }
+
+  // Decaimento exponencial: 100 * 0.5^(dias/meiaVida). Com meiaVida=7,
+  // reproduz a referência pedida (hoje≈100%, 7d≈50%, 15d≈22%, 30d≈5%, 60d≈0%).
+  function decayScore(daysAgo, halfLifeDays) {
+    const hl = halfLifeDays || PRESENCE_CONFIG.DECAY_HALFLIFE_DAYS;
+    const d = Math.max(0, daysAgo);
+    return 100 * Math.pow(0.5, d / hl);
+  }
+
+  function scoreFromBands(value, bands) {
+    for (const b of bands) { if (value <= b.max) return b.score; }
+    return bands[bands.length - 1].score;
+  }
+
+  function classifyByBands(value, bandsDescByMin) {
+    for (const b of bandsDescByMin) { if (value >= b.min) return b.label; }
+    return bandsDescByMin[bandsDescByMin.length - 1].label;
+  }
+
+  function scoreColorVar(score) {
+    if (score === null) return 'var(--muted)';
+    if (score >= 75) return 'var(--green)';
+    if (score >= 50) return 'var(--amber)';
+    return 'var(--rose)';
+  }
+
+  // Maior "silêncio" (gap em dias de calendário) entre dias ativos dentro
+  // da janela, incluindo as bordas (início da janela → primeiro dia ativo,
+  // último dia ativo → hoje). Quanto maior o silêncio, menor a consistência.
+  function computeConsistencyScore(activeDatesSorted, windowStart, today) {
+    if (activeDatesSorted.length === 0) return 0;
+    const points = [windowStart, ...activeDatesSorted, today];
+    let maxGap = 0;
+    for (let i = 1; i < points.length; i++) {
+      const gap = daysBetween(points[i - 1], points[i]);
+      if (gap > maxGap) maxGap = gap;
+    }
+    return Math.round(decayScore(maxGap, PRESENCE_CONFIG.CONSISTENCY_HALFLIFE_DAYS));
+  }
+
+  // Maior sequência de dias consecutivos de calendário (sem furos) com
+  // atividade, usada tanto para consistência (indiretamente) quanto para
+  // o Índice de Saturação (streaks muito longos = possível excesso).
+  function computeMaxConsecutiveStreak(datesSorted) {
+    if (datesSorted.length === 0) return 0;
+    let max = 1, cur = 1;
+    for (let i = 1; i < datesSorted.length; i++) {
+      if (daysBetween(datesSorted[i - 1], datesSorted[i]) === 1) {
+        cur++;
+        if (cur > max) max = cur;
+      } else {
+        cur = 1;
+      }
+    }
+    return max;
+  }
+
+  // Presença de UM canal (feed ou stories): combina recência (histórico
+  // completo, para saber há quantos dias não há atividade nesse canal),
+  // frequência e consistência (calculadas dentro da janela de análise,
+  // apenas sobre dias efetivamente conferidos — dias sem check-in não
+  // contam como "sem atividade", contam como "sem informação").
+  function computeChannelPresence(username, channel) {
+    const entries = checkins[username] || {};
+    const today = todayKey();
+    const windowStart = shiftDateStr(today, -(PRESENCE_CONFIG.ANALYSIS_WINDOW_DAYS - 1));
+    const isActiveForChannel = (date) => {
+      const s = statusFromEntry(entries[date]);
+      return channel === 'feed' ? (s === 'feed' || s === 'both') : (s === 'stories' || s === 'both');
+    };
+
+    const allCheckedDates = Object.keys(entries).filter((d) => d <= today).sort();
+    const allActiveDates = allCheckedDates.filter(isActiveForChannel);
+    const lastActiveDate = allActiveDates.length ? allActiveDates[allActiveDates.length - 1] : null;
+    const hasData = allCheckedDates.length > 0;
+
+    const windowCheckedDates = allCheckedDates.filter((d) => d >= windowStart);
+    const windowActiveDates = windowCheckedDates.filter(isActiveForChannel);
+
+    const daysSinceLast = lastActiveDate ? daysBetween(lastActiveDate, today) : null;
+    const recencyScore = lastActiveDate ? decayScore(daysSinceLast) : 0;
+    const frequencyScore = windowCheckedDates.length > 0
+      ? (windowActiveDates.length / windowCheckedDates.length) * 100
+      : 0;
+    const consistencyScore = computeConsistencyScore(windowActiveDates, windowStart, today);
+
+    const w = PRESENCE_CONFIG.SUBSCORE_WEIGHTS;
+    const overall = hasData
+      ? Math.round(clamp(recencyScore * w.recency + frequencyScore * w.frequency + consistencyScore * w.consistency, 0, 100))
+      : null;
+
+    return {
+      overall,
+      hasData,
+      recencyScore: Math.round(recencyScore),
+      frequencyScore: Math.round(frequencyScore),
+      consistencyScore,
+      daysSinceLast,
+      checkedDaysInWindow: windowCheckedDates.length,
+      activeDaysInWindow: windowActiveDates.length,
+    };
+  }
+
+  // Índice de Presença Online = Feed × 50% + Stories × 50% (ver nota no
+  // topo do módulo sobre a evolução futura para Stories/Reels/Carrossel/Foto).
+  function computePresenceIndex(username) {
+    const feed = computeChannelPresence(username, 'feed');
+    const stories = computeChannelPresence(username, 'stories');
+    if (!feed.hasData && !stories.hasData) {
+      return { overall: null, label: 'sem dados suficientes', feed, stories };
+    }
+    const w = PRESENCE_CONFIG.CHANNEL_WEIGHTS;
+    const overall = Math.round(clamp((feed.overall || 0) * w.feed + (stories.overall || 0) * w.stories, 0, 100));
+    const label = classifyByBands(overall, PRESENCE_CONFIG.PRESENCE_LABELS);
+    return { overall, label, feed, stories };
+  }
+
+  // Índice de Saturação — baseado exclusivamente no que o check-in diário
+  // consegue observar: proporção de dias ativos, maior sequência de dias
+  // consecutivos ativos e proporção de dias com feed+stories simultâneos.
+  // Não usa quantidade de posts/Stories por dia, porque essa informação
+  // não existe no banco atual.
+  function computeSaturationIndex(username) {
+    const entries = checkins[username] || {};
+    const today = todayKey();
+    const windowStart = shiftDateStr(today, -(PRESENCE_CONFIG.ANALYSIS_WINDOW_DAYS - 1));
+    const checkedDates = Object.keys(entries).filter((d) => d <= today && d >= windowStart).sort();
+
+    if (checkedDates.length === 0) {
+      return { score: null, label: 'sem dados suficientes', activeRatio: null, bothRatio: null, maxStreak: null, checkedDays: 0 };
+    }
+    if (checkedDates.length < PRESENCE_CONFIG.SATURATION_MIN_CHECKED_DAYS) {
+      return { score: null, label: 'dados insuficientes (poucos dias conferidos na janela)', activeRatio: null, bothRatio: null, maxStreak: null, checkedDays: checkedDates.length };
+    }
+
+    const activeDates = checkedDates.filter((d) => statusFromEntry(entries[d]) !== 'nothing');
+    const bothDates = checkedDates.filter((d) => statusFromEntry(entries[d]) === 'both');
+    const activeRatio = activeDates.length / checkedDates.length;
+    const bothRatio = bothDates.length / checkedDates.length;
+    const maxStreak = computeMaxConsecutiveStreak(activeDates);
+
+    const ratioScore = scoreFromBands(activeRatio, PRESENCE_CONFIG.SATURATION_RATIO_BANDS);
+    const streakScore = scoreFromBands(maxStreak, PRESENCE_CONFIG.SATURATION_STREAK_BANDS);
+    const bothScore = scoreFromBands(bothRatio, PRESENCE_CONFIG.SATURATION_BOTH_BANDS);
+
+    const w = PRESENCE_CONFIG.SATURATION_WEIGHTS;
+    const score = Math.round(clamp(ratioScore * w.activeRatio + streakScore * w.streak + bothScore * w.bothRatio, 0, 100));
+    const label = classifyByBands(score, PRESENCE_CONFIG.SATURATION_LABELS);
+
+    return { score, label, activeRatio, bothRatio, maxStreak, checkedDays: checkedDates.length, activeDays: activeDates.length };
+  }
+
+  // Interpretação automática — só combina os dois números já calculados
+  // (presença e saturação), sem inventar dados de qualidade/engajamento
+  // que o Vigia não possui.
+  function generatePresenceInterpretation(presence, saturation) {
+    if (presence.overall === null) return 'Ainda não há dias conferidos suficientes para avaliar a presença online desta conta.';
+    if (saturation.score === null) return 'Presença calculada, mas ainda não há dias suficientes na janela recente para avaliar saturação.';
+
+    const highP = presence.overall >= 75, modP = presence.overall >= 50 && presence.overall < 75;
+    const highS = saturation.score >= 75, modS = saturation.score >= 50 && saturation.score < 75;
+
+    if (highP && highS) return 'O perfil apresenta alta presença online, porém demonstra sinais de hiperprodução. O volume elevado de atividade pode reduzir a eficiência da estratégia.';
+    if (highP && modS) return 'O perfil está muito presente, com frequência de atividade um pouco acima do padrão saudável — vale observar se o ritmo se mantém sustentável.';
+    if (highP) return 'O perfil mantém uma presença online forte e uma frequência saudável de atividade, sem sinais relevantes de saturação.';
+    if (modP && highS) return 'O perfil tem presença moderada, mas concentra a atividade em poucos dias — um padrão que pode indicar picos de produção seguidos de silêncio.';
+    if (modP) return 'O perfil mantém presença moderada online, com espaço para aumentar a frequência ou a consistência da atividade.';
+    if (highS) return 'O perfil tem baixa presença geral, mas os poucos dias com atividade foram bastante concentrados — sugerindo picos isolados em vez de uma rotina.';
+    return 'O perfil está com baixa presença online no período analisado, com poucos ou nenhum sinal recente de atividade.';
+  }
+
+  function extractUsername(raw) {
+    let value = raw.trim();
+    if (!value) return '';
+
+    // Se for um link do Instagram (com ou sem https, com ou sem www),
+    // extrai o nome de usuário do caminho da URL.
+    const urlMatch = value.match(/instagram\.com\/([^/?#]+)/i);
+    if (urlMatch) {
+      value = urlMatch[1];
+    }
+
+    value = value.trim().replace(/^@/, '');
+
+    // Remove barra final e qualquer coisa depois de ? ou # que tenha sobrado.
+    value = value.split('?')[0].split('#')[0].replace(/\/+$/, '');
+
+    // Ignora seções que não são perfis de usuário.
+    const reserved = ['p', 'reel', 'reels', 'stories', 'explore', 'accounts', 'tv', 'direct'];
+    if (reserved.includes(value.toLowerCase())) return '';
+
+    return value;
+  }
+
+  function addAccount() {
+    const input = document.getElementById('newUsername');
+    const nichoInput = document.getElementById('newNicho');
+    const clean = extractUsername(input.value);
+    if (!clean) return;
+    if (accounts.some((a) => a.username.toLowerCase() === clean.toLowerCase())) {
+      input.value = '';
+      return;
+    }
+    const nicho = nichoInput.value.trim() || DEFAULT_NICHO;
+    const nowIso = new Date().toISOString();
+    accounts.push({ username: clean, addedAt: nowIso, updatedAt: nowIso, nicho, cidade: '', bairro: '', rua: '', numero: '', observacoes: '', whatsapp: '', telefone: '', relacionados: [] });
+    checkins[clean] = {};
+    saveAccounts();
+    input.value = '';
+    nichoInput.value = '';
+    render();
+  }
+
+  function removeAccount(username) {
+    accounts = accounts.filter((a) => a.username !== username);
+    delete checkins[username];
+    delete abordagemData[username];
+    saveAccounts();
+    try { localStorage.removeItem(STORAGE_CHECKIN_PREFIX + username); } catch (e) {}
+    try { localStorage.removeItem(STORAGE_ABORDAGEM_PREFIX + username); } catch (e) {}
+    if (editorState && editorState.username === username) editorState = null;
+    if (historyFor === username) historyFor = null;
+    if (abordagemFor === username) abordagemFor = null;
+    if (presenceFor === username) presenceFor = null;
+    if (quickPickFor && quickPickFor.username === username) quickPickFor = null;
+    if (nichoEditFor === username) nichoEditFor = null;
+    if (perfilEditFor === username) perfilEditFor = null;
+    render();
+  }
+
+  function buildStatusGrid(container) {
+    container.innerHTML = '';
+    STATUS_OPTIONS.forEach((opt) => {
+      const label = document.createElement('label');
+      label.className = 'status-option' + (editSelectedStatus === opt.value ? ' selected' : '');
+      label.style.borderColor = editSelectedStatus === opt.value ? statusColorVar(opt.value) : '';
+      const input = document.createElement('input');
+      input.type = 'radio';
+      input.name = 'status';
+      input.checked = editSelectedStatus === opt.value;
+      input.addEventListener('change', () => {
+        editSelectedStatus = opt.value;
+        const errEl = document.getElementById('statusError');
+        if (errEl) errEl.style.display = 'none';
+        buildStatusGrid(container);
+      });
+      label.appendChild(input);
+      label.appendChild(document.createTextNode(opt.label));
+      container.appendChild(label);
+    });
+  }
+
+  // Monta o painel de registro (editor) inline, para ser inserido logo abaixo
+  // da faixa de dias do próprio card da conta — em vez de um painel fixo no
+  // rodapé da página.
+  function buildEditorPanel(username, date) {
+    const existing = (checkins[username] || {})[date];
+    const today = todayKey();
+
+    const wrap = document.createElement('div');
+    wrap.className = 'editor open';
+    wrap.id = 'editorPanel';
+
+    const titleEl = document.createElement('div');
+    titleEl.className = 'editor-title';
+    titleEl.innerHTML = '@' + username + ' — ' + formatDatePretty(date) + ' (' + dayLabel(date) + ')' +
+      (date > today ? ' <span class="hint">· data futura, será conferida quando chegar o dia</span>' : '');
+    wrap.appendChild(titleEl);
+
+    const grid = document.createElement('div');
+    grid.className = 'status-grid';
+    grid.id = 'statusGrid';
+    wrap.appendChild(grid);
+    buildStatusGrid(grid);
+
+    const statusError = document.createElement('div');
+    statusError.className = 'status-error';
+    statusError.id = 'statusError';
+    statusError.textContent = 'selecione uma das opções acima.';
+    wrap.appendChild(statusError);
+
+    const timeRow = document.createElement('div');
+    timeRow.className = 'time-row';
+    const timeLabel = document.createElement('label');
+    timeLabel.setAttribute('for', 'editTime');
+    timeLabel.textContent = 'horário:';
+    const timeInput = document.createElement('input');
+    timeInput.type = 'time';
+    timeInput.id = 'editTime';
+    timeInput.value = existing ? (existing.time || '') : (date === today ? currentTimeHHMM() : '');
+    timeRow.appendChild(timeLabel);
+    timeRow.appendChild(timeInput);
+    wrap.appendChild(timeRow);
+
+    const noteArea = document.createElement('textarea');
+    noteArea.id = 'editNote';
+    noteArea.rows = 2;
+    noteArea.placeholder = 'nota opcional, link do post, etc.';
+    noteArea.value = existing ? (existing.note || '') : '';
+    wrap.appendChild(noteArea);
+
+    const actions = document.createElement('div');
+    actions.className = 'editor-actions';
+    const saveBtn = document.createElement('button');
+    saveBtn.className = 'btn-save';
+    saveBtn.id = 'saveBtn';
+    saveBtn.textContent = 'salvar registro';
+    saveBtn.addEventListener('click', saveCheckin);
+    actions.appendChild(saveBtn);
+    const cancelBtn = document.createElement('button');
+    cancelBtn.className = 'btn-cancel';
+    cancelBtn.id = 'cancelBtn';
+    cancelBtn.textContent = 'cancelar';
+    cancelBtn.addEventListener('click', closeEditor);
+    actions.appendChild(cancelBtn);
+    if (existing) {
+      const deleteBtn = document.createElement('button');
+      deleteBtn.className = 'btn-delete-entry';
+      deleteBtn.id = 'deleteBtn';
+      deleteBtn.textContent = 'apagar registro desse dia';
+      deleteBtn.addEventListener('click', () => deleteCheckin(username, date));
+      actions.appendChild(deleteBtn);
+    }
+    wrap.appendChild(actions);
+
+    return wrap;
+  }
+
+  // Núcleo do registro de check-in — usado tanto pelo quickMark() (fluxo
+  // normal, com render() completo) quanto pelo Modo Conferência (que evita
+  // reconstruir a lista inteira a cada conta). Mesmo formato de dado, mesmo
+  // local de armazenamento (checkins[username][date]), mesma persistência.
+  function recordCheckin(username, status, date) {
+    const targetDate = date || todayKey();
+    const existing = (checkins[username] || {})[targetDate];
+    const entry = {
+      status,
+      time: existing ? (existing.time || '') : (targetDate === todayKey() ? currentTimeHHMM() : ''),
+      note: existing ? (existing.note || '') : '',
+      checkedAt: new Date().toISOString(),
+    };
+    if (!checkins[username]) checkins[username] = {};
+    checkins[username][targetDate] = entry;
+    saveCheckinsFor(username);
+    return entry;
+  }
+
+  function quickMark(username, status, date) {
+    const targetDate = date || todayKey();
+    recordCheckin(username, status, targetDate);
+    if (quickPickFor && quickPickFor.username === username && quickPickFor.date === targetDate) {
+      quickPickFor = null;
+    }
+    render();
+  }
+
+  function buildQuickMarkRow(username, date, label, closable) {
+    const status = dayStatus(username, date);
+    const row = document.createElement('div');
+    row.className = 'quick-mark-row' + (closable ? ' quick-pick-active' : '');
+    const lbl = document.createElement('span');
+    lbl.className = 'quick-mark-label';
+    lbl.textContent = label;
+    row.appendChild(lbl);
+    STATUS_OPTIONS.forEach((opt) => {
+      const qBtn = document.createElement('button');
+      qBtn.className = 'quick-mark-btn' + (status === opt.value ? ' active' : '');
+      qBtn.textContent = opt.short;
+      if (status === opt.value) {
+        qBtn.style.borderColor = statusColorVar(opt.value);
+        qBtn.style.background = statusColorVar(opt.value);
+      }
+      qBtn.title = 'marcar "' + opt.label + '" — um clique já salva';
+      qBtn.addEventListener('click', () => quickMark(username, opt.value, date));
+      row.appendChild(qBtn);
+    });
+    const editBtn = document.createElement('button');
+    editBtn.className = 'quick-mark-edit';
+    editBtn.textContent = '✎';
+    editBtn.title = 'adicionar nota/horário para esse dia';
+    editBtn.addEventListener('click', () => { quickPickFor = null; openEditor(username, date); });
+    row.appendChild(editBtn);
+    if (closable) {
+      const closeBtn = document.createElement('button');
+      closeBtn.className = 'quick-mark-edit';
+      closeBtn.textContent = '✕';
+      closeBtn.title = 'fechar';
+      closeBtn.addEventListener('click', () => { quickPickFor = null; render(); });
+      row.appendChild(closeBtn);
+    }
+    return row;
+  }
+
+  function openEditor(username, date) {
+    const existing = (checkins[username] || {})[date];
+    editSelectedStatus = existing ? statusFromEntry(existing) : null;
+    editorState = { username, date };
+    render();
+    requestAnimationFrame(() => {
+      const panel = document.getElementById('editorPanel');
+      if (panel) panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  }
+
+  function closeEditor() {
+    editorState = null;
+    render();
+  }
+
+  function saveCheckin() {
+    if (!editorState) return;
+    if (!editSelectedStatus) {
+      const errEl = document.getElementById('statusError');
+      if (errEl) errEl.style.display = 'block';
+      return;
+    }
+    const { username, date } = editorState;
+    const entry = {
+      status: editSelectedStatus,
+      time: document.getElementById('editTime').value,
+      note: document.getElementById('editNote').value.trim(),
+      checkedAt: new Date().toISOString(),
+    };
+    if (!checkins[username]) checkins[username] = {};
+    checkins[username][date] = entry;
+    saveCheckinsFor(username);
+    editorState = null;
+    render();
+  }
+
+  function deleteCheckin(username, date) {
+    if (checkins[username]) {
+      delete checkins[username][date];
+      saveCheckinsFor(username);
+    }
+    if (editorState && editorState.username === username && editorState.date === date) editorState = null;
+    render();
+  }
+
+  function openHistory(username) {
+    if (historyFor === username) {
+      historyFor = null;
+      render();
+      return;
+    }
+    const now = new Date();
+    calMonth = { year: now.getFullYear(), month: now.getMonth() };
+    historyFor = username;
+    render();
+  }
+
+  function shiftMonth(delta) {
+    const d = new Date(calMonth.year, calMonth.month + delta, 1);
+    calMonth = { year: d.getFullYear(), month: d.getMonth() };
+    render();
+  }
+
+  function createAccountCard(acc, today, days) {
+      const card = document.createElement('div');
+      card.className = 'account-card';
+
+      const statusToday = dayStatus(acc.username, today);
+      const curAbordagem = currentAbordagem(acc.username);
+      const presenceIndex = computePresenceIndex(acc.username);
+      const presenceText = presenceIndex.overall !== null ? presenceIndex.overall + '%' : 'sem dados';
+      const presenceColorVar = scoreColorVar(presenceIndex.overall);
+
+      const header = document.createElement('div');
+      header.className = 'account-header';
+      header.innerHTML =
+        '<div class="account-name"><a href="https://www.instagram.com/' + acc.username + '/" target="_blank" rel="noopener noreferrer">@' + acc.username + '</a>' +
+        '<span class="nicho-tag" data-action="edit-nicho" data-username="' + acc.username + '">' + (acc.nicho || DEFAULT_NICHO) + ' ✎</span>' +
+        '<span class="nicho-tag contato-tag" data-action="edit-perfil" data-username="' + acc.username + '">+ informações ✎</span>' +
+        '<span class="abordagem-badge' + (curAbordagem ? '' : ' none') + '" style="' + (curAbordagem ? 'background:' + abordagemColorVar(curAbordagem.status) + ';' : '') + '" data-action="toggle-abordagem" data-username="' + acc.username + '" title="clique para ver/editar a abordagem">' +
+        (curAbordagem ? abordagemLabel(curAbordagem.status) : 'sem abordagem') + '</span>' +
+        '<span class="presence-badge' + (presenceIndex.overall === null ? ' none' : '') + '" style="' + (presenceIndex.overall !== null ? 'color:' + presenceColorVar + '; border-color:' + presenceColorVar + ';' : '') + '" data-action="toggle-presence" data-username="' + acc.username + '" title="Índice de Presença Online — clique para ver o detalhamento">📊 ' + presenceText + '</span></div>' +
+        '<div class="account-actions">' +
+        '<button class="btn-history' + (historyFor === acc.username ? ' open' : '') + '" data-action="toggle-history" data-username="' + acc.username + '">histórico por mês</button>' +
+        '<button class="btn-remove" data-action="remove" data-username="' + acc.username + '">remover</button>' +
+        '</div>';
+      card.appendChild(header);
+
+      card.appendChild(buildQuickMarkRow(acc.username, today, 'hoje:', false));
+
+      if (acc.cidade || acc.bairro || acc.rua || acc.numero || acc.whatsapp || acc.telefone || acc.observacoes || (acc.relacionados && acc.relacionados.length)) {
+        const infoRow = document.createElement('div');
+        infoRow.className = 'account-contact-info';
+        const addr = fullAddress(acc);
+        if (addr) {
+          const link = mapsLink(acc);
+          const end = document.createElement('a');
+          end.className = 'contact-endereco';
+          end.href = link;
+          end.target = '_blank';
+          end.rel = 'noopener noreferrer';
+          end.textContent = '📍 ' + addr;
+          infoRow.appendChild(end);
+        }
+        if (acc.whatsapp) {
+          const digits = acc.whatsapp.replace(/\D/g, '');
+          const link = document.createElement('a');
+          link.className = 'contact-whatsapp';
+          link.href = digits ? ('https://wa.me/' + digits) : '#';
+          link.target = '_blank';
+          link.rel = 'noopener noreferrer';
+          link.textContent = '💬 ' + acc.whatsapp;
+          infoRow.appendChild(link);
+        }
+        if (acc.telefone) {
+          const tel = document.createElement('span');
+          tel.className = 'contact-telefone';
+          tel.textContent = '☎️ ' + acc.telefone;
+          infoRow.appendChild(tel);
+        }
+        card.appendChild(infoRow);
+
+        if (acc.observacoes) {
+          const obsRow = document.createElement('div');
+          obsRow.className = 'account-observacoes';
+          obsRow.textContent = '📝 ' + acc.observacoes;
+          card.appendChild(obsRow);
+        }
+
+        if (acc.relacionados && acc.relacionados.length) {
+          const relRow = document.createElement('div');
+          relRow.className = 'account-contact-info';
+          const relLabel = document.createElement('span');
+          relLabel.textContent = '🔗 relacionadas:';
+          relRow.appendChild(relLabel);
+          acc.relacionados.forEach((r) => {
+            const relTag = document.createElement('span');
+            relTag.className = 'related-tag';
+            relTag.textContent = r;
+            relTag.title = 'clique para buscar';
+            relTag.addEventListener('click', () => {
+              document.getElementById('searchInput').value = r.replace(/^@/, '');
+              searchQuery = r.replace(/^@/, '');
+              render();
+            });
+            relRow.appendChild(relTag);
+          });
+          card.appendChild(relRow);
+        }
+      }
+
+      if (perfilEditFor === acc.username) {
+        const cEditRow = document.createElement('div');
+        cEditRow.className = 'nicho-edit-row contato-edit-row';
+        cEditRow.style.flexWrap = 'wrap';
+        const cidadeInput = document.createElement('input');
+        cidadeInput.type = 'text';
+        cidadeInput.value = acc.cidade || '';
+        cidadeInput.placeholder = 'cidade (ex: Nova Iguaçu)';
+        const bairroInput = document.createElement('input');
+        bairroInput.type = 'text';
+        bairroInput.value = acc.bairro || '';
+        bairroInput.placeholder = 'bairro';
+        const ruaInput = document.createElement('input');
+        ruaInput.type = 'text';
+        ruaInput.value = acc.rua || '';
+        ruaInput.placeholder = 'rua';
+        const numeroInput = document.createElement('input');
+        numeroInput.type = 'text';
+        numeroInput.value = acc.numero || '';
+        numeroInput.placeholder = 'número';
+        numeroInput.style.flex = '0 0 80px';
+        const whatsappInput = document.createElement('input');
+        whatsappInput.type = 'text';
+        whatsappInput.value = acc.whatsapp || '';
+        whatsappInput.placeholder = 'whatsapp (com DDD)';
+        const telefoneInput = document.createElement('input');
+        telefoneInput.type = 'text';
+        telefoneInput.value = acc.telefone || '';
+        telefoneInput.placeholder = 'telefone fixo (opcional)';
+        const relacionadosInput = document.createElement('input');
+        relacionadosInput.type = 'text';
+        relacionadosInput.value = (acc.relacionados || []).join(', ');
+        relacionadosInput.placeholder = 'contas relacionadas, separadas por vírgula';
+        relacionadosInput.style.flex = '1 1 100%';
+        const observacoesInput = document.createElement('textarea');
+        observacoesInput.rows = 2;
+        observacoesInput.value = acc.observacoes || '';
+        observacoesInput.placeholder = 'observações (nota livre sobre a empresa)';
+        observacoesInput.style.cssText = 'flex:1 1 100%; background:var(--panel-alt); border:1px solid var(--border); border-radius:6px; padding:6px 8px; color:var(--paper); font-family:inherit; font-size:12px; outline:none; resize:vertical;';
+        const saveContatoBtn = document.createElement('button');
+        saveContatoBtn.className = 'save';
+        saveContatoBtn.textContent = 'salvar';
+        saveContatoBtn.addEventListener('click', () => {
+          setPerfilInfo(acc.username, {
+            cidade: cidadeInput.value,
+            bairro: bairroInput.value,
+            rua: ruaInput.value,
+            numero: numeroInput.value,
+            observacoes: observacoesInput.value,
+            whatsapp: whatsappInput.value,
+            telefone: telefoneInput.value,
+            relacionados: relacionadosInput.value,
+          });
+          perfilEditFor = null;
+          render();
+        });
+        const cancelContatoBtn = document.createElement('button');
+        cancelContatoBtn.textContent = 'cancelar';
+        cancelContatoBtn.addEventListener('click', () => {
+          perfilEditFor = null;
+          render();
+        });
+        [cidadeInput, bairroInput, ruaInput, numeroInput, whatsappInput, telefoneInput, relacionadosInput].forEach((inp) => {
+          inp.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') saveContatoBtn.click();
+            if (e.key === 'Escape') cancelContatoBtn.click();
+          });
+        });
+        cEditRow.appendChild(cidadeInput);
+        cEditRow.appendChild(bairroInput);
+        cEditRow.appendChild(ruaInput);
+        cEditRow.appendChild(numeroInput);
+        cEditRow.appendChild(whatsappInput);
+        cEditRow.appendChild(telefoneInput);
+        cEditRow.appendChild(relacionadosInput);
+        cEditRow.appendChild(observacoesInput);
+        cEditRow.appendChild(saveContatoBtn);
+        cEditRow.appendChild(cancelContatoBtn);
+        card.appendChild(cEditRow);
+      }
+
+      if (nichoEditFor === acc.username) {
+        const editRow = document.createElement('div');
+        editRow.className = 'nicho-edit-row';
+        const nicheInput = document.createElement('input');
+        nicheInput.type = 'text';
+        nicheInput.value = acc.nicho === DEFAULT_NICHO ? '' : acc.nicho;
+        nicheInput.placeholder = 'nome do nicho';
+        nicheInput.setAttribute('list', 'nichoList');
+        const saveNicheBtn = document.createElement('button');
+        saveNicheBtn.className = 'save';
+        saveNicheBtn.textContent = 'salvar';
+        saveNicheBtn.addEventListener('click', () => {
+          setNicho(acc.username, nicheInput.value);
+          nichoEditFor = null;
+          render();
+        });
+        const cancelNicheBtn = document.createElement('button');
+        cancelNicheBtn.textContent = 'cancelar';
+        cancelNicheBtn.addEventListener('click', () => {
+          nichoEditFor = null;
+          render();
+        });
+        nicheInput.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') saveNicheBtn.click();
+          if (e.key === 'Escape') cancelNicheBtn.click();
+        });
+        editRow.appendChild(nicheInput);
+        editRow.appendChild(saveNicheBtn);
+        editRow.appendChild(cancelNicheBtn);
+        card.appendChild(editRow);
+      }
+
+      const strip = document.createElement('div');
+      strip.className = 'strip';
+      days.forEach((date, i) => {
+        const status = dayStatus(acc.username, date);
+        const isToday = date === today;
+        const isFuture = date > today;
+        const cell = document.createElement('button');
+        cell.className = 'day-cell' + (isToday ? ' today' : '') + (isFuture && status === 'unchecked' ? ' future' : '');
+        if (!(isFuture && status === 'unchecked')) cell.style.background = statusColorVar(status);
+        const rotation = isFuture ? 0 : ((i * 7) % 5) - 2;
+        cell.style.transform = 'rotate(' + rotation + 'deg)';
+        cell.title = formatDatePretty(date) + ' — ' + (isFuture && status === 'unchecked' ? 'ainda não chegou' : statusLabel(status));
+        cell.dataset.action = 'edit';
+        cell.dataset.username = acc.username;
+        cell.dataset.date = date;
+        strip.appendChild(cell);
+      });
+      card.appendChild(strip);
+
+      const labels = document.createElement('div');
+      labels.className = 'strip-labels';
+      days.forEach((date) => {
+        const div = document.createElement('div');
+        const isFuture = date > today;
+        div.className = date === today ? 'today' : (isFuture ? 'future' : '');
+        div.textContent = date.slice(8, 10);
+        labels.appendChild(div);
+      });
+      card.appendChild(labels);
+
+      if (quickPickFor && quickPickFor.username === acc.username) {
+        card.appendChild(buildQuickMarkRow(
+          acc.username,
+          quickPickFor.date,
+          (quickPickFor.date === today ? 'hoje' : formatDatePretty(quickPickFor.date)) + ':',
+          true
+        ));
+      }
+
+      if (editorState && editorState.username === acc.username) {
+        card.appendChild(buildEditorPanel(acc.username, editorState.date));
+      }
+
+      if (presenceFor === acc.username) {
+        const pPanel = document.createElement('div');
+        pPanel.className = 'abordagem-panel open';
+
+        const presenceIndex = computePresenceIndex(acc.username);
+        const saturationIndex = computeSaturationIndex(acc.username);
+
+        const pTitle = document.createElement('div');
+        pTitle.className = 'abordagem-panel-title';
+        pTitle.style.color = scoreColorVar(presenceIndex.overall);
+        pTitle.textContent = presenceIndex.overall !== null
+          ? 'Presença Online: ' + presenceIndex.overall + '% — ' + presenceIndex.label
+          : 'Presença Online — ' + presenceIndex.label;
+        pPanel.appendChild(pTitle);
+
+        if (presenceIndex.overall !== null) {
+          const channelsWrap = document.createElement('div');
+          channelsWrap.className = 'presence-channels';
+          [
+            { label: 'Feed', data: presenceIndex.feed },
+            { label: 'Stories', data: presenceIndex.stories },
+          ].forEach((ch) => {
+            const row = document.createElement('div');
+            row.className = 'presence-channel-row';
+            const lbl = document.createElement('span');
+            lbl.className = 'presence-channel-label';
+            lbl.textContent = ch.label;
+            row.appendChild(lbl);
+            const barWrap = document.createElement('div');
+            barWrap.className = 'presence-bar';
+            const fill = document.createElement('div');
+            fill.className = 'presence-bar-fill';
+            const pct = ch.data.overall !== null ? ch.data.overall : 0;
+            fill.style.width = pct + '%';
+            fill.style.background = scoreColorVar(ch.data.overall);
+            barWrap.appendChild(fill);
+            row.appendChild(barWrap);
+            const pctEl = document.createElement('span');
+            pctEl.className = 'presence-channel-pct';
+            pctEl.textContent = ch.data.overall !== null ? ch.data.overall + '%' : '—';
+            row.appendChild(pctEl);
+            channelsWrap.appendChild(row);
+          });
+          pPanel.appendChild(channelsWrap);
+
+          const meta = document.createElement('div');
+          meta.className = 'presence-meta';
+          const feedMeta = presenceIndex.feed.hasData
+            ? 'último post no feed há ' + presenceIndex.feed.daysSinceLast + ' dia(s)'
+            : 'sem posts no feed registrados';
+          const storiesMeta = presenceIndex.stories.hasData
+            ? 'últimos stories há ' + presenceIndex.stories.daysSinceLast + ' dia(s)'
+            : 'sem stories registrados';
+          meta.textContent = feedMeta + ' · ' + storiesMeta + ' · janela de análise: ' + PRESENCE_CONFIG.ANALYSIS_WINDOW_DAYS + ' dias';
+          pPanel.appendChild(meta);
+        }
+
+        const stats = presenceStats(acc.username);
+        if (stats.total > 0) {
+          const rawTitle = document.createElement('div');
+          rawTitle.style.cssText = 'font-size:11px; color:var(--faint); font-family:Arial, sans-serif; margin-top:14px; padding-top:10px; border-top:1px solid var(--border);';
+          rawTitle.textContent = 'atividade registrada (todo o histórico, ' + stats.total + ' dia(s) conferido(s)):';
+          pPanel.appendChild(rawTitle);
+
+          const breakdown = [
+            { key: 'both', count: stats.both },
+            { key: 'feed', count: stats.feed },
+            { key: 'stories', count: stats.stories },
+            { key: 'nothing', count: stats.nothing },
+          ];
+          const listEl = document.createElement('div');
+          listEl.className = 'cal-legend';
+          breakdown.forEach((b) => {
+            const pct = Math.round((b.count / stats.total) * 100);
+            const item = document.createElement('div');
+            item.className = 'cal-legend-item';
+            const swatch = document.createElement('span');
+            swatch.className = 'cal-legend-swatch';
+            swatch.style.background = statusColorVar(b.key);
+            item.appendChild(swatch);
+            item.appendChild(document.createTextNode(statusLabel(b.key) + ' — ' + pct + '% (' + b.count + ')'));
+            listEl.appendChild(item);
+          });
+          pPanel.appendChild(listEl);
+        }
+
+        const satTitle = document.createElement('div');
+        satTitle.className = 'abordagem-panel-title';
+        satTitle.style.cssText = 'margin-top:14px; padding-top:10px; border-top:1px solid var(--border); color:' + scoreColorVar(saturationIndex.score) + ';';
+        satTitle.textContent = saturationIndex.score !== null
+          ? 'Saturação: ' + saturationIndex.score + '% — ' + saturationIndex.label
+          : 'Saturação — ' + saturationIndex.label;
+        pPanel.appendChild(satTitle);
+
+        if (saturationIndex.score !== null) {
+          const satMeta = document.createElement('div');
+          satMeta.className = 'presence-meta';
+          satMeta.textContent =
+            Math.round(saturationIndex.activeRatio * 100) + '% dos dias conferidos com atividade · ' +
+            'maior sequência ativa: ' + saturationIndex.maxStreak + ' dia(s) · ' +
+            Math.round(saturationIndex.bothRatio * 100) + '% dos dias com feed + stories simultâneos ' +
+            '(últimos ' + PRESENCE_CONFIG.ANALYSIS_WINDOW_DAYS + ' dias)';
+          pPanel.appendChild(satMeta);
+        }
+
+        const interpretation = document.createElement('div');
+        interpretation.className = 'presence-interpretation';
+        interpretation.textContent = generatePresenceInterpretation(presenceIndex, saturationIndex);
+        pPanel.appendChild(interpretation);
+
+        card.appendChild(pPanel);
+      }
+
+      if (historyFor === acc.username && calMonth) {
+        const panel = document.createElement('div');
+        panel.className = 'cal-panel open';
+
+        const nav = document.createElement('div');
+        nav.className = 'cal-nav';
+        const prevBtn = document.createElement('button');
+        prevBtn.textContent = '‹ mês anterior';
+        prevBtn.addEventListener('click', () => shiftMonth(-1));
+        const label = document.createElement('div');
+        label.className = 'cal-label';
+        label.textContent = monthLabel(calMonth.year, calMonth.month);
+        const nextBtn = document.createElement('button');
+        nextBtn.textContent = 'mês seguinte ›';
+        nextBtn.addEventListener('click', () => shiftMonth(1));
+        nav.appendChild(prevBtn);
+        nav.appendChild(label);
+        nav.appendChild(nextBtn);
+        panel.appendChild(nav);
+
+        const weekdaysEl = document.createElement('div');
+        weekdaysEl.className = 'cal-weekdays';
+        ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sáb'].forEach((wd) => {
+          const d = document.createElement('div');
+          d.textContent = wd;
+          weekdaysEl.appendChild(d);
+        });
+        panel.appendChild(weekdaysEl);
+
+        const gridEl = document.createElement('div');
+        gridEl.className = 'cal-grid';
+        buildMonthGrid(calMonth.year, calMonth.month).forEach((date) => {
+          if (!date) {
+            const blank = document.createElement('div');
+            blank.className = 'cal-blank';
+            gridEl.appendChild(blank);
+            return;
+          }
+          const status = dayStatus(acc.username, date);
+          const isToday = date === today;
+          const isFuture = date > today;
+          const entry = (checkins[acc.username] || {})[date];
+          const dayNum = parseInt(date.slice(8, 10), 10);
+
+          const btn = document.createElement('button');
+          btn.className = 'cal-day' + (isToday ? ' today' : '') + (isFuture && status === 'unchecked' ? ' future-empty' : '');
+          if (!(isFuture && status === 'unchecked')) btn.style.background = statusColorVar(status);
+          btn.textContent = dayNum;
+          btn.title = formatDatePretty(date) + ' — ' + (isFuture && status === 'unchecked' ? 'ainda não chegou' : statusLabel(status)) + (entry && entry.time ? ' · ' + entry.time : '');
+          btn.addEventListener('click', () => openEditor(acc.username, date));
+          gridEl.appendChild(btn);
+        });
+        panel.appendChild(gridEl);
+
+        const legendTitle = document.createElement('div');
+        legendTitle.style.cssText = 'font-size:11px; color:var(--muted); font-family:Arial, sans-serif; margin-top:14px; padding-top:10px; border-top:1px solid var(--border);';
+        legendTitle.textContent = 'o que cada cor significa:';
+        panel.appendChild(legendTitle);
+
+        const legendEl = document.createElement('div');
+        legendEl.className = 'cal-legend';
+        CHECKIN_LEGEND.forEach((st) => {
+          const item = document.createElement('div');
+          item.className = 'cal-legend-item';
+          const swatch = document.createElement('span');
+          swatch.className = 'cal-legend-swatch';
+          swatch.style.background = statusColorVar(st);
+          item.appendChild(swatch);
+          item.appendChild(document.createTextNode(statusLabel(st)));
+          legendEl.appendChild(item);
+        });
+        panel.appendChild(legendEl);
+
+        card.appendChild(panel);
+      }
+
+      if (abordagemFor === acc.username) {
+        const aPanel = document.createElement('div');
+        aPanel.className = 'abordagem-panel open';
+
+        const aTitle = document.createElement('div');
+        aTitle.className = 'abordagem-panel-title';
+        aTitle.textContent = 'Registrar novo status de abordagem';
+        aPanel.appendChild(aTitle);
+
+        const chips = document.createElement('div');
+        chips.className = 'abordagem-chips';
+        ABORDAGEM_OPTIONS.forEach((opt) => {
+          const chip = document.createElement('button');
+          chip.className = 'abordagem-chip' + (abordagemSelected === opt.value ? ' selected' : '');
+          chip.textContent = opt.label;
+          if (abordagemSelected === opt.value) {
+            chip.style.background = 'var(' + opt.color + ')';
+          } else {
+            chip.style.borderColor = 'var(' + opt.color + ')';
+            chip.style.color = 'var(' + opt.color + ')';
+          }
+          chip.addEventListener('click', () => {
+            abordagemSelected = opt.value;
+            render();
+          });
+          chips.appendChild(chip);
+        });
+        aPanel.appendChild(chips);
+
+        const noteArea = document.createElement('textarea');
+        noteArea.rows = 2;
+        noteArea.placeholder = 'nota opcional sobre esse status (o que foi combinado, etc.)';
+        noteArea.value = abordagemNoteDraft;
+        noteArea.addEventListener('input', (e) => { abordagemNoteDraft = e.target.value; });
+        aPanel.appendChild(noteArea);
+
+        const registerRow = document.createElement('div');
+        registerRow.className = 'abordagem-register-row';
+        const registerBtn = document.createElement('button');
+        registerBtn.className = 'btn-register';
+        registerBtn.textContent = 'registrar';
+        const registerError = document.createElement('span');
+        registerError.className = 'abordagem-register-error';
+        registerError.textContent = 'selecione um status acima.';
+        registerBtn.addEventListener('click', () => {
+          if (!abordagemSelected) {
+            registerError.style.display = 'inline';
+            return;
+          }
+          addAbordagemEntry(acc.username, abordagemSelected, abordagemNoteDraft);
+          abordagemSelected = null;
+          abordagemNoteDraft = '';
+          render();
+        });
+        registerRow.appendChild(registerBtn);
+        registerRow.appendChild(registerError);
+        aPanel.appendChild(registerRow);
+
+        const histTitle = document.createElement('div');
+        histTitle.className = 'abordagem-history-title';
+        histTitle.textContent = 'histórico de status';
+        aPanel.appendChild(histTitle);
+
+        const histList = (abordagemData[acc.username] || []).slice().reverse();
+        if (histList.length === 0) {
+          const empty = document.createElement('div');
+          empty.className = 'abordagem-empty';
+          empty.textContent = 'nenhum status registrado ainda.';
+          aPanel.appendChild(empty);
+        } else {
+          const histWrap = document.createElement('div');
+          histWrap.className = 'abordagem-history';
+          histList.forEach((entry) => {
+            const row = document.createElement('div');
+            row.className = 'abordagem-entry';
+
+            const dot = document.createElement('div');
+            dot.className = 'abordagem-entry-dot';
+            dot.style.background = abordagemColorVar(entry.status);
+            row.appendChild(dot);
+
+            const body = document.createElement('div');
+            body.className = 'abordagem-entry-body';
+            const statusEl = document.createElement('div');
+            statusEl.className = 'abordagem-entry-status';
+            statusEl.style.color = abordagemColorVar(entry.status);
+            statusEl.textContent = abordagemLabel(entry.status);
+            body.appendChild(statusEl);
+            const whenEl = document.createElement('div');
+            whenEl.className = 'abordagem-entry-when';
+            whenEl.textContent = formatDateTimePretty(entry.at);
+            body.appendChild(whenEl);
+            if (entry.note) {
+              const noteEl = document.createElement('div');
+              noteEl.className = 'abordagem-entry-note';
+              noteEl.textContent = entry.note;
+              body.appendChild(noteEl);
+            }
+            row.appendChild(body);
+
+            const delBtn = document.createElement('button');
+            delBtn.className = 'abordagem-entry-del';
+            delBtn.textContent = '✕';
+            delBtn.title = 'apagar este registro';
+            delBtn.addEventListener('click', () => {
+              deleteAbordagemEntry(acc.username, entry.at);
+              render();
+            });
+            row.appendChild(delBtn);
+
+            histWrap.appendChild(row);
+          });
+          aPanel.appendChild(histWrap);
+        }
+
+        card.appendChild(aPanel);
+      }
+
+      return card;
+  }
+
+  // ---------- Nível 2: Central Hoje ----------
+
+  // Contas que ainda não têm check-in na data de hoje. Usa a mesma função
+  // dayStatus()/checkins já existente — não cria nenhuma estrutura nova.
+  // Preserva a ordem de armazenamento das contas (não reordena por
+  // prioridade — isso fica fora do escopo desta etapa).
+  function getUncheckedAccountsToday() {
+    const today = todayKey();
+    return accounts.filter((a) => dayStatus(a.username, today) === 'unchecked');
+  }
+
+  function updateTodayPanel() {
+    const panel = document.getElementById('todayPanel');
+    const btn = document.getElementById('conferenceBtn');
+    if (accounts.length === 0) {
+      panel.style.display = 'none';
+      return;
+    }
+    panel.style.display = 'block';
+    const today = todayKey();
+    const total = accounts.length;
+    const conferidas = accounts.filter((a) => dayStatus(a.username, today) !== 'unchecked').length;
+    const pendentes = total - conferidas;
+    document.getElementById('todayStats').innerHTML =
+      '<span><strong>' + total + '</strong> conta' + (total === 1 ? '' : 's') + '</span>' +
+      '<span><strong class="green">' + conferidas + '</strong> conferida' + (conferidas === 1 ? '' : 's') + ' hoje</span>' +
+      '<span><strong class="amber">' + pendentes + '</strong> pendente' + (pendentes === 1 ? '' : 's') + '</span>';
+    if (pendentes > 0) {
+      btn.style.display = 'inline-block';
+      btn.textContent = conferidas > 0 ? '▶ CONTINUAR CONFERÊNCIA' : '▶ INICIAR CONFERÊNCIA';
+    } else {
+      btn.style.display = 'none';
+    }
+  }
+
+  // ---------- Nível 2: Modo Conferência ----------
+  // Rótulos exatos pedidos, mapeados para os mesmos valores de status já
+  // usados em STATUS_OPTIONS/checkins (both/feed/stories/nothing).
+  const CONFERENCE_STATUS_ORDER = ['both', 'feed', 'stories', 'nothing'];
+  const CONFERENCE_LABELS = {
+    both: 'Feed + Stories',
+    feed: 'Só Feed',
+    stories: 'Só Stories',
+    nothing: 'Nada novo',
+  };
+
+  function startConference() {
+    const pending = getUncheckedAccountsToday();
+    if (pending.length === 0) return;
+    conferenceQueue = pending.map((a) => a.username);
+    conferenceIndex = 0;
+    conferenceMode = true;
+    document.getElementById('conferenceOverlay').classList.add('open');
+    document.addEventListener('keydown', conferenceKeyHandler);
+    renderConferencePanel();
+  }
+
+  function currentConferenceUsername() {
+    if (!conferenceMode) return null;
+    if (conferenceIndex >= conferenceQueue.length) return null;
+    return conferenceQueue[conferenceIndex];
+  }
+
+  // Atualiza SOMENTE o painel da conferência (não chama render() completo,
+  // não reconstrói a lista de contas — atende ao requisito de performance).
+  function renderConferencePanel() {
+    const content = document.getElementById('conferencePanelContent');
+    if (!content) return;
+    const total = conferenceQueue.length;
+
+    if (conferenceIndex >= total) {
+      // ---- tela de finalização — números reais, calculados a partir dos
+      // check-ins de hoje das contas que passaram pela fila (contas puladas
+      // continuam sem check-in e não entram na contagem) ----
+      const today = todayKey();
+      let both = 0, feed = 0, stories = 0, nothing = 0, verified = 0;
+      conferenceQueue.forEach((username) => {
+        const s = dayStatus(username, today);
+        if (s === 'unchecked') return;
+        verified++;
+        if (s === 'both') both++;
+        else if (s === 'feed') feed++;
+        else if (s === 'stories') stories++;
+        else if (s === 'nothing') nothing++;
+      });
+
+      content.innerHTML = '';
+      const icon = document.createElement('div');
+      icon.className = 'conference-done-icon';
+      icon.textContent = '✓';
+      content.appendChild(icon);
+      const title = document.createElement('div');
+      title.className = 'conference-title';
+      title.textContent = 'CONFERÊNCIA CONCLUÍDA';
+      content.appendChild(title);
+      const summary = document.createElement('div');
+      summary.className = 'conference-done-summary';
+      summary.innerHTML =
+        '<div><strong>' + verified + '</strong> conta' + (verified === 1 ? '' : 's') + ' verificada' + (verified === 1 ? '' : 's') + '</div>' +
+        '<div>✅ Feed + Stories: ' + both + '</div>' +
+        '<div>📷 Só Feed: ' + feed + '</div>' +
+        '<div>⚡ Só Stories: ' + stories + '</div>' +
+        '<div>— Nada novo: ' + nothing + '</div>';
+      content.appendChild(summary);
+      const closeBtn = document.createElement('button');
+      closeBtn.className = 'btn-conference-exit';
+      closeBtn.style.width = '100%';
+      closeBtn.textContent = 'FECHAR';
+      closeBtn.addEventListener('click', exitConference);
+      content.appendChild(closeBtn);
+      return;
+    }
+
+    const username = conferenceQueue[conferenceIndex];
+    const acc = accounts.find((a) => a.username === username);
+
+    content.innerHTML = '';
+
+    const title = document.createElement('div');
+    title.className = 'conference-title';
+    title.textContent = 'CONFERÊNCIA DE HOJE';
+    content.appendChild(title);
+
+    const progressText = document.createElement('div');
+    progressText.className = 'conference-progress-text';
+    progressText.textContent = (conferenceIndex + 1) + ' / ' + total;
+    content.appendChild(progressText);
+
+    const barWrap = document.createElement('div');
+    barWrap.className = 'conference-progress-bar';
+    const fill = document.createElement('div');
+    fill.className = 'conference-progress-fill';
+    fill.style.width = Math.round((conferenceIndex / total) * 100) + '%';
+    barWrap.appendChild(fill);
+    content.appendChild(barWrap);
+
+    const accEl = document.createElement('div');
+    accEl.className = 'conference-account';
+    accEl.innerHTML = '@' + username +
+      (acc && acc.nicho && acc.nicho !== DEFAULT_NICHO
+        ? ' <span style="font-size:11px;color:var(--muted);font-weight:400;">(' + acc.nicho + ')</span>'
+        : '');
+    content.appendChild(accEl);
+
+    // Mesma URL do Instagram usada no restante do app (link do card da conta).
+    const igBtn = document.createElement('button');
+    igBtn.className = 'btn-conference-insta';
+    igBtn.textContent = '📷 ABRIR INSTAGRAM';
+    igBtn.addEventListener('click', conferenceOpenInstagram);
+    content.appendChild(igBtn);
+
+    const grid = document.createElement('div');
+    grid.className = 'conference-status-grid';
+    CONFERENCE_STATUS_ORDER.forEach((status) => {
+      const b = document.createElement('button');
+      b.className = 'conference-status-btn';
+      b.style.borderColor = statusColorVar(status);
+      b.textContent = CONFERENCE_LABELS[status];
+      b.addEventListener('click', () => conferenceRegister(status));
+      grid.appendChild(b);
+    });
+    content.appendChild(grid);
+
+    const actionsRow = document.createElement('div');
+    actionsRow.className = 'conference-actions-row';
+    const skipBtn = document.createElement('button');
+    skipBtn.className = 'btn-conference-skip';
+    skipBtn.textContent = 'PULAR (N)';
+    skipBtn.addEventListener('click', conferenceSkip);
+    actionsRow.appendChild(skipBtn);
+    const exitBtn = document.createElement('button');
+    exitBtn.className = 'btn-conference-exit';
+    exitBtn.textContent = 'SAIR DA CONFERÊNCIA (ESC)';
+    exitBtn.addEventListener('click', exitConference);
+    actionsRow.appendChild(exitBtn);
+    content.appendChild(actionsRow);
+
+    if (acc && acc.whatsapp) {
+      const waBtn = document.createElement('button');
+      waBtn.className = 'btn-conference-skip';
+      waBtn.style.width = '100%';
+      waBtn.style.marginTop = '6px';
+      waBtn.textContent = '💬 ABRIR WHATSAPP (W)';
+      waBtn.addEventListener('click', conferenceOpenWhatsapp);
+      content.appendChild(waBtn);
+    }
+
+    const msg = document.createElement('div');
+    msg.className = 'conference-msg';
+    msg.id = 'conferenceMsg';
+    content.appendChild(msg);
+
+    const shortcuts = document.createElement('div');
+    shortcuts.className = 'conference-shortcuts';
+    shortcuts.textContent = 'atalhos: 1 Feed+Stories · 2 Só Feed · 3 Só Stories · 4 Nada novo · N Pular · I Instagram · W WhatsApp · ESC Sair';
+    content.appendChild(shortcuts);
+  }
+
+  // Registra o resultado usando o MESMO check-in do sistema (recordCheckin,
+  // usado também pelo quickMark), avança a fila e atualiza só o painel da
+  // conferência — sem reconstruir a lista principal de contas.
+  function conferenceRegister(status) {
+    if (!conferenceMode) return;
+    if (conferenceIndex >= conferenceQueue.length) return;
+    const username = conferenceQueue[conferenceIndex];
+    recordCheckin(username, status, todayKey());
+    conferenceIndex++;
+    renderConferencePanel();
+  }
+
+  // PULAR ≠ CONFERIDA: não grava check-in nenhum, só avança a fila. A conta
+  // pulada continua sem check-in e volta a aparecer se a conferência for
+  // reiniciada.
+  function conferenceSkip() {
+    if (!conferenceMode) return;
+    if (conferenceIndex >= conferenceQueue.length) return;
+    conferenceIndex++;
+    renderConferencePanel();
+  }
+
+  function exitConference() {
+    conferenceMode = false;
+    conferenceQueue = [];
+    conferenceIndex = 0;
+    document.getElementById('conferenceOverlay').classList.remove('open');
+    document.removeEventListener('keydown', conferenceKeyHandler);
+    render(); // uma única reconstrução completa, ao sair — não a cada conta
+  }
+
+  function conferenceOpenInstagram() {
+    const username = currentConferenceUsername();
+    if (!username) return;
+    // mesma URL usada no link do card da conta (https://www.instagram.com/USERNAME/)
+    window.open('https://www.instagram.com/' + username + '/', '_blank', 'noopener,noreferrer');
+  }
+
+  function conferenceOpenWhatsapp() {
+    const username = currentConferenceUsername();
+    const msgEl = document.getElementById('conferenceMsg');
+    if (!username) return;
+    const acc = accounts.find((a) => a.username === username);
+    const digits = acc && acc.whatsapp ? acc.whatsapp.replace(/\D/g, '') : '';
+    if (!digits) {
+      if (msgEl) msgEl.textContent = 'esta conta não possui WhatsApp cadastrado.';
+      return;
+    }
+    // mesma URL usada no link de WhatsApp do card da conta (https://wa.me/DIGITOS)
+    window.open('https://wa.me/' + digits, '_blank', 'noopener,noreferrer');
+  }
+
+  function conferenceKeyHandler(e) {
+    if (!conferenceMode) return;
+    const tag = (e.target && e.target.tagName || '').toLowerCase();
+    if (tag === 'input' || tag === 'textarea' || (e.target && e.target.isContentEditable)) return;
+    if (conferenceIndex >= conferenceQueue.length) {
+      if (e.key === 'Escape') { e.preventDefault(); exitConference(); }
+      return;
+    }
+    switch (e.key) {
+      case '1': e.preventDefault(); conferenceRegister('both'); break;
+      case '2': e.preventDefault(); conferenceRegister('feed'); break;
+      case '3': e.preventDefault(); conferenceRegister('stories'); break;
+      case '4': e.preventDefault(); conferenceRegister('nothing'); break;
+      case 'n': case 'N': e.preventDefault(); conferenceSkip(); break;
+      case 'i': case 'I': e.preventDefault(); conferenceOpenInstagram(); break;
+      case 'w': case 'W': e.preventDefault(); conferenceOpenWhatsapp(); break;
+      case 'Escape': e.preventDefault(); exitConference(); break;
+    }
+  }
+
+  function render() {
+    showError('');
+    const today = todayKey();
+    const days = dayRange(13, 6);
+
+    document.getElementById('emptyState').style.display = accounts.length === 0 ? 'block' : 'none';
+    updateNichoDatalist();
+    updateTodayPanel();
+
+    const summaryEl = document.getElementById('summary');
+    if (accounts.length > 0) {
+      const posted = accounts.filter((a) => {
+        const s = dayStatus(a.username, today);
+        return s !== 'unchecked' && s !== 'nothing';
+      }).length;
+      const pending = accounts.filter((a) => dayStatus(a.username, today) === 'unchecked').length;
+      summaryEl.style.display = 'flex';
+      summaryEl.innerHTML = '<strong>' + accounts.length + ' empresa' + (accounts.length === 1 ? '' : 's') + ' no total</strong>&nbsp;·&nbsp;hoje: <strong class="green">' + posted + ' postaram</strong>&nbsp;·&nbsp;<strong class="amber">' + pending + ' ainda não conferidas</strong>';
+    } else {
+      summaryEl.style.display = 'none';
+    }
+
+    const nichos = getAllNichos();
+    const filterRow = document.getElementById('filterRow');
+    const chipsEl = document.getElementById('filterChips');
+    if (accounts.length > 0 && nichos.length > 1) {
+      filterRow.style.display = 'flex';
+      chipsEl.innerHTML = '';
+      const allChip = document.createElement('button');
+      allChip.className = 'filter-chip' + (activeFiltro === null ? ' active' : '');
+      allChip.textContent = 'todos';
+      allChip.addEventListener('click', () => { activeFiltro = null; render(); });
+      chipsEl.appendChild(allChip);
+      nichos.forEach((n) => {
+        const chip = document.createElement('button');
+        chip.className = 'filter-chip' + (activeFiltro === n ? ' active' : '');
+        chip.textContent = n;
+        chip.addEventListener('click', () => { activeFiltro = (activeFiltro === n ? null : n); render(); });
+        chipsEl.appendChild(chip);
+      });
+    } else {
+      filterRow.style.display = 'none';
+    }
+
+    const cidades = getAllCidades();
+    const filterRowCidade = document.getElementById('filterRowCidade');
+    const chipsElCidade = document.getElementById('filterChipsCidade');
+    if (accounts.length > 0 && cidades.length > 0) {
+      filterRowCidade.style.display = 'flex';
+      chipsElCidade.innerHTML = '';
+      const allChipC = document.createElement('button');
+      allChipC.className = 'filter-chip' + (activeCidadeFiltro === null ? ' active' : '');
+      allChipC.textContent = 'todas';
+      allChipC.addEventListener('click', () => { activeCidadeFiltro = null; render(); });
+      chipsElCidade.appendChild(allChipC);
+      cidades.forEach((c) => {
+        const chip = document.createElement('button');
+        chip.className = 'filter-chip' + (activeCidadeFiltro === c ? ' active' : '');
+        chip.textContent = c;
+        chip.addEventListener('click', () => { activeCidadeFiltro = (activeCidadeFiltro === c ? null : c); render(); });
+        chipsElCidade.appendChild(chip);
+      });
+    } else {
+      filterRowCidade.style.display = 'none';
+    }
+
+    // Filtro Pendentes/Conferidas (Nível 2) — mesmo mecanismo de chips já
+    // usado para nicho/cidade, sem criar um segundo sistema de filtros.
+    const filterRowStatus = document.getElementById('filterRowStatus');
+    const chipsElStatus = document.getElementById('filterChipsStatus');
+    if (accounts.length > 0) {
+      filterRowStatus.style.display = 'flex';
+      chipsElStatus.innerHTML = '';
+      const statusOptions = [
+        { value: null, label: 'todas' },
+        { value: 'pending', label: 'pendentes' },
+        { value: 'checked', label: 'conferidas' },
+      ];
+      statusOptions.forEach((opt) => {
+        const chip = document.createElement('button');
+        chip.className = 'filter-chip' + (activeStatusFiltro === opt.value ? ' active' : '');
+        chip.textContent = opt.label;
+        chip.addEventListener('click', () => { activeStatusFiltro = opt.value; render(); });
+        chipsElStatus.appendChild(chip);
+      });
+    } else {
+      filterRowStatus.style.display = 'none';
+    }
+
+    const listEl = document.getElementById('accountsList');
+    listEl.innerHTML = '';
+
+    // mais recente adicionado primeiro
+    const sortedAccounts = accounts.slice().sort((a, b) => new Date(b.addedAt || 0) - new Date(a.addedAt || 0));
+
+    const searchFiltered = searchQuery ? sortedAccounts.filter((a) => matchesSearch(a, searchQuery)) : sortedAccounts;
+    let visibleAccounts = activeFiltro ? searchFiltered.filter((a) => (a.nicho || DEFAULT_NICHO) === activeFiltro) : searchFiltered;
+    if (activeCidadeFiltro) {
+      visibleAccounts = visibleAccounts.filter((a) => (a.cidade || '') === activeCidadeFiltro);
+    }
+    if (activeStatusFiltro) {
+      visibleAccounts = visibleAccounts.filter((a) => {
+        const checked = dayStatus(a.username, today) !== 'unchecked';
+        return activeStatusFiltro === 'checked' ? checked : !checked;
+      });
+    }
+
+    const noResultsEl = document.getElementById('noSearchResults');
+    noResultsEl.style.display = (accounts.length > 0 && visibleAccounts.length === 0) ? 'block' : 'none';
+
+    const groups = {};
+    visibleAccounts.forEach((acc) => {
+      const n = acc.nicho || DEFAULT_NICHO;
+      if (!groups[n]) groups[n] = [];
+      groups[n].push(acc);
+    });
+
+    const groupOrder = getAllNichos().filter((n) => groups[n]);
+
+    groupOrder.forEach((nicho) => {
+      const groupEl = document.createElement('div');
+      groupEl.className = 'nicho-group';
+
+      const titleEl = document.createElement('div');
+      titleEl.className = 'nicho-group-title';
+      titleEl.innerHTML = nicho + ' <span class="count">(' + groups[nicho].length + ')</span>';
+      groupEl.appendChild(titleEl);
+
+      const cardsWrap = document.createElement('div');
+      cardsWrap.className = 'accounts';
+      groups[nicho].forEach((acc) => {
+        cardsWrap.appendChild(createAccountCard(acc, today, days));
+      });
+      groupEl.appendChild(cardsWrap);
+
+      listEl.appendChild(groupEl);
+    });
+  }
+
+  document.getElementById('accountsList').addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-action]');
+    if (!btn) return;
+    const action = btn.dataset.action;
+    const username = btn.dataset.username;
+    if (action === 'remove') removeAccount(username);
+    if (action === 'edit') {
+      const date = btn.dataset.date;
+      quickPickFor = (quickPickFor && quickPickFor.username === username && quickPickFor.date === date)
+        ? null
+        : { username, date };
+      editorState = null;
+      render();
+      if (quickPickFor) {
+        requestAnimationFrame(() => {
+          const row = document.querySelector('.quick-pick-active');
+          if (row) row.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+      }
+    }
+    if (action === 'toggle-history') openHistory(username);
+    if (action === 'edit-nicho') { nichoEditFor = (nichoEditFor === username ? null : username); perfilEditFor = null; render(); }
+    if (action === 'edit-perfil') { perfilEditFor = (perfilEditFor === username ? null : username); nichoEditFor = null; render(); }
+    if (action === 'toggle-abordagem') toggleAbordagemPanel(username);
+    if (action === 'toggle-presence') { presenceFor = (presenceFor === username ? null : username); render(); }
+  });
+
+  document.getElementById('searchInput').addEventListener('input', (e) => {
+    searchQuery = e.target.value.trim();
+    render();
+  });
+
+  document.getElementById('conferenceBtn').addEventListener('click', startConference);
+
+  document.getElementById('addBtn').addEventListener('click', addAccount);
+  document.getElementById('newUsername').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') addAccount();
+  });
+  document.getElementById('newNicho').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') addAccount();
+  });
+  function exportBackup() {
+    const payload = {
+      app: 'vigia-instagram-local',
+      version: 1,
+      exportedAt: new Date().toISOString(),
+      accounts,
+      checkins,
+      abordagem: abordagemData,
+    };
+    const json = JSON.stringify(payload, null, 2);
+    const blob = new Blob([json], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const now = new Date();
+    const pad = (n) => String(n).padStart(2, '0');
+    const filename = 'vigia-backup-' + now.getFullYear() + pad(now.getMonth() + 1) + pad(now.getDate()) +
+      '-' + pad(now.getHours()) + pad(now.getMinutes()) + '.json';
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+
+    try { localStorage.setItem(STORAGE_LASTEXPORT, now.toISOString()); } catch (e) {}
+    updateSyncBadge();
+  }
+
+  // Mescla os dados importados com os dados locais, mantendo sempre o registro
+  // mais recente de cada conta/checkin/abordagem, em vez de substituir tudo.
+  function mergeImportedData(localAccounts, localCheckins, localAbordagem, importedAccounts, importedCheckins, importedAbordagem) {
+    const byKey = {};
+    localAccounts.forEach((a) => { byKey[a.username.toLowerCase()] = { ...a }; });
+    importedAccounts.forEach((a) => {
+      const key = a.username.toLowerCase();
+      const existing = byKey[key];
+      if (!existing) {
+        byKey[key] = { ...a };
+      } else {
+        const localTime = new Date(existing.updatedAt || existing.addedAt || 0).getTime();
+        const importedTime = new Date(a.updatedAt || a.addedAt || 0).getTime();
+        // mantém a versão mais recente; em empate, fica a local
+        if (importedTime > localTime) byKey[key] = { ...a };
+      }
+    });
+    const mergedAccounts = Object.values(byKey);
+
+    function mergeCheckinMaps(localMap, importedMap) {
+      const result = {};
+      const users = new Set([...Object.keys(localMap || {}), ...Object.keys(importedMap || {})]);
+      users.forEach((u) => {
+        const localDays = (localMap && localMap[u]) || {};
+        const importedDays = (importedMap && importedMap[u]) || {};
+        const days = { ...localDays };
+        Object.keys(importedDays).forEach((date) => {
+          const l = localDays[date];
+          const im = importedDays[date];
+          if (!l) { days[date] = im; return; }
+          const lt = new Date(l.checkedAt || 0).getTime();
+          const it = new Date(im.checkedAt || 0).getTime();
+          if (it > lt) days[date] = im;
+        });
+        result[u] = days;
+      });
+      return result;
+    }
+
+    function mergeAbordagemMaps(localMap, importedMap) {
+      const result = {};
+      const users = new Set([...Object.keys(localMap || {}), ...Object.keys(importedMap || {})]);
+      users.forEach((u) => {
+        const localList = (localMap && localMap[u]) || [];
+        const importedList = (importedMap && importedMap[u]) || [];
+        const seen = new Set();
+        const combined = [];
+        localList.concat(importedList).forEach((entry) => {
+          const key = entry.at + '|' + entry.status + '|' + (entry.note || '');
+          if (seen.has(key)) return;
+          seen.add(key);
+          combined.push(entry);
+        });
+        combined.sort((a, b) => new Date(a.at) - new Date(b.at));
+        result[u] = combined;
+      });
+      return result;
+    }
+
+    return {
+      accounts: mergedAccounts,
+      checkins: mergeCheckinMaps(localCheckins, importedCheckins),
+      abordagem: mergeAbordagemMaps(localAbordagem, importedAbordagem),
+    };
+  }
+
+  function importBackup(file) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      let data;
+      try {
+        data = JSON.parse(reader.result);
+      } catch (e) {
+        showError('Arquivo inválido: não parece ser um backup do Vigia (JSON malformado).');
+        return;
+      }
+      if (!data || !Array.isArray(data.accounts)) {
+        showError('Arquivo inválido: não parece ser um backup do Vigia.');
+        return;
+      }
+      const total = data.accounts.length;
+      const ok = window.confirm(
+        'Importar este arquivo (' + total + ' conta(s), exportado em ' +
+        (data.exportedAt ? formatDateTimePretty(data.exportedAt) : 'data desconhecida') + ') vai MESCLAR com os dados já salvos neste dispositivo.\n\n' +
+        'Para cada conta e cada registro, o sistema compara as datas e mantém sempre a versão mais recente. Contas que existem só no arquivo ou só neste dispositivo são preservadas. Deseja continuar?'
+      );
+      if (!ok) return;
+
+      const importedAccounts = data.accounts.map((a) => ({
+        username: a.username,
+        addedAt: a.addedAt || new Date().toISOString(),
+        updatedAt: a.updatedAt || a.addedAt || new Date().toISOString(),
+        nicho: (a.nicho && a.nicho.trim()) ? a.nicho : DEFAULT_NICHO,
+        cidade: typeof a.cidade === 'string' ? a.cidade : '',
+        bairro: typeof a.bairro === 'string' ? a.bairro : '',
+        rua: typeof a.rua === 'string' ? a.rua : '',
+        numero: typeof a.numero === 'string' ? a.numero : '',
+        observacoes: typeof a.observacoes === 'string' ? a.observacoes : '',
+        whatsapp: typeof a.whatsapp === 'string' ? a.whatsapp : '',
+        telefone: typeof a.telefone === 'string' ? a.telefone : '',
+        relacionados: Array.isArray(a.relacionados) ? a.relacionados : [],
+      }));
+      const importedCheckins = data.checkins || {};
+      const importedAbordagem = data.abordagem || {};
+
+      const merged = mergeImportedData(accounts, checkins, abordagemData, importedAccounts, importedCheckins, importedAbordagem);
+      accounts = merged.accounts;
+      checkins = merged.checkins;
+      abordagemData = merged.abordagem;
+
+      saveAccounts();
+      accounts.forEach((acc) => {
+        saveCheckinsFor(acc.username);
+        saveAbordagemFor(acc.username);
+      });
+
+      try { localStorage.setItem(STORAGE_LASTEXPORT, new Date().toISOString()); } catch (e) {}
+      showError('');
+      historyFor = null;
+      abordagemFor = null;
+      presenceFor = null;
+      quickPickFor = null;
+      nichoEditFor = null;
+      perfilEditFor = null;
+      editorState = null;
+      activeFiltro = null;
+      activeCidadeFiltro = null;
+      searchQuery = '';
+      document.getElementById('searchInput').value = '';
+      render();
+      updateSyncBadge();
+    };
+    reader.onerror = () => {
+      showError('Não foi possível ler o arquivo selecionado.');
+    };
+    reader.readAsText(file);
+  }
+
+  document.getElementById('exportBtn').addEventListener('click', exportBackup);
+  document.getElementById('importBtn').addEventListener('click', () => {
+    document.getElementById('importFile').click();
+  });
+  document.getElementById('importFile').addEventListener('change', (e) => {
+    const file = e.target.files && e.target.files[0];
+    if (file) importBackup(file);
+    e.target.value = '';
+  });
+
+  loadAll();
+  document.getElementById('loadingState').style.display = 'none';
+  document.getElementById('mainApp').style.display = 'block';
+  render();
+  updateSyncBadge();
+  updateAuthUI();
+
+  if (cloudEnabled) {
+    document.getElementById('authBtn').addEventListener('click', toggleAuth);
+    auth.onAuthStateChanged((user) => {
+      if (user) startCloudSync(user); else stopCloudSync();
+    });
+  }
+
+  setInterval(() => { render(); }, 60000);
+</script>
+</body>
+</html>
